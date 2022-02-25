@@ -52,10 +52,10 @@ const Home: NextPage = () => {
                                 fontSize={{ base: "40", md: "60" }}
                                 color="white"
                             >
-                                Dr. Noel's Ark
+                                DR. NOEL'S ARK
                             </Heading>
                             <Text
-                                fontSize={{ base: "17", md: "23" }}
+                                fontSize={{ base: "18.5", md: "27.7" }}
                                 color="white"
                             >
                                 NATURAL VETERINARY CARE
