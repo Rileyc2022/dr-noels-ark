@@ -104,8 +104,8 @@ export default function SignUp() {
             <Navbar variant="light" showCompanyName={true} withShadow={false} bottomBorder={true}></Navbar>
             <Flex
                 minH={"100vh"}
-                align={{ base: "center", md: "end" }}
-                pb={{base: 0, md: 5}}
+                align={{ base: "end", md: "end" }}
+                pb={{base: 10, md: 5}}
                 justify={"space-evenly"}
                 bg={"gray.50"}
                 // pt="20px"
@@ -121,7 +121,7 @@ export default function SignUp() {
                 >
                     <Stack align={"center"}>
                         <Text
-                            fontSize={{ base: 35, md: 40 }}
+                            fontSize={{ base: 25, md: 40 }}
                             color={"brand.500"}
                             // m="1"
                             fontWeight={"bold"}

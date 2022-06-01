@@ -5,6 +5,9 @@ import { ParallaxProvider } from "react-scroll-parallax";
 import Fonts from "../components/Fonts";
 import theme from "../theme";
 import { AuthProvider } from "../contexts/AuthContext";
+
+import { ColorModeScript } from '@chakra-ui/react'
+
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <AuthProvider>

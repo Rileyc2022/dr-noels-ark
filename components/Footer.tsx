@@ -1,16 +1,17 @@
 import {
-  Box,
-  Container,
-  Link,
-  SimpleGrid,
-  Stack,
-  Text,
-  Flex,
-  Tag,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import { ReactNode } from 'react';
-import Logo from './Logo';
+    Box,
+    Container,
+    Link,
+    SimpleGrid,
+    Stack,
+    Text,
+    Flex,
+    Tag,
+    useColorModeValue,
+    DarkMode,
+} from "@chakra-ui/react";
+import { ReactNode } from "react";
+import Logo from "./Logo";
 
 // const Logo = (props: any) => {
 //   return (
@@ -32,88 +33,111 @@ import Logo from './Logo';
 // };
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
-  return (
-    <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
-      {children}
-    </Text>
-  );
+    return (
+        <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
+            {children}
+        </Text>
+    );
 };
 
-export default function LargeWithLogoCentered() {
-  return (
-    <Box
-      bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}>
-      <Container as={Stack} maxW={'6xl'} py={10}>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
-          <Stack align={'flex-start'}>
-            <ListHeader>Quick Links</ListHeader>
-            {/* <Link href={'#'}>Overview</Link> */}
+interface LargeWithLogoCentered {
+  variant: "light" | "dark";
+}
 
-            <Link href={'#about'}>About Me</Link>
-            <Link href={'#services'}>Services</Link>
-            <Link href={'#pricing'}>Pricing</Link>
-            {/* <Link href={'#'}>Contact Us</Link> */}
-            {/* <Link href={'#'}>Partners</Link> */}
 
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Read More</ListHeader>
-            <Link href={'#'}>Tutorials</Link>
-            <Link href={'#'}>Homeopathy</Link>
-            <Link href={'#'}>Nutrition</Link>
-            <Link href={'#'}>Ayurveda</Link>
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Contact Me</ListHeader>
-            <Link href={'#'}>Make appointment</Link>
-            <Link href={'#'}>LinkedIn</Link>
-            <Link href={'#'}>Email</Link>
-            <Link href={'#'}>Phone</Link>
-            {/* <Link href={'#'}>Status</Link> */}
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Patients</ListHeader>
-            <Stack direction={'row'} align={'center'} spacing={2}>
-              <Link href={'#'}>Pet Portal</Link>
-              <Tag
-                size={'sm'}
-                bg={useColorModeValue('green.300', 'green.800')}
-                ml={2}
-                color={'white'}>
-                New
-              </Tag>
-            </Stack>
-            {/* <Link href={'#'}>Twitter</Link>
+export default function LargeWithLogoCentered({ variant }: LargeWithLogoCentered) {
+  const isLight = (variant === "light");
+    return (
+        // <DarkMode>
+            <Box
+                bg={isLight ? "gray.50": "brand.800"}
+                color={isLight ? "gray.700": "gray.200"}
+            >
+                <Container as={Stack} maxW={"6xl"} py={10}>
+                    <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
+                        <Stack align={"flex-start"}>
+                            <ListHeader>Quick Links</ListHeader>
+                            {/* <Link href={'#'}>Overview</Link> */}
+
+                            <Link href={"#about"}>About Me</Link>
+                            <Link href={"#services"}>Services</Link>
+                            <Link href={"#pricing"}>Pricing</Link>
+                            {/* <Link href={'#'}>Contact Us</Link> */}
+                            {/* <Link href={'#'}>Partners</Link> */}
+                        </Stack>
+                        <Stack align={"flex-start"}>
+                            <ListHeader>Read More</ListHeader>
+                            <Link href={"#"}>Tutorials</Link>
+                            <Link href={"#"}>Homeopathy</Link>
+                            <Link href={"#"}>Nutrition</Link>
+                            <Link href={"#"}>Ayurveda</Link>
+                        </Stack>
+                        <Stack align={"flex-start"}>
+                            <ListHeader>Contact Me</ListHeader>
+                            <Link href={"#"}>Make appointment</Link>
+                            <Link href={"#"}>LinkedIn</Link>
+                            <Link href={"#"}>Email</Link>
+                            <Link href={"#"}>Phone</Link>
+                            {/* <Link href={'#'}>Status</Link> */}
+                        </Stack>
+                        <Stack align={"flex-start"}>
+                            <ListHeader>Patients</ListHeader>
+                            <Stack
+                                direction={"row"}
+                                align={"center"}
+                                spacing={2}
+                            >
+                                <Link href={"#"}>Pet Portal</Link>
+                                <Tag
+                                    size={"sm"}
+                                    bg={isLight ? 
+                                        "green.300":
+                                        "green.500"
+                                    }
+                                    ml={2}
+                                    color={"white"}
+                                >
+                                    New
+                                </Tag>
+                            </Stack>
+                            {/* <Link href={'#'}>Twitter</Link>
             <Link href={'#'}>Dribbble</Link>
             <Link href={'#'}>Instagram</Link>
             <Link href={'#'}>LinkedIn</Link> */}
-          </Stack>
-        </SimpleGrid>
-      </Container>
-      <Box py={10}>
-        <Flex
-          align={'center'}
-          _before={{
-            content: '""',
-            borderBottom: '1px solid',
-            borderColor: useColorModeValue('gray.200', 'gray.700'),
-            flexGrow: 1,
-            mr: 8,
-          }}
-          _after={{
-            content: '""',
-            borderBottom: '1px solid',
-            borderColor: useColorModeValue('gray.200', 'gray.700'),
-            flexGrow: 1,
-            ml: 8,
-          }}>
-          <Logo boxSize={10}/>
-        </Flex>
-        <Text pt={6} fontSize={'sm'} textAlign={'center'}>
-          © 2022 Dr. Noel's Ark. All rights reserved
-        </Text>
-      </Box>
-    </Box>
-  );
+                        </Stack>
+                    </SimpleGrid>
+                </Container>
+                <Box py={10}>
+                    <Flex
+                        align={"center"}
+                        _before={{
+                            content: '""',
+                            borderBottom: "1px solid",
+                            borderColor: (isLight ?
+                                "gray.200" :
+                                "gray.600"
+                            ),
+                            flexGrow: 1,
+                            mr: 8,
+                        }}
+                        _after={{
+                            content: '""',
+                            borderBottom: "1px solid",
+                            borderColor: (isLight ?
+                              "gray.200" :
+                              "gray.600"
+                          ),
+                            flexGrow: 1,
+                            ml: 8,
+                        }}
+                    >
+                        <Logo boxSize={10} fill="white"/>
+                    </Flex>
+                    <Text pt={6} fontSize={"sm"} textAlign={"center"}>
+                        © 2022 Dr. Noel's Ark. All rights reserved
+                    </Text>
+                </Box>
+            </Box>
+        // </DarkMode>
+    );
 }

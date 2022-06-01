@@ -172,9 +172,8 @@ export default function WithSubnavigation({
             }
             transition="box-shadow 1s ease, background-color 1s ease"
             // 2px border on the bottom
-            borderColor="gray.200"
-            borderBottomWidth={bottomBorder ? 1 : 0}
-            
+            borderColor={variant == "light" ? "gray.200" : "none"}
+            borderBottomWidth={(variant == "light") ? (bottomBorder ? 1 : 0) : 0}
         >
             <Flex
                 // bg={useColorModeValue('white', 'gray.800')}

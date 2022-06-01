@@ -713,7 +713,7 @@ const Home: React.FC<HomeProps> = ({}) => {
 
                             mb="8"
                         >
-                            Why not conventional medicine?
+                            Why choose Dr. Noel's Ark?
                         </Text>
                         <List spacing={3} fontSize="20" color="gray.200">
                             <ListItem>
@@ -1031,7 +1031,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                 </Stack>
             </Box>
 
-            <Footer />
+            <Footer variant="light"/>
         </>
     );
 };
