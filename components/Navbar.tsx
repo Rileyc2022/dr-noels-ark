@@ -23,6 +23,8 @@ import {
     MenuItem,
     MenuList,
     useToast,
+    LinkBox,
+    LinkOverlay,
 } from "@chakra-ui/react";
 import {
     HamburgerIcon,
@@ -33,14 +35,19 @@ import {
     ArrowBackIcon,
     SettingsIcon,
     ViewIcon,
+    UnlockIcon,
+    CalendarIcon,
 } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import Logo from "./Logo";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { motion } from "framer-motion";
 import { BiLogOut } from "react-icons/bi";
 import { useRouter } from "next/router";
+import { analytics } from "../constants/firebase";
+import { logEvent } from "firebase/analytics";
+import { checkIsAdmin } from "../functions/checkIsAdmin";
 
 interface NavItem {
     label: string;
@@ -93,23 +100,27 @@ const NAV_ITEMS: Array<NavItem> = [
             {
                 label: "Homeopathy",
                 subLabel: "Learn more about homeopathy",
-                href: "#",
+                href: "/resources/homeopathy",
             },
             {
                 label: "Nutrition",
                 subLabel: "Learn more about nutrition",
-                href: "#",
+                href: "/resources/nutrition",
             },
             {
                 label: "Ayurveda",
                 subLabel: "Learn more about ayurveda",
-                href: "#",
+                href: "/resources/ayurveda",
             },
         ],
     },
     {
         label: "Pricing",
         href: "/#pricing",
+    },
+    {
+        label: "Make Appointment",
+        href: "/make-appointment",
     },
 ];
 
@@ -130,8 +141,8 @@ export default function WithSubnavigation({
     const { currentUser, logOut } = useAuth();
     const router = useRouter();
     const toast = useToast();
-    const isBase = useBreakpointValue({ base: true, md: false });
-
+    const isBase = useBreakpointValue({ base: true, lg: false });
+    const [isAdmin, setIsAdmin] = useState(false);
     async function handleLogout() {
         // setError("");
 
@@ -140,7 +151,7 @@ export default function WithSubnavigation({
             router.push("/");
             toast({
                 title: `Logged out`,
-                description: `Your pet's information is safe and secure.`,
+                description: `Your account is secured.`,
                 status: "success",
             });
         } catch {
@@ -150,6 +161,15 @@ export default function WithSubnavigation({
             });
         }
     }
+
+    useEffect(() => {
+        (async () => {
+            if (currentUser) {
+                const isAdmin = await checkIsAdmin(currentUser);
+                setIsAdmin(isAdmin);
+            }
+        })();
+    }, [currentUser]);
     // const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure();
     // const [hidden, setHidden] = useState(!isOpen);
 
@@ -173,7 +193,7 @@ export default function WithSubnavigation({
             transition="box-shadow 1s ease, background-color 1s ease"
             // 2px border on the bottom
             borderColor={variant == "light" ? "gray.200" : "none"}
-            borderBottomWidth={(variant == "light") ? (bottomBorder ? 1 : 0) : 0}
+            borderBottomWidth={variant == "light" ? (bottomBorder ? 1 : 0) : 0}
         >
             <Flex
                 // bg={useColorModeValue('white', 'gray.800')}
@@ -189,12 +209,15 @@ export default function WithSubnavigation({
             >
                 <Flex
                     // flex={{ base: 1 }}
-                    // justify={{ base: 'center', md: 'start' }}
+                    // justify={{ base: 'center', lg: 'start' }}
                     align="center"
                 >
-                    <Logo fill="brand.500" boxSize={10}></Logo>
-                    {/* <Box position={"relative"}> */}
-
+                    <LinkBox>
+                        <LinkOverlay href="/">
+                            <Logo fill="brand.500" boxSize={10}></Logo>
+                            {/* <Box position={"relative"}> */}
+                        </LinkOverlay>
+                    </LinkBox>
                     <Box
                         width={showCompanyName ? "18em" : "0px"}
                         opacity={showCompanyName ? "1" : "0"}
@@ -212,14 +235,18 @@ export default function WithSubnavigation({
                             style={{overflow: "hidden", height: "50"}}
                         > */}
                         {/* {showCompanyName && ( */}
-                        <Heading
-                            color="brand.500"
-                            ml="30px"
-                            width={"100%"}
-                            whiteSpace="nowrap"
-                        >
-                            DR. NOEL'S ARK
-                        </Heading>
+                        <LinkBox>
+                            <LinkOverlay href="/">
+                                <Heading
+                                    color="brand.500"
+                                    ml="30px"
+                                    width={"100%"}
+                                    whiteSpace="nowrap"
+                                >
+                                    DR. NOEL'S ARK
+                                </Heading>
+                            </LinkOverlay>
+                        </LinkBox>
 
                         {/* // )} */}
                         {/* </motion.div> */}
@@ -231,58 +258,58 @@ export default function WithSubnavigation({
 
                         </Box> */}
                     </Box>
-                    <Flex display={{ base: "none", md: "flex" }} ml={10} >
+                    <Flex display={{ base: "none", lg: "flex" }} ml={10}>
                         <DesktopNav variant={variant} />
                     </Flex>
                 </Flex>
                 {/* <Button colorScheme='brand'>Orange</Button> */}
 
-
-                {(!showCompanyName || !isBase) && (currentUser ? (
-                    <Menu>
-                        <MenuButton
-                            as={Button}
-                            rounded={"full"}
-                            // borderRadius="20px 20px 0px 20px"
-                            variant={"link"}
-                            // variant={"solid"}
-                            cursor={"pointer"}
-                            minW={0}
-                            borderColor="brand.500"
-                            borderWidth={2}
-                            color="brand.500"
-                            _active={{ color: "gray.400" }}
-                            // _hover={{backgroundColor: "brand.500"}}
-                        >
-                            <Flex align={"center"} flexDirection="row">
-
-
-                                <Avatar
-                                    name={
-                                        currentUser.email
-                                            ? currentUser.email
-                                            : undefined
-                                    }
-                                    src={
-                                        currentUser.photoURL
-                                            ? currentUser.photoURL
-                                            : undefined
-                                    }
-                                />
-                                                                <Text mx="3">
-                                {currentUser.displayName
-                                    ? currentUser.displayName
-                                    : currentUser.email?.split("@")[0]}
-                                </Text>
-                            </Flex>
-                        </MenuButton>
-                        <MenuList
-                            alignItems={"center"}
-                            border={"0px"}
-                            boxShadow={"xl"}
-                            bg={"brand.600"}
-                        >
-                            {/* <br />
+                {(!showCompanyName || !isBase) &&
+                    (currentUser ? (
+                        <Menu>
+                            <MenuButton
+                                as={Button}
+                                rounded={"full"}
+                                // borderRadius="20px 20px 0px 20px"
+                                variant={"link"}
+                                // variant={"solid"}
+                                cursor={"pointer"}
+                                minW={0}
+                                borderColor="brand.500"
+                                borderWidth={2}
+                                color="brand.500"
+                                _active={{ color: "gray.400" }}
+                                // _hover={{backgroundColor: "brand.500"}}
+                            >
+                                <Flex align={"center"} flexDirection="row">
+                                    <Avatar
+                                        name={
+                                            currentUser.email
+                                                ? currentUser.email
+                                                : undefined
+                                        }
+                                        src={
+                                            currentUser.photoURL
+                                                ? currentUser.photoURL
+                                                : undefined
+                                        }
+                                    />
+                                    <Text mx="3">
+                                        {currentUser.displayName
+                                            ? currentUser.displayName.split(
+                                                  ","
+                                              )[0]
+                                            : currentUser.email?.split("@")[0]}
+                                    </Text>
+                                </Flex>
+                            </MenuButton>
+                            <MenuList
+                                alignItems={"center"}
+                                border={"0px"}
+                                boxShadow={"xl"}
+                                bg={"brand.600"}
+                            >
+                                {/* <br />
                             <Center>
                                 <Avatar
                                     size="2xl"
@@ -299,90 +326,116 @@ export default function WithSubnavigation({
                                 />
                             </Center>
                             <br /> */}
-                            <Center>
-                                <p>{currentUser.displayName}</p>
-                            </Center>
-                            {/* <br /> */}
-                            <MenuDivider />
-                            <MenuItem
-                                _hover={{ bg: "brand.500" }}
-                                _focus={{ bg: "brand.500" }}
-                                icon={<ViewIcon />}
-                                as="a"
-                                href="/portal"
-                            >
-                                View portal
-                            </MenuItem>
-                            <MenuItem
-                                _hover={{ bg: "brand.500" }}
-                                _focus={{ bg: "brand.500" }}
-                                icon={<SettingsIcon />}
-                            >
-                                Account Settings
-                            </MenuItem>
-                            <MenuItem
-                                _hover={{ bg: "brand.500" }}
-                                _focus={{ bg: "brand.500" }}
-                                icon={<ArrowBackIcon />}
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </MenuItem>
-                        </MenuList>
-                    </Menu>
-                ) : (
-                    <Stack
-                        // flex={{ base: 1, md: 0 }}
-                        // justify={'flex-end'}
-                        direction={"row"}
-                        spacing={6}
-                    >
-                        <NextLink href={"/sign-in"} passHref>
+                                <Center>
+                                    <Text>
+                                        {" "}
+                                        {currentUser.displayName
+                                            ? currentUser.displayName.split(
+                                                  ","
+                                              )[0]
+                                            : currentUser.email?.split("@")[0]}
+                                    </Text>
+                                </Center>
+                                {/* <br /> */}
+                                <MenuDivider />
+                                <MenuItem
+                                    _hover={{ bg: "brand.500" }}
+                                    _focus={{ bg: "brand.500" }}
+                                    icon={<ViewIcon />}
+                                    as="a"
+                                    href="/portal"
+                                >
+                                    Pet Portal
+                                </MenuItem>
+                                {isAdmin && (
+                                    <MenuItem
+                                        _hover={{ bg: "brand.500" }}
+                                        _focus={{ bg: "brand.500" }}
+                                        icon={< CalendarIcon/>}
+                                        as="a"
+                                        href="/admin"
+                                    >
+                                        Admin Portal
+                                    </MenuItem>
+                                )}
+                                {/* <MenuItem
+                                    _hover={{ bg: "brand.500" }}
+                                    _focus={{ bg: "brand.500" }}
+                                    icon={<SettingsIcon />}
+                                >
+                                    Account Settings
+                                </MenuItem> */}
+                                <MenuItem
+                                    _hover={{ bg: "brand.500" }}
+                                    _focus={{ bg: "brand.500" }}
+                                    icon={<ArrowBackIcon />}
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </MenuItem>
+                            </MenuList>
+                        </Menu>
+                    ) : (
+                        <NextLink href={"/make-appointment"} passHref>
                             <Button
                                 as={"a"}
-                                fontSize="15"
+                                fontSize={{
+                                    base: "14",
+                                    lg: "16",
+                                }}
                                 fontWeight={400}
-                                variant={"link"}
+                                variant={"solid"}
                                 colorScheme={"brand"}
+                                size={"md"}
+                                onClick={() => {
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "clicked_make_appointment"
+                                            );
+                                    });
+                                }}
                             >
-                                Sign In
+                                Make Appointment
                             </Button>
                         </NextLink>
-                        <NextLink href={"/create-portal-account"} passHref>
-                            <Button
-                                as="a"
-                                display={{ base: "none", md: "inline-flex" }}
-                                fontSize="15"
-                                fontWeight={600}
-                                color={"white"}
-                                colorScheme={"brand"}
-                                // bg={'pink.400'}
-
-                                // _hover={{
-                                //   bg: 'pink.300',
-                                // }}
-                            >
-                                Sign Up
-                            </Button>
-                        </NextLink>
-                        {/* <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Sign Up
-          </Button> */}
-                    </Stack>
-                ))}
+                        // <Stack
+                        //     direction={"row"}
+                        //     spacing={6}
+                        // >
+                        //     <NextLink href={"/sign-in"} passHref>
+                        //         <Button
+                        //             as={"a"}
+                        //             fontSize="15"
+                        //             fontWeight={400}
+                        //             variant={"link"}
+                        //             colorScheme={"brand"}
+                        //         >
+                        //             Sign In
+                        //         </Button>
+                        //     </NextLink>
+                        //     <NextLink href={"/create-portal-account"} passHref>
+                        //         <Button
+                        //             as="a"
+                        //             display={{
+                        //                 base: "none",
+                        //                 lg: "inline-flex",
+                        //             }}
+                        //             fontSize="15"
+                        //             fontWeight={600}
+                        //             color={"white"}
+                        //             colorScheme={"brand"}
+                        //         >
+                        //             Sign Up
+                        //         </Button>
+                        //     </NextLink>
+                        // </Stack>
+                    ))}
                 <Flex
-                    // flex={{ base: 1, md: 'auto' }}
+                    // flex={{ base: 1, lg: 'auto' }}
                     // ml={{ base: -2 }}
-                    display={{ base: "flex", md: "none" }}
+                    display={{ base: "flex", lg: "none" }}
                 >
                     <IconButton
                         onClick={onToggle}
@@ -502,7 +555,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 
 const MobileNav = () => {
     return (
-        <Stack bg={"white"} p={4} display={{ md: "none" }}>
+        <Stack bg={"white"} p={4} display={{ lg: "none" }}>
             {NAV_ITEMS.map((navItem) => (
                 <MobileNavItem key={navItem.label} {...navItem} />
             ))}
@@ -557,7 +610,22 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                 >
                     {children &&
                         children.map((child) => (
-                            <Link key={child.label} py={2} href={child.href}>
+                            <Link
+                                key={child.label}
+                                py={2}
+                                href={child.href}
+                                onClick={() => {
+                                    if (child.href == "/make-appointment") {
+                                        analytics.then((analytics) => {
+                                            analytics &&
+                                                logEvent(
+                                                    analytics,
+                                                    "clicked_make_appointment"
+                                                );
+                                        });
+                                    }
+                                }}
+                            >
                                 {child.label}
                             </Link>
                         ))}

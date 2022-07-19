@@ -1,23 +1,16 @@
 import { DeleteIcon } from "@chakra-ui/icons";
 import {
-    Flex,
-    Tab,
-    Table,
-    TableCaption,
-    TableContainer,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Tabs,
-    Tbody,
-    Td,
-    Tfoot,
-    Th,
-    Thead,
-    Tr,
-    Text,
-    useDisclosure,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogCloseButton,
+    AlertDialogContent,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogOverlay,
+    Box,
     Button,
+    Divider,
+    Flex,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -25,24 +18,56 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    Divider,
-    Box,
-    useToast,
+    Spinner,
+    Tab,
+    Table,
+    TableContainer,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    Tbody,
+    Td,
+    Text,
+    Th,
+    Thead,
+    Tr,
+    useDisclosure,
+    useToast
 } from "@chakra-ui/react";
 import {
-    onSnapshot,
-    doc,
     collection,
-    QueryDocumentSnapshot,
     deleteDoc,
+    doc,
+    DocumentData,
+    onSnapshot,
+    QueryDocumentSnapshot
 } from "firebase/firestore";
-import React, { useState } from "react";
+import NextLink from "next/link";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import { db } from "../constants/firebase";
+import { useAuth } from "../contexts/AuthContext";
+import { checkIsAdmin } from "../functions/checkIsAdmin";
 
-interface adminProps {}
+interface AdminProps {}
 
-const admin: React.FC<adminProps> = ({}) => {
+const Admin: React.FC<AdminProps> = ({}) => {
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [statusFetched, setStatusFetched] = useState(false);
+    const { currentUser } = useAuth();
+    useEffect(() => {
+        if (currentUser) {
+            checkIsAdmin(currentUser).then((isAdmin) => {
+                setIsAdmin(isAdmin);
+                setStatusFetched(true);
+            });
+            console.log(currentUser.uid);
+        } else {
+            setIsAdmin(false);
+            setStatusFetched(true);
+        }
+    }, [currentUser]);
     return (
         <>
             <Navbar
@@ -51,50 +76,123 @@ const admin: React.FC<adminProps> = ({}) => {
                 withShadow={false}
                 bottomBorder={true}
             ></Navbar>
-            <Box minH="100vh" bgColor={"gray.200"} py="120">
-                <Flex alignItems="center" flexDirection={"column"}>
-                    <Box
-                        bgColor="white"
-                        width={"90%"}
-                        p={{ base: "50px", md: "50" }}
-                    >
-                        <Text
-                            fontSize={{ base: 25, md: 40 }}
-                            color={"brand.500"}
-                            fontWeight={"bold"}
-                            textAlign={"center"}
-                            // pt="50"
-                        >
-                            Admin Portal
-                        </Text>
-                        <Divider my={10} />
 
-                        {/* <Box>
+            {!statusFetched ? (
+                <Box height="100vh">
+                    <Flex
+                        alignItems="center"
+                        justify={"center"}
+                        height={"100%"}
+                    >
+                        <Spinner color="white"></Spinner>
+                    </Flex>
+                </Box>
+            ) : isAdmin ? (
+                <Box minH="100vh" bgColor={"gray.200"} py="120">
+                    <Flex alignItems="center" flexDirection={"column"}>
+                        <Box
+                            bgColor="white"
+                            width={"90%"}
+                            p={{ base: "50px", lg: "50" }}
+                        >
+                            <Text
+                                fontSize={{ base: 25, lg: 40 }}
+                                color={"brand.500"}
+                                fontWeight={"bold"}
+                                textAlign={"center"}
+                                // pt="50"
+                            >
+                                Admin Portal
+                            </Text>
+                            <Divider my={10} />
+
+                            {/* <Box>
     <Text>Current recommendation</Text>
     
     </Box> */}
-                        <Tabs
-                            isFitted
-                            variant={"enclosed-colored"}
-                            colorScheme="brand"
-                            w="100%"
-                        >
-                            <TabList>
-                                <Tab fontSize={18}>Appointment Requests</Tab>
-                                <Tab fontSize={18}>Your patients</Tab>
-                            </TabList>
-                            <TabPanels>
-                                <TabPanel bgColor="white">
-                                    <AppointmentTable />
-                                </TabPanel>
-                                <TabPanel>
-                                    <p>No patients yet</p>
-                                </TabPanel>
-                            </TabPanels>
-                        </Tabs>
-                    </Box>
-                </Flex>
-            </Box>
+                            <Tabs
+                                isFitted
+                                variant={"enclosed-colored"}
+                                colorScheme="brand"
+                                w="100%"
+                            >
+                                <TabList>
+                                    <Tab fontSize={18}>
+                                        Appointment Requests
+                                    </Tab>
+                                    <Tab fontSize={18}>Your patients</Tab>
+                                </TabList>
+                                <TabPanels>
+                                    <TabPanel bgColor="white">
+                                        <AppointmentTable />
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <Text>No pet portal accounts yet.</Text>
+                                    </TabPanel>
+                                </TabPanels>
+                            </Tabs>
+                        </Box>
+                    </Flex>
+                </Box>
+            ) : (
+                <Box height="100vh">
+                    <Flex
+                        alignItems="center"
+                        justify={"center"}
+                        height={"100%"}
+                    >
+                        <Box p="16" borderWidth={1} m={10}>
+                            <Text color="white">
+                                You are not authorized to view this page.
+                            </Text>
+                            <Text color="white" mt="2">
+                                Please log into an account with Administrator
+                                privileges.
+                            </Text>
+                            <Flex mt="10" w="100%">
+                                <NextLink href={"/sign-in"} passHref>
+                                    <Button
+                                        as={"a"}
+                                        fontSize="15"
+                                        fontWeight={400}
+                                        colorScheme={"brand"}
+                                                flexGrow={1}
+                                                mr={1}
+                                    >
+                                        Sign In
+                                    </Button>
+                                </NextLink>
+                                {/* <NextLink
+                                    href={"/create-portal-account"}
+                                    passHref
+                                >
+                                    <Button
+                                        as="a"
+                                        display={{
+                                            base: "none",
+                                            lg: "inline-flex",
+                                        }}
+                                        fontSize="15"
+                                        fontWeight={600}
+                                        color={"white"}
+                                        colorScheme={"brand"}
+                                                flexGrow={1}
+                                                ml={1}
+                                                
+                                        // bg={'pink.400'}
+
+                                        // _hover={{
+                                        //   bg: 'pink.300',
+                                        // }}
+                                    >
+                                        Sign Up
+                                    </Button>
+                                </NextLink> */}
+                            </Flex>
+                        </Box>
+                    </Flex>
+                </Box>
+            )}
         </>
     );
 };
@@ -112,7 +210,7 @@ const AppointmentTable = () => {
         QueryDocumentSnapshot[] | null
     >(null);
     const unsub = onSnapshot(
-        collection(db, "Appointment Requests"),
+        collection(db, "appointment_requests"),
         (querySnapshot) => {
             // console.log("Current data: ", doc.data());
             const requests: any = [];
@@ -122,9 +220,19 @@ const AppointmentTable = () => {
             setAppointmentRequests(requests);
         }
     );
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const {
+        isOpen: isMessageOpen,
+        onOpen: onMessageOpen,
+        onClose: onMessageClose,
+    } = useDisclosure();
     const [message, setMessage] = useState("");
     const toast = useToast();
+    const {
+        isOpen: isDeleteOpen,
+        onOpen: onDeleteOpen,
+        onClose: onDeleteClose,
+    } = useDisclosure();
+    const cancelRef = useRef<HTMLButtonElement | null>(null);
 
     return (
         <>
@@ -136,11 +244,11 @@ const AppointmentTable = () => {
                                 Date & Time
                             </Th>
                             <Th fontFamily={"body"} fontSize="14">
-                                First name
+                                Name
                             </Th>
-                            <Th fontFamily={"body"} fontSize="14">
+                            {/* <Th fontFamily={"body"} fontSize="14">
                                 Last name
-                            </Th>
+                            </Th> */}
                             <Th fontFamily={"body"} fontSize="14">
                                 Email address
                             </Th>
@@ -151,6 +259,9 @@ const AppointmentTable = () => {
                                 City
                             </Th>
                             <Th fontFamily={"body"} fontSize="14">
+                                Prefered day/time
+                            </Th>
+                            <Th fontFamily={"body"} fontSize="14">
                                 Actions
                             </Th>
                         </Tr>
@@ -158,20 +269,58 @@ const AppointmentTable = () => {
                     <Tbody>
                         {/* initialValues={{ "Date and Time": "", "First name": "", "Last name": "", "Email address": "", "Phone number": "", "City": "", "Message": "" }} */}
 
-                        {appointmentRequests?.map((appointmentRequest: any) => (
-                                <Tr>
+                        {appointmentRequests?.map(
+                            (
+                                appointmentRequest: QueryDocumentSnapshot<DocumentData>
+                            ) => (
+                                <Tr key={appointmentRequest.id}>
                                     <Td>
-                                        {appointmentRequest.data()["Date and Time"]}
+                                        {
+                                            appointmentRequest.data()[
+                                                "Date and Time"
+                                            ]
+                                        }
                                     </Td>
-                                    <Td>{appointmentRequest.data()["First name"]}</Td>
-                                    <Td>{appointmentRequest.data()["Last name"]}</Td>
                                     <Td>
-                                        {appointmentRequest.data()["Email address"]}
+                                        {appointmentRequest.data()[
+                                            "First name"
+                                        ] +
+                                            " " +
+                                            appointmentRequest.data()[
+                                                "Last name"
+                                            ]}
+                                    </Td>
+                                    {/* <Td>
+                                    {appointmentRequest.data()["Last name"]}
+                                </Td> */}
+                                    <Td>
+                                        {
+                                            appointmentRequest.data()[
+                                                "Email address"
+                                            ]
+                                        }
                                     </Td>
                                     <Td>
-                                        {appointmentRequest.data()["Phone number"]}
+                                        {
+                                            appointmentRequest.data()[
+                                                "Phone number"
+                                            ]
+                                        }
                                     </Td>
                                     <Td>{appointmentRequest.data()["City"]}</Td>
+                                    <Td>
+                                        {
+                                            appointmentRequest.data()[
+                                                "Prefered day of week"
+                                            ]
+                                        }{" "}
+                                        /{" "}
+                                        {
+                                            appointmentRequest.data()[
+                                                "Prefered time of day"
+                                            ]
+                                        }
+                                    </Td>
                                     <Td>
                                         <Button
                                             onClick={() => {
@@ -180,9 +329,13 @@ const AppointmentTable = () => {
                                                         "Message"
                                                     ]
                                                 );
-                                                onOpen();
+                                                onMessageOpen();
                                             }}
-                                            key={appointmentRequest.data()["Message"]}
+                                            key={
+                                                appointmentRequest.data()[
+                                                    "Message"
+                                                ]
+                                            }
                                             // m={4}
                                             colorScheme="blue"
                                         >
@@ -192,26 +345,7 @@ const AppointmentTable = () => {
     console.log("Document successfully deleted!");
 }) */}{" "}
                                         <Button
-                                            onClick={async () => {
-                                                await deleteDoc(
-                                                    doc(
-                                                        db,
-                                                        "Appointment Requests",
-                                                        appointmentRequest.id
-                                                    )
-                                                );
-                                                toast({
-                                                    title: "Appointment request deleted",
-                                                    // description:
-                                                        // "",
-                                                    status: "success",
-                                                });
-                                                // await collection("Appointment Requests").doc(appointmentRequest.id).delete()
-                                                // setMessage(
-                                                //     appointmentRequest["Message"]
-                                                // );
-                                                // onOpen();
-                                            }}
+                                            onClick={onDeleteOpen}
                                             // key={appointmentRequest["Message"]}
                                             // m={4}
                                             colorScheme="red"
@@ -219,9 +353,67 @@ const AppointmentTable = () => {
                                         >
                                             Delete
                                         </Button>
+                                        <AlertDialog
+                                            // motionPreset="slideInBottom"
+                                            leastDestructiveRef={cancelRef}
+                                            onClose={onDeleteClose}
+                                            isOpen={isDeleteOpen}
+                                            isCentered
+                                        >
+                                            <AlertDialogOverlay />
+                                            {/* <ModalOverlay/> */}
+
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>
+                                                    Delete request?
+                                                </AlertDialogHeader>
+                                                <AlertDialogCloseButton />
+                                                <AlertDialogBody>
+                                                    Are you sure you want to
+                                                    delete this request? This
+                                                    action is irreversible.
+                                                </AlertDialogBody>
+                                                <AlertDialogFooter>
+                                                    <Button
+                                                        ref={cancelRef}
+                                                        onClick={onDeleteClose}
+                                                    >
+                                                        No
+                                                    </Button>
+                                                    <Button
+                                                        onClick={async () => {
+                                                            await deleteDoc(
+                                                                doc(
+                                                                    db,
+                                                                    "appointment_requests",
+                                                                    appointmentRequest.id
+                                                                )
+                                                            );
+                                                            toast({
+                                                                title: "Appointment request deleted",
+                                                                // description:
+                                                                // "",
+                                                                status: "success",
+                                                            });
+                                                            onDeleteClose();
+                                                            // await collection("Appointment Requests").doc(appointmentRequest.id).delete()
+                                                            // setMessage(
+                                                            //     appointmentRequest["Message"]
+                                                            // );
+                                                            // onOpen();
+                                                        }}
+                                                        colorScheme="red"
+                                                        ml={3}
+                                                    >
+                                                        Yes
+                                                    </Button>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
                                     </Td>
                                 </Tr>
-                            ))}
+                            )
+                        )}
 
                         {/* <Tr>
                             <Td>feet</Td>
@@ -237,7 +429,7 @@ const AppointmentTable = () => {
                 </Table>
             </TableContainer>
 
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isCentered isOpen={isMessageOpen} onClose={onMessageClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Message</ModalHeader>
@@ -245,7 +437,7 @@ const AppointmentTable = () => {
                     <ModalBody>{message}</ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme="brand" onClick={onClose}>
+                        <Button colorScheme="brand" onClick={onMessageClose}>
                             Close
                         </Button>
                         {/* <Button variant="ghost">Secondary Action</Button> */}
@@ -256,4 +448,4 @@ const AppointmentTable = () => {
     );
 };
 
-export default admin;
+export default Admin;

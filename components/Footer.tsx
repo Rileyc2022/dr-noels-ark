@@ -10,7 +10,9 @@ import {
     useColorModeValue,
     DarkMode,
 } from "@chakra-ui/react";
+import { logEvent } from "firebase/analytics";
 import { ReactNode } from "react";
+import { analytics } from "../constants/firebase";
 import Logo from "./Logo";
 
 // const Logo = (props: any) => {
@@ -34,110 +36,176 @@ import Logo from "./Logo";
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
     return (
-        <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
+        <Text fontWeight={"700"} fontSize={"lg"} mb={2}>
             {children}
         </Text>
     );
 };
 
 interface LargeWithLogoCentered {
-  variant: "light" | "dark";
+    variant: "light" | "dark";
 }
 
-
-export default function LargeWithLogoCentered({ variant }: LargeWithLogoCentered) {
-  const isLight = (variant === "light");
+export default function LargeWithLogoCentered({
+    variant,
+}: LargeWithLogoCentered) {
+    const isLight = variant === "light";
     return (
         // <DarkMode>
-            <Box
-                bg={isLight ? "gray.50": "brand.800"}
-                color={isLight ? "gray.700": "gray.200"}
-            >
-                <Container as={Stack} maxW={"6xl"} py={10}>
-                    <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
-                        <Stack align={"flex-start"}>
-                            <ListHeader>Quick Links</ListHeader>
-                            {/* <Link href={'#'}>Overview</Link> */}
+        <Box
+            bg={isLight ? "gray.50" : "brand.800"}
+            color={isLight ? "gray.700" : "gray.200"}
+        >
+            {/* <Flex justify={"center"} alignItems="center"> */}
+            {/* <Container as={Stack} maxW={"6xl"} py={10}> */}
+            <Flex justify={"center"} py={10}>
+                <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={8}>
+                    <Stack align={"flex-start"}>
+                        <ListHeader>Quick Links</ListHeader>
+                        {/* <Link href={'#'}>Overview</Link> */}
 
-                            <Link href={"#about"}>About Me</Link>
-                            <Link href={"#services"}>Services</Link>
-                            <Link href={"#pricing"}>Pricing</Link>
-                            {/* <Link href={'#'}>Contact Us</Link> */}
-                            {/* <Link href={'#'}>Partners</Link> */}
-                        </Stack>
-                        <Stack align={"flex-start"}>
-                            <ListHeader>Read More</ListHeader>
-                            <Link href={"#"}>Tutorials</Link>
-                            <Link href={"#"}>Homeopathy</Link>
-                            <Link href={"#"}>Nutrition</Link>
-                            <Link href={"#"}>Ayurveda</Link>
-                        </Stack>
-                        <Stack align={"flex-start"}>
-                            <ListHeader>Contact Me</ListHeader>
-                            <Link href={"#"}>Make appointment</Link>
-                            <Link href={"#"}>LinkedIn</Link>
-                            <Link href={"#"}>Email</Link>
-                            <Link href={"#"}>Phone</Link>
-                            {/* <Link href={'#'}>Status</Link> */}
-                        </Stack>
-                        <Stack align={"flex-start"}>
-                            <ListHeader>Patients</ListHeader>
-                            <Stack
-                                direction={"row"}
-                                align={"center"}
-                                spacing={2}
+                        <Link href={"#about"}>About Me</Link>
+                        <Link href={"#services"}>Services</Link>
+                        <Link href={"#pricing"}>Pricing</Link>
+                        {/* <Link href={'#'}>Contact Us</Link> */}
+                        {/* <Link href={'#'}>Partners</Link> */}
+                    </Stack>
+                    <Stack align={"flex-start"}>
+                        <ListHeader>Read More</ListHeader>
+                        {/* <Link href={"#"}>Tutorials</Link> */}
+                        <Link href={"#"}>Homeopathy</Link>
+                        <Link href={"#"}>Nutrition</Link>
+                        <Link href={"#"}>Ayurveda</Link>
+                    </Stack>
+                    <Stack align={"flex-start"}>
+                        <ListHeader>Contact Me</ListHeader>
+                        <Link
+                            href={"/make-appointment"}
+                            onClick={() => {
+                                analytics.then((analytics) => {
+                                    analytics &&
+                                        logEvent(
+                                            analytics,
+                                            "clicked_make_appointment"
+                                        );
+                                });
+                            }}
+                        >
+                            Make appointment
+                        </Link>
+                        <Link
+                            href="tel:+15105605494"
+                            onClick={() => {
+                                analytics.then((analytics) => {
+                                    analytics &&
+                                        logEvent(
+                                            analytics,
+                                            "clicked_phone_number"
+                                        );
+                                });
+                            }}
+                        >
+                            +1 (510) 560-5494
+                        </Link>
+                        {/* <Link href={"#"}>Email</Link> */}
+                        <Link
+                            href={
+                                "https://www.linkedin.com/in/noel-crymble-bvsc-bsc-ba-llb-a92572124"
+                            }
+                            onClick={() => {
+                                analytics.then((analytics) => {
+                                    analytics &&
+                                        logEvent(analytics, "clicked_linkedin");
+                                });
+                            }}
+                        >
+                            LinkedIn
+                        </Link>
+                        {/* <Link href={'#'}>Status</Link> */}
+                    </Stack>
+                    <Stack align={"flex-start"}>
+                        <ListHeader>Portals</ListHeader>
+                        <Stack direction={"row"} align={"center"} spacing={2}>
+                            <Link
+                                onClick={() => {
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "clicked_pet_portal"
+                                            );
+                                    });
+                                }}
                             >
-                                <Link href={"#"}>Pet Portal</Link>
-                                <Tag
-                                    size={"sm"}
-                                    bg={isLight ? 
-                                        "green.300":
-                                        "green.500"
-                                    }
-                                    ml={2}
-                                    color={"white"}
-                                >
-                                    New
-                                </Tag>
-                            </Stack>
-                            {/* <Link href={'#'}>Twitter</Link>
+                                Pet Portal
+                            </Link>
+                            <Tag
+                                size={"sm"}
+                                bg={isLight ? "blue.300" : "blue.500"}
+                                ml={2}
+                                color={"white"}
+                            >
+                                Coming Soon
+                            </Tag>
+                        </Stack>
+                        <Stack direction={"row"} align={"center"} spacing={2}>
+                            <Link
+                                href={"/admin"}
+                                onClick={() => {
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "clicked_admin_portal"
+                                            );
+                                    });
+                                }}
+                            >
+                                Admin Portal
+                            </Link>
+                            <Tag
+                                size={"sm"}
+                                bg={isLight ? "red.300" : "red.500"}
+                                ml={2}
+                                color={"white"}
+                            >
+                                Restricted
+                            </Tag>
+                        </Stack>
+                        {/* <Link href={'#'}>Twitter</Link>
             <Link href={'#'}>Dribbble</Link>
             <Link href={'#'}>Instagram</Link>
             <Link href={'#'}>LinkedIn</Link> */}
-                        </Stack>
-                    </SimpleGrid>
-                </Container>
-                <Box py={10}>
-                    <Flex
-                        align={"center"}
-                        _before={{
-                            content: '""',
-                            borderBottom: "1px solid",
-                            borderColor: (isLight ?
-                                "gray.200" :
-                                "gray.600"
-                            ),
-                            flexGrow: 1,
-                            mr: 8,
-                        }}
-                        _after={{
-                            content: '""',
-                            borderBottom: "1px solid",
-                            borderColor: (isLight ?
-                              "gray.200" :
-                              "gray.600"
-                          ),
-                            flexGrow: 1,
-                            ml: 8,
-                        }}
-                    >
-                        <Logo boxSize={10} fill="white"/>
-                    </Flex>
-                    <Text pt={6} fontSize={"sm"} textAlign={"center"}>
-                        © 2022 Dr. Noel's Ark. All rights reserved
-                    </Text>
-                </Box>
+                    </Stack>
+                </SimpleGrid>
+            </Flex>
+            {/* </Container> */}
+            {/* </Flex> */}
+            <Box py={10}>
+                <Flex
+                    align={"center"}
+                    _before={{
+                        content: '""',
+                        borderBottom: "1px solid",
+                        borderColor: isLight ? "gray.200" : "gray.600",
+                        flexGrow: 1,
+                        mr: 8,
+                    }}
+                    _after={{
+                        content: '""',
+                        borderBottom: "1px solid",
+                        borderColor: isLight ? "gray.200" : "gray.600",
+                        flexGrow: 1,
+                        ml: 8,
+                    }}
+                >
+                    <Logo boxSize={10} fill={isLight ? "gray.400" : "white"} />
+                </Flex>
+                <Text pt={6} fontSize={"sm"} textAlign={"center"}>
+                    © 2022 Dr. Noel's Ark. All rights reserved
+                </Text>
             </Box>
+        </Box>
         // </DarkMode>
     );
 }

@@ -1,35 +1,31 @@
 import {
     Box,
     Button,
-    Checkbox,
     Divider,
     Flex,
     FormControl,
     FormErrorMessage,
     FormHelperText,
     FormLabel,
-    HStack,
     Input,
-    Link,
     Select,
     Stack,
     Text,
     Textarea,
     useToast,
 } from "@chakra-ui/react";
-import { Formik, Form, Field, FieldProps } from "formik";
-import router from "next/router";
-import React from "react";
-import Navbar from "../components/Navbar";
-import camelize from "../helpers/camelcase";
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../constants/firebase";
-import Footer from "../components/Footer";
+import { logEvent } from "firebase/analytics";
+import { addDoc, collection } from "firebase/firestore";
+import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
+import React from "react";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { analytics, db } from "../constants/firebase";
 
-interface makeAppointmentProps {}
+interface MakeAppointmentProps {}
 
-const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
+const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
     const toast = useToast();
     // const form = [
     //     {
@@ -109,6 +105,7 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
         {
             label: "Phone number",
             required: true,
+            special: "phone-number",
         },
         {
             label: "City",
@@ -125,7 +122,22 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                 "Orinda",
                 "Lafayette",
                 "Walnut Creek",
+                "Mill Valley",
             ],
+        },
+        {
+            label: "Prefered day of week",
+            required: true,
+            special: "dropdown",
+            // helperText: "Only these cities are in my range.",
+            options: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        },
+        {
+            label: "Prefered time of day",
+            required: true,
+            special: "dropdown",
+            // helperText: "Only these cities are in my range.",
+            options: ["Morning", "Afternoon", "No preference"],
         },
         {
             label: "Message",
@@ -147,22 +159,31 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                 withShadow={false}
                 bottomBorder={true}
             ></Navbar>
-            <Box minH="100vh" bgColor={"gray.50"} py="120">
+            <Box minH="100vh" bgColor={"gray.100"} py="120">
                 <Flex alignItems="center" flexDirection={"column"}>
                     <Box
                         bgColor="white"
                         width={"80%"}
-                        p={{ base: "50px", md: "120" }}
+                        p={{ base: "50px", lg: "120" }}
                         shadow="md"
                     >
                         <Text
-                            fontSize={{ base: 25, md: 40 }}
+                            fontSize={{ base: 25, lg: 40 }}
                             color={"brand.500"}
                             fontWeight={"bold"}
                             textAlign={"center"}
                             // pt="50"
                         >
                             Make Appointment
+                        </Text>
+                        <Text
+                            fontSize={{ base: 16, lg: 25 }}
+                            color={"brand.400"}
+                            fontWeight={"bold"}
+                            textAlign={"center"}
+                            // pt="50"
+                        >
+                            with Dr. Noel
                         </Text>
                         <Divider my={10} />
 
@@ -173,8 +194,10 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                                 "Last name": "",
                                 "Email address": "",
                                 "Phone number": "",
-                                City: "Berkeley",
+                                City: "",
                                 Message: "",
+                                "Prefered day of week": "",
+                                "Prefered time of day": "",
                             }}
                             onSubmit={async (values, actions) => {
                                 console.log(values);
@@ -185,7 +208,7 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                                     // await logIn(email, password);
                                     // setDoc(doc(db, "save"), {  userData: values });
                                     await addDoc(
-                                        collection(db, "Appointment Requests"),
+                                        collection(db, "appointment_requests"),
                                         values
                                     );
                                     actions.setSubmitting(false);
@@ -193,10 +216,18 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                                     toast({
                                         title: "Appointment Request Sent",
                                         description:
-                                            "We will get back to you shortly.",
+                                            "Dr. Noel will be alerted to your request, and get back to you soon.",
                                         status: "success",
                                     });
-                                } catch {
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "appointment_requested_success"
+                                            );
+                                    });
+                                    actions.resetForm();
+                                } catch (err) {
                                     actions.setSubmitting(false);
                                     toast({
                                         title: "Failed to submit.",
@@ -204,6 +235,14 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                                             "Please check each box, or your wifi connection.",
                                         status: "error",
                                     });
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "appointment_requested_fail"
+                                            );
+                                    });
+                                    console.log(err);
                                 }
                             }}
                         >
@@ -243,6 +282,24 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                                                         appointmentField.label
                                                     }
                                                     key={appointmentField.label}
+                                                    validate={(
+                                                        value: string
+                                                    ) => {
+                                                        let error;
+
+                                                        if (
+                                                            !value ||
+                                                            (value &&
+                                                                value.length ==
+                                                                    0)
+                                                        ) {
+                                                            error =
+                                                                appointmentField.label +
+                                                                " is required.";
+                                                        }
+
+                                                        return error;
+                                                    }}
                                                 >
                                                     {({
                                                         field,
@@ -250,10 +307,14 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                                                     }: FieldProps) => (
                                                         <FormControl
                                                             isInvalid={
-                                                                !!form.errors
-                                                                    .firstName &&
-                                                                !!form.touched
-                                                                    .firstName
+                                                                !!form.errors[
+                                                                    appointmentField
+                                                                        .label
+                                                                ] &&
+                                                                !!form.touched[
+                                                                    appointmentField
+                                                                        .label
+                                                                ]
                                                             }
                                                             isRequired={
                                                                 appointmentField.required
@@ -283,12 +344,16 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                                                                     id={
                                                                         appointmentField.label
                                                                     }
+                                                                    placeholder=" "
                                                                 >
                                                                     {appointmentField.options?.map(
                                                                         (
                                                                             option
                                                                         ) => (
                                                                             <option
+                                                                                key={
+                                                                                    option
+                                                                                }
                                                                                 value={
                                                                                     option
                                                                                 }
@@ -309,6 +374,19 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
                                                                         appointmentField.label
                                                                     }
                                                                 ></Textarea>
+                                                            )}
+
+                                                            {appointmentField.special ==
+                                                                "phone-number" && (
+                                                                <Input
+                                                                    {...field}
+                                                                    id={
+                                                                        appointmentField.label
+                                                                    }
+                                                                    type={
+                                                                        "phone"
+                                                                    }
+                                                                ></Input>
                                                             )}
 
                                                             <FormErrorMessage>
@@ -335,16 +413,16 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
 
                                         {/* <HStack><Checkbox></Checkbox><Text>Send me a copy</Text></HStack> */}
                                     </Stack>
-                                        <Button
-                                            // width={"100%"}
-                                            colorScheme="teal"
-                                            disabled={props.isSubmitting}
-                                            isLoading={props.isSubmitting}
+                                    <Button
+                                        // width={"100%"}
+                                        colorScheme="teal"
+                                        disabled={props.isSubmitting}
+                                        isLoading={props.isSubmitting}
                                         type="submit"
-                                        size={'lg'}
-                                        >
-                                            Submit
-                                        </Button>
+                                        size={"lg"}
+                                    >
+                                        Submit
+                                    </Button>
                                 </Form>
                             )}
                         </Formik>
@@ -356,4 +434,4 @@ const makeAppointment: React.FC<makeAppointmentProps> = ({}) => {
     );
 };
 
-export default makeAppointment;
+export default MakeAppointment;

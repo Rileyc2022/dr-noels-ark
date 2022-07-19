@@ -1,35 +1,39 @@
-import React, { useContext, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { Card, Alert } from "react-bootstrap";
-import { AuthContext, IAuthContext, useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 // import { Link as  ReachLink, useHistory } from "react-router-dom";
-import { Field, Form, FieldProps, Formik, FormikHelpers } from "formik";
 import {
-    FormControl,
+    Box,
     Button,
+    Divider,
+    Flex,
+    FormControl,
     FormErrorMessage,
     FormLabel,
     Input,
-    Box,
-    Flex,
-    Heading,
+    InputGroup,
+    InputRightElement,
+    Link,
     Stack,
     Text,
-    useColorModeValue,
-    Link,
     useToast,
     VStack,
-    Divider,
 } from "@chakra-ui/react";
-import GoogleButton from "react-google-button";
+import { Field, FieldProps, Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import Logo from "../components/Logo";
+import GoogleButton from "react-google-button";
 import Navbar from "../components/Navbar";
+import { checkIsAdmin } from "../functions/checkIsAdmin";
+import { analytics } from "../constants/firebase";
+import { logEvent } from "firebase/analytics";
 
 export default function SignIn() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const passwordConfirmRef = useRef<HTMLInputElement>(null);
     const { logIn, googleLogin, currentUser } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClick = () => setShowPassword((showPassword) => !showPassword);
     const router = useRouter();
     // const [error, setError] = useState("");
     // const [loading, setLoading] = useState(false);
@@ -78,36 +82,64 @@ export default function SignIn() {
         try {
             if (googleLogin) await googleLogin();
             // history.push("/")
-            router.push("/portal");
+            // router.push("/portal");
+            // sendToNextPage();
         } catch {
             console.log("Failed to login using google");
         }
     }
 
+    // const sendToNextPage = async () => {
+    //     if (currentUser) {
+    //         if (await checkIsAdmin(currentUser)) {
+    //             router.push("/admin");
+    //         } else {
+    //             router.push("/portal");
+    //         }
+    //         console.log(currentUser.uid);
+    //     }
+    // };
+    useEffect(() => {
+        (async () => {
+            if (currentUser) {
+                if (await checkIsAdmin(currentUser)) {
+                    router.push("/admin");
+                } else {
+                    router.push("/portal");
+                }
+            }
+        })();
+    }, [currentUser]);
+
     return (
         <>
-            <Navbar variant="light" showCompanyName={true} withShadow={false} bottomBorder={true}></Navbar>
+            <Navbar
+                variant="light"
+                showCompanyName={true}
+                withShadow={false}
+                bottomBorder={true}
+            ></Navbar>
             <Flex
                 minH={"100vh"}
-                // align={"end"}
-                align={{ base: "end", md: "end" }}
-                pb={{base: 10, md: 5}}
-                justify={"space-evenly"}
+                align={{ base: "end", lg: "end" }}
+                // pb={{ base: 10, lg: 5 }}
+                pt={16}
+                justify={"center"}
+                alignItems={"center"}
                 bg={"gray.50"}
                 // pt="20px"
                 // pt="10"
                 // pb="10"
-
             >
                 <Stack
                     spacing={8}
-                    w={{ base: "400px", md: "500px" }}
+                    w={{ base: "400px", lg: "500px" }}
                     // py={12}
                     px={6}
                 >
                     <Stack align={"center"}>
                         <Text
-                            fontSize={{ base: 25, md: 40 }}
+                            fontSize={{ base: 25, lg: 40 }}
                             color={"brand.500"}
                             m="1"
                             fontWeight={"bold"}
@@ -115,16 +147,11 @@ export default function SignIn() {
                             Sign In
                         </Text>
                         <Text fontSize={"lg"} color={"gray.600"}>
-                            To your pet's portal
+                            Admin Portal
                             {/* to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️ */}
                         </Text>
                     </Stack>
-                    <Box
-                        rounded={"lg"}
-                        bg={"white"}
-                        boxShadow={"lg"}
-                        p={8}
-                    >
+                    <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
                         <Formik
                             initialValues={{ email: "", password: "" }}
                             onSubmit={async (
@@ -137,7 +164,14 @@ export default function SignIn() {
                                 try {
                                     await logIn(email, password);
                                     actions.setSubmitting(false);
-                                    router.push("/portal");
+                                    // await sendToNextPage();
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "login_success"
+                                            );
+                                    });
                                 } catch {
                                     actions.setSubmitting(false);
                                     toast({
@@ -145,6 +179,10 @@ export default function SignIn() {
                                         description:
                                             "Please check your credentials",
                                         status: "error",
+                                    });
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(analytics, "login_fail");
                                     });
                                 }
                             }}
@@ -188,13 +226,32 @@ export default function SignIn() {
                                                     <FormLabel htmlFor="password">
                                                         Password
                                                     </FormLabel>
-                                                    <Input
-                                                        {...field}
-                                                        type="password"
-                                                        // autoComplete="off"
-                                                        id="password"
-                                                        // placeholder="password"
-                                                    />
+                                                    <InputGroup size="md">
+                                                        <Input
+                                                            {...field}
+                                                            // autoComplete="off"
+                                                            id="password"
+                                                            type={
+                                                                showPassword
+                                                                    ? "text"
+                                                                    : "password"
+                                                            }
+                                                            // placeholder="password"
+                                                        />
+                                                        <InputRightElement width="4.5rem">
+                                                            <Button
+                                                                h="1.75rem"
+                                                                size="sm"
+                                                                onClick={
+                                                                    handleClick
+                                                                }
+                                                            >
+                                                                {showPassword
+                                                                    ? "Hide"
+                                                                    : "Show"}
+                                                            </Button>
+                                                        </InputRightElement>
+                                                    </InputGroup>
                                                     <FormErrorMessage>
                                                         {form.errors.password}
                                                     </FormErrorMessage>
@@ -229,23 +286,6 @@ export default function SignIn() {
                                 </Form>
                             )}
                         </Formik>
-                        <VStack>
-                            <Flex
-                                flexDirection={"row"}
-                                // justifyContent="stretch"
-                                alignItems={"center"}
-                                width="100%"
-                                my="6"
-                            >
-                                <Divider borderColor="gray.400"></Divider>
-                                <Text mx="5px" color="gray.400">
-                                    or
-                                </Text>
-                                {/* <Text mx="5px" color="gray.400">or</Text> */}
-                                <Divider borderColor="gray.400"></Divider>
-                            </Flex>
-                            <GoogleButton onClick={googleHandle} />
-                        </VStack>
                     </Box>
                 </Stack>
                 {/* <Logo boxSize={"700px"} fill="brand.200"></Logo> */}

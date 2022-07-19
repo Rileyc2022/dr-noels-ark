@@ -1,34 +1,29 @@
-import React, { useEffect, useState } from "react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
     Box,
     Button,
     Divider,
     Flex,
     Heading,
-    Image,
-    Text,
-    Stack,
-    ListItem,
-    UnorderedList,
-    Avatar,
-    useBreakpointValue,
-    List,
-    ListIcon,
+    Image, List,
+    ListIcon, ListItem, Stack, Text, UnorderedList, useBreakpointValue
 } from "@chakra-ui/react";
-import Navbar from "../components/Navbar";
+import { logEvent } from "firebase/analytics";
 import NextLink from "next/link";
-import { Parallax, ParallaxBanner } from "react-scroll-parallax";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { InView } from "react-intersection-observer";
 import { useRouter } from "next/router";
-import Footer from "../components/Footer";
+import React, { useEffect, useState } from "react";
 import { MdCheckCircle } from "react-icons/md";
+import { InView } from "react-intersection-observer";
+import { Parallax, ParallaxBanner } from "react-scroll-parallax";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { analytics } from "../constants/firebase";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = ({}) => {
     const [allowedToCollapse, setAllowedToCollapse] = useState(false);
-    const isBase = useBreakpointValue({ base: true, md: false });
+    const isBase = useBreakpointValue({ base: true, lg: false });
     useEffect(() => {
         setTimeout(() => {
             setAllowedToCollapse(true);
@@ -41,13 +36,12 @@ const Home: React.FC<HomeProps> = ({}) => {
         if (hash) {
             let elem = document.getElementById(hash);
             if (elem) {
-                elem.scrollIntoView({ block: 'start', behavior: "smooth" });
+                elem.scrollIntoView({ block: "start", behavior: "smooth" });
             }
         }
     }, [asPath]);
     return (
         <>
-            
             <Parallax
                 style={{
                     position: "absolute",
@@ -61,11 +55,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                     position={"absolute"}
                     backgroundImage={{
                         base: "/images/ark-background-phone.png",
-                        md: "/images/ark-background.png",
+                        lg: "/images/ark-background.png",
                     }}
                     backgroundSize={"cover"}
                     backgroundPosition="right bottom"
-                    height={{ base: 760, md: "100vh" }}
+                    height={{ base: 760, lg: "100vh" }}
                     width="100%"
                     zIndex={"-10"}
                 ></Box>
@@ -82,25 +76,27 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 withShadow={true}
                                 bottomBorder={false}
                             />
-                            <Box height={{ base: 760, md: "100vh" }}>
+                            <Box height={{ base: 760, lg: "100vh" }}>
                                 <Flex
-                                    direction={{ base: "column", md: "row" }}
+                                    direction={{ base: "column", lg: "row" }}
                                     justify={{
                                         base: "flex-end",
-                                        md: "space-evenly",
+                                        lg: "space-evenly",
                                     }}
                                     height="100%"
+                                    px={10}
                                 >
                                     <Box
                                         alignSelf={"center"}
                                         ref={ref}
-                                        maxW="80%"
+                                        // maxW="80%"
+
                                         transform={{ base: "translateY(70px)" }}
                                     >
                                         {/* <Parallax
           speed={10}> */}
                                         <Heading
-                                            fontSize={{ base: "40", md: "70" }}
+                                            fontSize={{ base: "40", lg: "70" }}
                                             color="white"
                                         >
                                             DR. NOEL'S ARK
@@ -112,7 +108,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         <Text
                                             fontSize={{
                                                 base: "18.5",
-                                                md: "32.4",
+                                                lg: "32.4",
                                             }}
                                             color="text.sub-heading"
                                         >
@@ -123,18 +119,31 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             mt="10"
                                             color={"gray.300"}
                                             // maxW="40em"
-                                            w={{ base: "100%", md: "35em" }}
+                                            w={{ base: "100%", lg: "35em" }}
                                             fontSize={{
                                                 base: "14",
-                                                md: "18",
+                                                lg: "18",
                                             }}
                                         >
                                             Professional holisitic veterinary
-                                            services available as housecalls for
-                                            cats and dogs in Berkeley, Albany,
-                                            Kensington, Montclair, Piedmont,
-                                            Moraga, Orinda, Lafayette and Walnut
-                                            Creek. Click below to request an
+                                            services available as house calls
+                                            for cats and dogs in Berkeley,
+                                            Albany, Kensington, Montclair,
+                                            Piedmont, Moraga, Orinda, Lafayette,
+                                            Walnut Creek, Danville, and Mill
+                                            Valley.
+                                        </Text>
+                                        <Text
+                                            mt="10"
+                                            color={"gray.300"}
+                                            // maxW="40em"
+                                            w={{ base: "100%", lg: "35em" }}
+                                            fontSize={{
+                                                base: "14",
+                                                lg: "18",
+                                            }}
+                                        >
+                                            Click below to request an
                                             appointment with New Zealand
                                             veterinarian, Dr. Noel Crymble.
                                         </Text>
@@ -146,20 +155,25 @@ const Home: React.FC<HomeProps> = ({}) => {
                                                 as={"a"}
                                                 fontSize={{
                                                     base: "14",
-                                                    md: "16",
+                                                    lg: "16",
                                                 }}
                                                 fontWeight={400}
                                                 variant={"solid"}
                                                 colorScheme={"brand"}
                                                 mt="10"
                                                 size={"lg"}
+                                                onClick={() => {
+                                                    analytics.then((analytics) => {
+                                                        analytics && logEvent(analytics, "clicked_make_appointment");
+                                                     })
+                                                 }}
                                             >
                                                 Make Appointment
                                             </Button>
                                         </NextLink>
                                     </Box>
                                     <Box
-                                        width={{ base: 280, md: 500 }}
+                                        width={{ base: 280, lg: 400, xl: 500 }}
                                         // mt="10"
                                         alignSelf={"flex-end"}
                                         justifySelf={"flex-end"}
@@ -168,7 +182,7 @@ const Home: React.FC<HomeProps> = ({}) => {
           speed={2}
           > */}
 
-                                        <Image src="/images/no-background-portrait.png"></Image>
+                                        <Image src="/images/no-background-portrait.png" alt="Dr. Noel Crymble smiling with arms crossed."></Image>
                                         {/* </Parallax> */}
                                     </Box>
                                 </Flex>
@@ -191,7 +205,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         MY STORY
                     </Text>
                     <Text
-                        fontSize={{ base: 35, md: 40 }}
+                        fontSize={{ base: 35, lg: 40 }}
                         color={"brand.500"}
                         mt="8"
                         fontWeight={"bold"}
@@ -199,7 +213,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         Dr. Noel Crymble
                     </Text>
                     <Text
-                        fontSize={{ base: 18, md: 20 }}
+                        fontSize={{ base: 18, lg: 20 }}
                         color={"brand.500"}
                         mb="8"
                     >
@@ -213,17 +227,17 @@ const Home: React.FC<HomeProps> = ({}) => {
                     justify={"space-evenly"}
                     // justify="center"
                     mb="120"
-                    flexDirection={{ base: "column", md: "row" }}
+                    flexDirection={{ base: "column", lg: "row" }}
                 >
-                    <Box w={{ base: "80%", md: "30%" }}>
+                    <Box w={{ base: "80%", lg: "30%" }}>
                         {isBase ? (
                             <Box
                                 borderColor={"brand.500"}
                                 borderWidth="10px"
-                                // w={{ base: "50%", md: "20%" }}
+                                // w={{ base: "50%", lg: "20%" }}
                                 // shadow="dark-lg"
                             >
-                                <Image src="/images/looking-at-cat.png"></Image>
+                                <Image src="/images/looking-at-cat.png"  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
                             </Box>
                         ) : (
                             <Parallax
@@ -233,18 +247,18 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 <Box
                                     borderColor={"brand.500"}
                                     borderWidth="10px"
-                                    // w={{ base: "50%", md: "50%" }}
+                                    // w={{ base: "50%", lg: "50%" }}
                                     shadow="dark-lg"
                                 >
-                                    <Image src="/images/looking-at-cat.png"></Image>
+                                    <Image src="/images/looking-at-cat.png"  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
                                 </Box>
-                                {/* <Box w={{ base: "50%", md: "20%" }} bg="brand.700"> */}
+                                {/* <Box w={{ base: "50%", lg: "20%" }} bg="brand.700"> */}
                                 {/* </Box> */}
                             </Parallax>
                         )}
                     </Box>
                     <Box
-                        w={{ base: "80%", md: "40%" }}
+                        w={{ base: "80%", lg: "40%" }}
                         fontSize="15"
                         mt={{ base: "10" }}
                     >
@@ -252,9 +266,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Text>
                                 I come from New Zealand where I received a
                                 Bachelor of Science degree in Animal Science,
-                                and a Bachelor of Veterinary Science degree from
-                                Massey University’s school of veterinary
-                                medicine in 2013.
+                                and a Bachelor of Veterinary Science from Massey
+                                University’s school of veterinary medicine in
+                                2013.
                             </Text>
                             <Text>
                                 A former legal officer in the Royal New Zealand
@@ -283,13 +297,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                 </Flex>
                 <Flex
                     display={"flex"}
-                    alignItems={{ base: "center", md: "flex-start" }}
+                    alignItems={{ base: "center", lg: "flex-start" }}
                     justify={"space-evenly"}
-                    flexDirection={{ base: "column", md: "row" }}
+                    flexDirection={{ base: "column", lg: "row" }}
                     mb="120"
                     fontSize="15"
                 >
-                    <Box w={{ base: "80%", md: "auto" }}>
+                    <Box w={{ base: "80%", lg: "auto" }}>
                         <Text
                             fontSize={20}
                             color="brand.500"
@@ -300,13 +314,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                         <Divider m="10px 0 20px 0" />
                         <UnorderedList>
                             <ListItem>
-                                Academy of Veterinary Homeopathy
+                                American Veterinary Medical Association
                             </ListItem>
                             <ListItem>
-                                International Academy of Veterinary Homeopathy
-                            </ListItem>
-                            <ListItem>
-                                Bay Area Homeopathic Association
+                                California Veterinary Medical Association
                             </ListItem>
                             <ListItem>
                                 American Holistic Veterinary Association
@@ -315,16 +326,19 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 American Association of Feline Practitioners
                             </ListItem>
                             <ListItem>
-                                California Veterinary Medical Association
+                                Academy of Veterinary Homeopathy
                             </ListItem>
                             <ListItem>
-                                American Veterinary Medical Association
+                                International Academy of Veterinary Homeopathy
+                            </ListItem>
+                            <ListItem>
+                                Bay Area Homeopathic Association
                             </ListItem>
                         </UnorderedList>
                     </Box>
                     <Box
-                        w={{ base: "80%", md: "auto" }}
-                        mt={{ base: "40px", md: "0px" }}
+                        w={{ base: "80%", lg: "auto" }}
+                        mt={{ base: "40px", lg: "0px" }}
                     >
                         <Text
                             fontSize={20}
@@ -376,7 +390,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         HEALING THE WHOLE ANIMAL
                     </Text>
                     <Text
-                        fontSize={{ base: 35, md: 40 }}
+                        fontSize={{ base: 35, lg: 40 }}
                         color={"brand.500"}
                         m="8"
                         fontWeight={"bold"}
@@ -387,12 +401,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                 </Box>
                 <Stack
                     align={"center"}
-                    // mx={{ base: "0", md: "120" }}
+                    // mx={{ base: "0", lg: "120" }}
                     spacing="20"
                 >
                     <Flex
-                        w={{ base: "80%", md: "80%" }}
-                        flexDirection={{ base: "column", md: "row-reverse" }}
+                        w={{ base: "80%", lg: "80%" }}
+                        flexDirection={{ base: "column", lg: "row-reverse" }}
                         align="center"
                         justify={"space-evenly"}
                     >
@@ -487,9 +501,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                         /> */}
                         {/* <Box height={"100px"} width={"100%"}bgImage="/images/homeopathy.jpeg" bgSize={"cover"} bgPosition="center"></Box> */}
                         <Box
-                            mr={{ base: "0px", md: "80px" }}
-                            w={{ base: "auto", md: "70%" }}
-                            mt={{ base: "30px", md: "0px" }}
+                            mr={{ base: "0px", lg: "80px" }}
+                            w={{ base: "auto", lg: "70%" }}
+                            mt={{ base: "30px", lg: "0px" }}
                         >
                             <Text
                                 fontSize={20}
@@ -502,8 +516,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Homeopathy is a medical system based on the
                                 belief that the body can cure itself. Using tiny
                                 amounts of natural substances, like plants and
-                                minerals, homeopaths are able to stimulate the
-                                healing process.
+                                minerals, homeopathic remedies are able to
+                                stimulate the healing process.
                             </Text>
                             <Button
                                 rightIcon={<ArrowForwardIcon />}
@@ -517,9 +531,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Flex>
                     <Divider></Divider>
                     <Flex
-                        // w={{ base: "80%", md: "40%" }}
-                        w={{ base: "80%", md: "80%" }}
-                        flexDirection={{ base: "column", md: "row" }}
+                        // w={{ base: "80%", lg: "40%" }}
+                        w={{ base: "80%", lg: "80%" }}
+                        flexDirection={{ base: "column", lg: "row" }}
                         align="center"
                         justify={"space-evenly"}
                     >
@@ -573,9 +587,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                             style={{ height: "200px" }}
                         /> */}
                         <Box
-                            ml={{ base: "0px", md: "80px" }}
-                            w={{ base: "auto", md: "70%" }}
-                            mt={{ base: "30px", md: "0px" }}
+                            ml={{ base: "0px", lg: "80px" }}
+                            w={{ base: "auto", lg: "70%" }}
+                            mt={{ base: "30px", lg: "0px" }}
                         >
                             <Text
                                 mb="5"
@@ -586,12 +600,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Nutrition
                             </Text>
                             <Text my="5" fontSize={15}>
-                                For homeopathy to be effective, the pet must be
-                                supported nutritionally. By formulating
-                                supplements and home-prepared diets, we can
-                                manage the complex needs of individual animals,
-                                and understand the underlying causes of symptoms
-                                in order to prevent and treat diseases.
+                                For homeopathic remedies to be effective, the
+                                pet must be nutritionally supported. Using
+                                dietary protocols and nutritional supplements,
+                                we can manage the complex needs of individual
+                                animals, in order to prevent and treat diseases.
                             </Text>
                             <Button
                                 rightIcon={<ArrowForwardIcon />}
@@ -605,8 +618,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Flex>
                     <Divider></Divider>
                     <Flex
-                        w={{ base: "80%", md: "80%" }}
-                        flexDirection={{ base: "column", md: "row-reverse" }}
+                        w={{ base: "80%", lg: "80%" }}
+                        flexDirection={{ base: "column", lg: "row-reverse" }}
                         align="center"
                         justify={"space-evenly"}
                         // pb="120px"
@@ -661,9 +674,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                             style={{ height: "100px" }}
                         /> */}
                         <Box
-                            mr={{ base: "0px", md: "80px" }}
-                            w={{ base: "auto", md: "70%" }}
-                            mt={{ base: "30px", md: "0px" }}
+                            mr={{ base: "0px", lg: "80px" }}
+                            w={{ base: "auto", lg: "70%" }}
+                            mt={{ base: "30px", lg: "0px" }}
                         >
                             <Text
                                 fontSize={20}
@@ -675,12 +688,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Text my="5" fontSize={15}>
                                 Ayurveda is a medicine system with historical
                                 roots in the Indian subcontinent, where around
-                                80% of the population report using it. It is
-                                based on the belief that health and wellness
+                                80% of the population report using it. Ayurveda
+                                is based on the belief that health and wellness
                                 depend on a delicate balance between the mind,
-                                body, and spirit. Its main goal is to promote
-                                good health, not fight disease, but treatments
-                                may be geared toward specific health problems.
+                                body, and spirit. The main goal of Ayurvedic
+                                supplements for pets is to promote good health,
+                                and treatments are geared toward specific health
+                                problems.
                             </Text>
                             <Button
                                 rightIcon={<ArrowForwardIcon />}
@@ -696,17 +710,16 @@ const Home: React.FC<HomeProps> = ({}) => {
             </Box>
             <Flex height="90vh" my="50" justify={{ base: "center" }}>
                 <Flex
-                    direction={{ base: "column", md: "row" }}
-                    width={{base: "80%", md: "100%"}}
+                    direction={{ base: "column", lg: "row" }}
+                    width={{ base: "80%", lg: "100%" }}
                     height={"100%"}
                     alignItems="center"
                     justify="space-evenly"
-                    
                 >
                     <Box>
                         <Text
                             color="gray.200"
-                            fontSize={{ base: 35, md: 30 }}
+                            fontSize={{ base: 35, lg: 30 }}
                             // color={"brand.500"}
                             // m="8"
                             // fontWeight={"bold"}
@@ -742,7 +755,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
-                                No animal stress - all check-ups done in your
+                                Less animal stress – all check-ups done in your
                                 home
                             </ListItem>
                             <ListItem>
@@ -750,20 +763,34 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
-                                Focus on fixing cause, not masking symptomes
+                                Focus on addressing causes of illness, not
+                                masking symptoms
                             </ListItem>
                             <ListItem>
                                 <ListIcon
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
-                                Look at whole animal, and how symptomes connect
+                                Goal to restore and maintain optimal health
                             </ListItem>
                         </List>
                     </Box>
-                    <Button colorScheme={"brand"} size="lg" p="10" mt={{base: "10", md: "0"}}>
-                        Make Appointment
-                    </Button>
+                    <NextLink href="/make-appointment" passHref>
+                        <Button
+                            as="a"
+                            colorScheme={"brand"}
+                            size="lg"
+                            p="10"
+                            mt={{ base: "10", lg: "0" }}
+                            onClick={() => {
+                                analytics.then((analytics) => {
+                                    analytics && logEvent(analytics, "clicked_make_appointment");
+                                 })
+                             }}
+                        >
+                            Make Appointment
+                        </Button>
+                    </NextLink>
                 </Flex>
             </Flex>
             {isBase ? (
@@ -791,10 +818,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                     flexDirection="column"
                 >
                     <Text fontSize={"18.5"} color={"text.sub-heading"}>
-                        EASY TO UNDERSTAND
+                        STRAIGHTFORWARD
                     </Text>
                     <Text
-                        fontSize={{ base: 35, md: 40 }}
+                        fontSize={{ base: 35, lg: 40 }}
                         color={"brand.500"}
                         m="8"
                         fontWeight={"bold"}
@@ -806,12 +833,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                 </Box>
                 <Stack
                     align={"center"}
-                    // mx={{ base: "0", md: "120" }}
-                    spacing="20"
+                    // mx={{ base: "0", lg: "120" }}
+                    spacing="17"
                 >
                     <Flex
-                        w={{ base: "80%", md: "80%" }}
-                        flexDirection={{ base: "column", md: "row" }}
+                        w={{ base: "80%", lg: "80%" }}
+                        flexDirection={{ base: "column", lg: "row" }}
                         align="center"
                         justify={"space-evenly"}
                     >
@@ -827,30 +854,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                             style={{ height: "100px" }}
                         /> */}
                         {/* <Box height={"100px"} width={"100%"}bgImage="/images/homeopathy.jpeg" bgSize={"cover"} bgPosition="center"></Box> */}
-
-                        <Text
-                            fontSize="50px"
-                            fontWeight="extrabold"
-                            color="brand.500"
-                            // mr="40px"
-                            ml={{ base: "0", md: "40px" }}
-                            w={{ base: "auto", md: "15%" }}
-                        >
-                            $280
-                        </Text>
-                        {!isBase && (
-                            <Divider
-                                orientation={"vertical"}
-                                borderColor={"brand.500"}
-                                borderWidth=""
-                                height="100"
-                            ></Divider>
-                        )}
-
                         <Box
-                            ml={{ base: "0px", md: "40px" }}
-                            w={{ base: "auto", md: "70%" }}
-                            mt={{ base: "30px", md: "0px" }}
+                            mr={{ base: "0px", lg: "40px" }}
+                            w={{ base: "auto", lg: "70%" }}
+                            mt={{ base: "30px", lg: "0px" }}
                         >
                             <Text
                                 fontSize={20}
@@ -860,12 +867,15 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Initial Consultation
                             </Text>
                             <Text my="5" fontSize={15}>
-                                In person consultation to get to know the animal
-                                and the health issues needing to be addressed.
-                                This fee includes review of previous medical
-                                records, and case research/repertorization after
-                                the consultation to decide on the first remedy
-                                selection and/or diet recommendations.
+                                In-person consultation for me to get to know
+                                your pet and the health issues needing to be
+                                addressed. This fee includes a review of
+                                previous medical records, and case research
+                                after the consultation to decide on the
+                                appropriate homeopathic remedy selection, and to
+                                determine nutritional supplements as well as
+                                dietary changes. My house call visit takes about
+                                1 to 1.5 hours.
                             </Text>
                             {/* <Button
                                 rightIcon={<ArrowForwardIcon />}
@@ -876,6 +886,27 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Learn More
                             </Button> */}
                         </Box>
+
+                        {!isBase && (
+                            <Divider
+                                orientation={"vertical"}
+                                borderColor={"brand.500"}
+                                borderWidth=""
+                                height="100"
+                            ></Divider>
+                        )}
+
+                        <Text
+                            fontSize="30px"
+                            fontWeight="extrabold"
+                            color="brand.500"
+                            // mr="40px"
+                            ml={{ base: "0", lg: "40px" }}
+                            w={{ base: "auto", lg: "15%" }}
+                            mt={{ base: "30px", lg: "0px" }}
+                        >
+                            $320
+                        </Text>
                     </Flex>
                     {isBase && (
                         <Divider
@@ -887,8 +918,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                     )}
                     {/* <Divider></Divider> */}
                     <Flex
-                        w={{ base: "80%", md: "80%" }}
-                        flexDirection={{ base: "column", md: "row" }}
+                        w={{ base: "80%", lg: "80%" }}
+                        flexDirection={{ base: "column", lg: "row" }}
                         align="center"
                         justify={"space-evenly"}
                     >
@@ -904,43 +935,25 @@ const Home: React.FC<HomeProps> = ({}) => {
                             style={{ height: "100px" }}
                         /> */}
                         {/* <Box height={"100px"} width={"100%"}bgImage="/images/homeopathy.jpeg" bgSize={"cover"} bgPosition="center"></Box> */}
-
-                        <Text
-                            fontSize="50px"
-                            fontWeight="extrabold"
-                            color="brand.500"
-                            // mr="40px"
-                            ml={{ base: "0", md: "40px" }}
-                            w={{ base: "auto", md: "15%" }}
-                        >
-                            $90
-                        </Text>
-                        {!isBase && (
-                            <Divider
-                                orientation={"vertical"}
-                                borderColor={"brand.500"}
-                                borderWidth=""
-                                height="100"
-                            ></Divider>
-                        )}
                         <Box
-                            ml={{ base: "0px", md: "40px" }}
-                            w={{ base: "auto", md: "70%" }}
-                            mt={{ base: "30px", md: "0px" }}
+                            mr={{ base: "0px", lg: "40px" }}
+                            w={{ base: "auto", lg: "70%" }}
+                            mt={{ base: "30px", lg: "0px" }}
                         >
                             <Text
                                 fontSize={20}
                                 color="brand.500"
                                 fontWeight={"bold"}
                             >
-                                Follow up
+                                Phone Follow up
                             </Text>
                             <Text my="5" fontSize={15}>
-                                30 minute follow up, either in person (with
-                                housecall fee below) or online (no fee). I will
-                                check how the animal is doing and may provide a
-                                change of recommendation either to remedies or
-                                diet.
+                                Follow up sessions by phone are set for 30
+                                minutes. Any additional time will be billed
+                                incrementally at an hourly rate of $180. I will
+                                check the progress your pet is making, and may
+                                provide a change of recommendation either to
+                                remedy, supplements, or diet. Phone follow ups are recommended every 4 to 6 weeks.
                             </Text>
                             {/* <Button
                                 rightIcon={<ArrowForwardIcon />}
@@ -951,6 +964,27 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Learn More
                             </Button> */}
                         </Box>
+
+                        {!isBase && (
+                            <Divider
+                                orientation={"vertical"}
+                                borderColor={"brand.500"}
+                                borderWidth=""
+                                height="100"
+                            ></Divider>
+                        )}
+
+                        <Text
+                            fontSize="30px"
+                            fontWeight="extrabold"
+                            color="brand.500"
+                            // mr="40px"
+                            ml={{ base: "0", lg: "40px" }}
+                            w={{ base: "auto", lg: "15%" }}
+                            mt={{ base: "30px", lg: "0px" }}
+                        >
+                            $80
+                        </Text>
                     </Flex>
                     {isBase && (
                         <Divider
@@ -961,8 +995,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                         ></Divider>
                     )}
                     <Flex
-                        w={{ base: "80%", md: "80%" }}
-                        flexDirection={{ base: "column", md: "row" }}
+                        w={{ base: "80%", lg: "80%" }}
+                        flexDirection={{ base: "column", lg: "row" }}
                         align="center"
                         justify={"space-evenly"}
                     >
@@ -979,44 +1013,23 @@ const Home: React.FC<HomeProps> = ({}) => {
                         /> */}
                         {/* <Box height={"100px"} width={"100%"}bgImage="/images/homeopathy.jpeg" bgSize={"cover"} bgPosition="center"></Box> */}
 
-                        <Text
-                            fontSize="50px"
-                            fontWeight="extrabold"
-                            color="brand.500"
-                            // mr="40px"
-                            ml={{ base: "0", md: "40px" }}
-                            w={{ base: "auto", md: "15%" }}
-                        >
-                            $60
-                        </Text>
-                        {!isBase && (
-                            <Divider
-                                orientation={"vertical"}
-                                borderColor={"brand.500"}
-                                borderWidth=""
-                                height="100"
-                            ></Divider>
-                        )}
                         <Box
-                            ml={{ base: "0px", md: "40px" }}
-                            w={{ base: "auto", md: "70%" }}
-                            mt={{ base: "30px", md: "0px" }}
+                            mr={{ base: "0px", lg: "40px" }}
+                            w={{ base: "auto", lg: "70%" }}
+                            mt={{ base: "30px", lg: "0px" }}
                         >
                             <Text
                                 fontSize={20}
                                 color="brand.500"
                                 fontWeight={"bold"}
                             >
-                                House Call Fee
+                                House Call Follow Up
                             </Text>
                             <Text my="5" fontSize={15}>
-                                This fee is required for initial consultations
-                                or in-person followups - whever I come to your
-                                animal's home. Housecalls cause less stress for
-                                your animal, and allow me to better see the
-                                environment it lives in so I can make
-                                well-informed recommendations. Housecalls are
-                                available within a 15 mile radius.
+                                This fee covers an 1/2 hour in-person follow up visit to
+                                your home. Housecalls allow me to better
+                                reassess your pet so that I can make well-informed
+                                recommendations.
                             </Text>
                             {/* <Button
                                 rightIcon={<ArrowForwardIcon />}
@@ -1027,11 +1040,31 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Learn More
                             </Button> */}
                         </Box>
+                        {!isBase && (
+                            <Divider
+                                orientation={"vertical"}
+                                borderColor={"brand.500"}
+                                borderWidth=""
+                                height="100"
+                            ></Divider>
+                        )}
+
+                        <Text
+                            fontSize="30px"
+                            fontWeight="extrabold"
+                            color="brand.500"
+                            // mr="40px"
+                            ml={{ base: "0", lg: "40px" }}
+                            w={{ base: "auto", lg: "15%" }}
+                            mt={{ base: "30px", lg: "0px" }}
+                        >
+                            $160
+                        </Text>
                     </Flex>
                 </Stack>
             </Box>
 
-            <Footer variant="light"/>
+            <Footer variant="light" />
         </>
     );
 };

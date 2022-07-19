@@ -1,35 +1,40 @@
-import React, { useContext, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { Card, Alert } from "react-bootstrap";
-import { AuthContext, IAuthContext, useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 // import { Link as  ReachLink, useHistory } from "react-router-dom";
-import { Field, Form, FieldProps, Formik, FormikHelpers } from "formik";
 import {
-    FormControl,
+    Box,
     Button,
+    Divider,
+    Flex,
+    FormControl,
     FormErrorMessage,
     FormLabel,
     Input,
-    Box,
-    Flex,
-    Heading,
+    InputGroup,
+    InputRightElement,
+    Link,
     Stack,
     Text,
     useColorModeValue,
-    Link,
     useToast,
     VStack,
-    Divider,
 } from "@chakra-ui/react";
-import GoogleButton from "react-google-button";
+import { Field, FieldProps, Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import Logo from "../components/Logo";
+import GoogleButton from "react-google-button";
 import Navbar from "../components/Navbar";
+import { checkIsAdmin } from "../functions/checkIsAdmin";
+import { analytics } from "../constants/firebase";
+import { logEvent } from "firebase/analytics";
 
 export default function SignUp() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const passwordConfirmRef = useRef<HTMLInputElement>(null);
     const { signUp, googleLogin, currentUser } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClick = () => setShowPassword((showPassword) => !showPassword);
     const router = useRouter();
     // const [error, setError] = useState("");
     // const [loading, setLoading] = useState(false);
@@ -93,27 +98,57 @@ export default function SignUp() {
         try {
             if (googleLogin) await googleLogin();
             // history.push("/")
-            router.push("/portal");
+            // sendToNextPage();
         } catch {
             console.log("Failed to login using google");
         }
     }
 
+    // const sendToNextPage = async () => {
+    //     if (currentUser) {
+    //         if (await checkIsAdmin(currentUser)) {
+    //             router.push("/admin");
+    //         } else {
+    //             router.push("/portal");
+    //         }
+    //         console.log(currentUser.uid);
+    //     }
+    // };
+
+    useEffect(() => {
+        (async () => {
+            if (currentUser) {
+                if (await checkIsAdmin(currentUser)) {
+                    router.push("/admin");
+                } else {
+                    router.push("/portal");
+                }
+            }
+        })();
+    }, [currentUser]);
+
     return (
         <>
-            <Navbar variant="light" showCompanyName={true} withShadow={false} bottomBorder={true}></Navbar>
+            <Navbar
+                variant="light"
+                showCompanyName={true}
+                withShadow={false}
+                bottomBorder={true}
+            ></Navbar>
             <Flex
                 minH={"100vh"}
-                align={{ base: "end", md: "end" }}
-                pb={{base: 10, md: 5}}
-                justify={"space-evenly"}
+                align={{ base: "end", lg: "end" }}
+                // pb={{ base: 10, lg: 5 }}
+                pt={16}
+                justify={"center"}
+                alignItems={"center"}
                 bg={"gray.50"}
                 // pt="20px"
                 // pt="10"
             >
                 <Flex
                     // spacing={8}
-                    w={{ base: "400px", md: "500px" }}
+                    w={{ base: "400px", lg: "500px" }}
                     // py={12}
                     px={6}
                     // direction="row"
@@ -121,7 +156,7 @@ export default function SignUp() {
                 >
                     <Stack align={"center"}>
                         <Text
-                            fontSize={{ base: 25, md: 40 }}
+                            fontSize={{ base: 25, lg: 40 }}
                             color={"brand.500"}
                             // m="1"
                             fontWeight={"bold"}
@@ -154,13 +189,28 @@ export default function SignUp() {
                                 try {
                                     await signUp(email, password);
                                     actions.setSubmitting(false);
-                                    router.push("/portal");
+                                    // await sendToNextPage();
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "create_account_success",
+                                            );
+                                    });
                                 } catch {
                                     actions.setSubmitting(false);
                                     toast({
                                         title: "Failed to create account",
-                                        description: "Are you sure you don't already have an account?",
+                                        description:
+                                            "Are you sure you don't already have an account?",
                                         status: "error",
+                                    });
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "create_account_fail",
+                                            );
                                     });
                                 }
                             }}
@@ -203,13 +253,32 @@ export default function SignUp() {
                                                     <FormLabel htmlFor="password">
                                                         Password
                                                     </FormLabel>
-                                                    <Input
-                                                        {...field}
-                                                        type="password"
-                                                        // autoComplete="off"
-                                                        id="password"
-                                                        // placeholder="password"
-                                                    />
+                                                    <InputGroup size="md">
+                                                        <Input
+                                                            {...field}
+                                                            // autoComplete="off"
+                                                            id="password"
+                                                            type={
+                                                                showPassword
+                                                                    ? "text"
+                                                                    : "password"
+                                                            }
+                                                            // placeholder="password"
+                                                        />
+                                                        <InputRightElement width="4.5rem">
+                                                            <Button
+                                                                h="1.75rem"
+                                                                size="sm"
+                                                                onClick={
+                                                                    handleClick
+                                                                }
+                                                            >
+                                                                {showPassword
+                                                                    ? "Hide"
+                                                                    : "Show"}
+                                                            </Button>
+                                                        </InputRightElement>
+                                                    </InputGroup>
                                                     <FormErrorMessage>
                                                         {form.errors.password}
                                                     </FormErrorMessage>
@@ -234,16 +303,35 @@ export default function SignUp() {
                                                             .passwordConfirm
                                                     }
                                                 >
-                                                    <FormLabel htmlFor="email">
+                                                    <FormLabel htmlFor="password Confirmation">
                                                         Password Confirmation
                                                     </FormLabel>
-                                                    <Input
-                                                        {...field}
-                                                        type="password"
-                                                        // autoComplete="off"
-                                                        id="passwordConfirm"
-                                                        // placeholder="passwordConfirm"
-                                                    />
+                                                    <InputGroup size="md">
+                                                        <Input
+                                                            {...field}
+                                                            // autoComplete="off"
+                                                            id="passwordConfirm"
+                                                            type={
+                                                                showPassword
+                                                                    ? "text"
+                                                                    : "password"
+                                                            }
+                                                            // placeholder="password"
+                                                        />
+                                                        <InputRightElement width="4.5rem">
+                                                            <Button
+                                                                h="1.75rem"
+                                                                size="sm"
+                                                                onClick={
+                                                                    handleClick
+                                                                }
+                                                            >
+                                                                {showPassword
+                                                                    ? "Hide"
+                                                                    : "Show"}
+                                                            </Button>
+                                                        </InputRightElement>
+                                                    </InputGroup>
                                                     <FormErrorMessage>
                                                         {
                                                             form.errors
