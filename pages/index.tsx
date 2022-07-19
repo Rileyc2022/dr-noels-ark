@@ -184,7 +184,7 @@ const Home: React.FC<HomeProps> = ({}) => {
           speed={2}
           > */}
 
-                                        <Image src={HeroPortraitPhoto} alt="Dr. Noel Crymble smiling with arms crossed."></Image>
+                                        <Image src={HeroPortraitPhoto} alt="Dr. Noel Crymble smiling with arms crossed." priority></Image>
                                         {/* </Parallax> */}
                                     </Box>
                                 </Flex>
