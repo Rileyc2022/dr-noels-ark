@@ -13,6 +13,10 @@ body {
   scroll-behavior: smooth;
 }
 
+span{
+  display: inline !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;

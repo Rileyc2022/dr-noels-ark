@@ -184,7 +184,8 @@ const Home: React.FC<HomeProps> = ({}) => {
           speed={2}
           > */}
 
-                                        <Image src={HeroPortraitPhoto} alt="Dr. Noel Crymble smiling with arms crossed." priority></Image>
+                                        <Image src={HeroPortraitPhoto} placeholder="blur" alt="Dr. Noel Crymble smiling with arms crossed." priority></Image>
+                                        {/* <Box backgroundImage="/images/no-background-portrait.png" backgroundSize={"cover"} backgroundPosition="center" height="617" width="500"></Box> */}
                                         {/* </Parallax> */}
                                     </Box>
                                 </Flex>
@@ -239,7 +240,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // w={{ base: "50%", lg: "20%" }}
                                 // shadow="dark-lg"
                             >
-                                <Image src={LookingAtCatPhoto}  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
+                                <Image src={LookingAtCatPhoto} placeholder="blur"  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
                             </Box>
                         ) : (
                             <Parallax
@@ -252,7 +253,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // w={{ base: "50%", lg: "50%" }}
                                     shadow="dark-lg"
                                 >
-                                    <Image src={LookingAtCatPhoto}  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
+                                    <Image src={LookingAtCatPhoto} placeholder="blur"  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
                                 </Box>
                                 {/* <Box w={{ base: "50%", lg: "20%" }} bg="brand.700"> */}
                                 {/* </Box> */}
