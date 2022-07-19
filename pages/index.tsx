@@ -4,8 +4,7 @@ import {
     Button,
     Divider,
     Flex,
-    Heading,
-    Image, List,
+    Heading, List,
     ListIcon, ListItem, Stack, Text, UnorderedList, useBreakpointValue
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
@@ -18,6 +17,9 @@ import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";
+import Image from "next/image";
+import HeroPortraitPhoto from '../public/images/no-background-portrait.png';
+import LookingAtCatPhoto from '../public/images/looking-at-cat.png';
 
 interface HomeProps {}
 
@@ -182,7 +184,7 @@ const Home: React.FC<HomeProps> = ({}) => {
           speed={2}
           > */}
 
-                                        <Image src="/images/no-background-portrait.png" alt="Dr. Noel Crymble smiling with arms crossed."></Image>
+                                        <Image src={HeroPortraitPhoto} alt="Dr. Noel Crymble smiling with arms crossed."></Image>
                                         {/* </Parallax> */}
                                     </Box>
                                 </Flex>
@@ -237,7 +239,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // w={{ base: "50%", lg: "20%" }}
                                 // shadow="dark-lg"
                             >
-                                <Image src="/images/looking-at-cat.png"  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
+                                <Image src={LookingAtCatPhoto}  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
                             </Box>
                         ) : (
                             <Parallax
@@ -250,7 +252,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // w={{ base: "50%", lg: "50%" }}
                                     shadow="dark-lg"
                                 >
-                                    <Image src="/images/looking-at-cat.png"  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
+                                    <Image src={LookingAtCatPhoto}  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
                                 </Box>
                                 {/* <Box w={{ base: "50%", lg: "20%" }} bg="brand.700"> */}
                                 {/* </Box> */}
