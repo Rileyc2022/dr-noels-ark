@@ -23,7 +23,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
     return (
         <>
             <HeadTemplate
-                title="Homeopathy for Pets - Explained by Dr. Noel"
+                title="Homeopathy for Pets - Dr. Noel's Ark"
                 description="Homeopathy is a holistic approach to healing (in humans and animals) that is based on one simple principle 'like cures like'."
                 short_description="Using Ayurvedic medicine to support your pet's health"
                 url="https://www.drnoelsark.com/resources/homeopathy"
