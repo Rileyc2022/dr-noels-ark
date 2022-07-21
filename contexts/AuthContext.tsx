@@ -31,7 +31,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }: { children: React.ReactChild }) {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
 
     function signUp(email: string, password: string): Promise<UserCredential> {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -68,7 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactChild }) {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
-            setLoading(false);
+            // setLoading(false);
         });
 
         return unsubscribe;
@@ -87,7 +87,7 @@ export function AuthProvider({ children }: { children: React.ReactChild }) {
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 }

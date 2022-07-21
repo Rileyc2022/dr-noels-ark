@@ -13,7 +13,6 @@ import {
     useBreakpointValue,
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
-import Head from "next/head";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -46,20 +45,18 @@ const Home: React.FC<HomeProps> = ({}) => {
     const servicesRef = useRef<HTMLDivElement>(null);
     const { asPath } = useRouter();
     useEffect(() => {
-        setTimeout(() => {
-            const hash = asPath.split("#")[1];
-            let elem;
-            if (hash == "pricing") {
-                elem = pricingRef.current;
-            } else if (hash == "about") {
-                elem = aboutRef.current;
-            } else if (hash == "services") {
-                elem = aboutRef.current;
-            }
-            if (elem) {
-                elem.scrollIntoView({ block: "start", behavior: "smooth" });
-            }
-        }, 500);
+        const hash = asPath.split("#")[1];
+        let elem;
+        if (hash == "pricing") {
+            elem = pricingRef.current;
+        } else if (hash == "about") {
+            elem = aboutRef.current;
+        } else if (hash == "services") {
+            elem = aboutRef.current;
+        }
+        if (elem) {
+            elem.scrollIntoView({ block: "start", behavior: "smooth" });
+        }
     }, [asPath]);
     return (
         <>
@@ -67,7 +64,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                 title="Dr. Noel's Ark - Natural Veterinary Care"
                 description="Holistic veterinary practice offering homeopathy, nutritional support, and ayurvedic therapy. Available by house call to the San Francisco Bay Area."
                 short_description="All-Natural Bay Area House Call Veterinarian"
-                url="https://www.drnoelsark.com/admin"
+                url="https://www.drnoelsark.com"
             />
             <Parallax
                 style={{
@@ -89,15 +86,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                     height={{ base: 760, lg: "100vh" }}
                     width="100%"
                     zIndex={"-10"}
-                ></Box>
+                />
             </Parallax>
             <InView rootMargin="-200px" triggerOnce={false}>
                 {({ inView, ref }) => {
                     return (
                         <>
-                            {/* <Fade in={inView}> */}
-                            {/* // <YourElement ref={ref} /> */}
-                            {/* </Fade> */}
                             <Navbar
                                 showCompanyName={!inView && allowedToCollapse}
                                 withShadow={true}
@@ -116,22 +110,14 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     <Box
                                         alignSelf={"center"}
                                         ref={ref}
-                                        // maxW="80%"
-
                                         transform={{ base: "translateY(70px)" }}
                                     >
-                                        {/* <Parallax
-          speed={10}> */}
                                         <Heading
                                             fontSize={{ base: "40", lg: "70" }}
                                             color="white"
                                         >
                                             DR. NOEL'S ARK
                                         </Heading>
-
-                                        {/* </Parallax> */}
-                                        {/* <Parallax
-          speed={10}> */}
                                         <Text
                                             fontSize={{
                                                 base: "18.5",
@@ -141,11 +127,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         >
                                             NATURAL VETERINARY CARE
                                         </Text>
-                                        {/* </Parallax> */}
                                         <Text
                                             mt="10"
                                             color={"gray.300"}
-                                            // maxW="40em"
                                             w={{ base: "100%", lg: "35em" }}
                                             fontSize={{
                                                 base: "14",
@@ -163,7 +147,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         <Text
                                             mt="10"
                                             color={"gray.300"}
-                                            // maxW="40em"
                                             w={{ base: "100%", lg: "35em" }}
                                             fontSize={{
                                                 base: "14",
@@ -207,25 +190,16 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     </Box>
                                     <Box
                                         width={{ base: 280, lg: 400, xl: 500 }}
-                                        // mt="10"
                                         alignSelf={"flex-end"}
                                         justifySelf={"flex-end"}
                                     >
-                                        {/* <Parallax
-          speed={2}
-          > */}
-                                        {/* <ChakraImage src="/images/no-background-portrait-sm.png"></ChakraImage> */}
-                                        {/* <Image src={HeroPortraitPhoto} placeholder="blur"  alt="Dr. Noel Crymble smiling with arms crossed." priority></Image> */}
                                         <Image
                                             src={HeroPortraitPhoto}
                                             alt="Dr. Noel Crymble smiling with arms crossed."
                                             priority
                                         ></Image>
-                                        {/* <Box backgroundImage="/images/no-background-portrait.png" backgroundSize={"cover"} backgroundPosition="center" height="617" width="500"></Box> */}
-                                        {/* </Parallax> */}
                                     </Box>
                                 </Flex>
-                                {/* <Button colorScheme={"brand"}>Hello</Button> */}
                             </Box>
                         </>
                     );
@@ -264,18 +238,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                     display={"flex"}
                     alignItems="center"
                     justify={"space-evenly"}
-                    // justify="center"
                     mb="120"
                     flexDirection={{ base: "column", lg: "row" }}
                 >
                     <Box w={{ base: "80%", lg: "30%" }}>
                         {isBase ? (
-                            <Box
-                                borderColor={"brand.500"}
-                                borderWidth="10px"
-                                // w={{ base: "50%", lg: "20%" }}
-                                // shadow="dark-lg"
-                            >
+                            <Box borderColor={"brand.500"} borderWidth="10px">
                                 <Image
                                     src={LookingAtCatPhoto}
                                     alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
@@ -289,7 +257,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 <Box
                                     borderColor={"brand.500"}
                                     borderWidth="10px"
-                                    // w={{ base: "50%", lg: "50%" }}
                                     shadow="dark-lg"
                                 >
                                     <Image
@@ -298,8 +265,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                     ></Image>
                                 </Box>
-                                {/* <Box w={{ base: "50%", lg: "20%" }} bg="brand.700"> */}
-                                {/* </Box> */}
                             </Parallax>
                         )}
                     </Box>
@@ -425,16 +390,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                     display={"flex"}
                     alignItems={"center"}
                     justify={"space-evenly"}
-                    // flexDirection={{ base: "column", lg: "row" }}
-                    // mb="120"
                     fontSize="16"
                     height={"100px"}
                 >
                     <Box
-                        // mx="100"
-                        // w="30%"
                         height={{ base: "80%", lg: "100%" }}
-                        // mb="10"
                         flex={1}
                         backgroundImage={
                             "/images/ff-certified-professional.png"
@@ -444,17 +404,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                         bgRepeat="no-repeat"
                     ></Box>
                     <Box
-                        // mx="100"
                         height={{ base: "140%", lg: "170%" }}
                         flex={1}
-                        // mt="10"
                         backgroundImage={"/images/ff-logo.png"}
                         backgroundSize="contain"
                         backgroundPosition={"center"}
                         bgRepeat="no-repeat"
                     ></Box>
-                    {/* <Image src={FearFreeCertifiedProfessional} alt="Dr. Noel Crymble smiling with arms crossed." priority></Image> */}
-                    {/* <Image src={FearFreeLogo} alt="Dr. Noel Crymble smiling with arms crossed." priority></Image> */}
                 </Flex>
             </Box>
             {isBase ? (
@@ -496,11 +452,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Text>
                     <Box width="10" height="1" bg={"brand.600"}></Box>
                 </Box>
-                <Stack
-                    align={"center"}
-                    // mx={{ base: "0", lg: "120" }}
-                    spacing="20"
-                >
+                <Stack align={"center"} spacing="20">
                     <Flex
                         w={{ base: "80%", lg: "80%" }}
                         flexDirection={{ base: "column", lg: "row-reverse" }}
@@ -508,65 +460,16 @@ const Home: React.FC<HomeProps> = ({}) => {
                         justify={"space-evenly"}
                     >
                         {isBase ? (
-                            // <ParallaxBanner
-                            //     layers={[
-                            //         {
-                            //             image: "/images/homeopathy.jpeg",
-                            //             speed: -15,
-                            //         },
-                            //     ]}
-                            //     className="aspect-[2/1]"
-                            //     style={{ height: "200px" }}
-                            // />
-                            // <Box
-                            //     borderColor={"brand.700"}
-                            //     borderWidth="10px"
-                            //     height={"200px"}
-                            //     width="100%"
-                            //     bgSize={"cover"}
-                            //     bgPos="center"
-                            //     shadow="dark-lg"
-                            //     bgImage="/images/homeopathy.jpeg"
-                            // />
-
-                            /// MOBILE IMAGE PARALLAX?
-                            //             <Parallax
-                            //             speed={3}
-                            //                 //                             height={"200px"}
-                            //                 // width="100%"
-                            //             style={{ height: "200px", width: "100%" }}
-                            //         >
-                            //             <Box
-                            //                 borderColor={"brand.600"}
-                            //                 borderWidth="10px"
-                            //                 height={"100%"}
-                            //                 width={"100%"}
-                            //                 shadow="dark-lg"
-                            //                 // boxShadow="0 5px 10px rgba(154,160,185,0.05), 0 15px 40px rgba(166,173,201,0.2)"
-                            //                 bgSize={"cover"}
-                            //                 bgPos="center"
-                            //                 bgImage="/images/homeopathy.jpeg"
-                            //             />
-                            // </Parallax>
-
                             <Box
                                 borderColor={"brand.500"}
                                 borderWidth="10px"
                                 height={"200px"}
                                 width={"100%"}
-                                // boxShadow="0 5px 10px rgba(154,160,185,0.05), 0 15px 40px rgba(166,173,201,0.2)"
                                 bgSize={"cover"}
                                 bgPos="center"
                                 bgImage="/images/homeopathy.jpeg"
                             />
                         ) : (
-                            // <Box height={"100px"} width="100%" bgSize={"cover"} bgPos="center" bgImage='/images/homeopathy.jpeg' bgAttachment={"fixed"}>
-
-                            // </Box>
-                            // <Avatar
-                            //     src="/images/homeopathy.jpeg"
-                            //     size={"2xl"}
-                            // />
                             <Parallax
                                 speed={3}
                                 style={{ height: "300px", width: "700px" }}
@@ -577,26 +480,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     height={"100%"}
                                     width={"100%"}
                                     shadow="dark-lg"
-                                    // boxShadow="0 5px 10px rgba(154,160,185,0.05), 0 15px 40px rgba(166,173,201,0.2)"
                                     bgSize={"cover"}
                                     bgPos="center"
                                     bgImage="/images/homeopathy.jpeg"
                                 />
                             </Parallax>
                         )}
-
-                        {/* <Avatar src="/images/homeopathy.jpeg" size={"2xl"} /> */}
-                        {/* <ParallaxBanner
-                            layers={[
-                                {
-                                    image: "/images/homeopathy.jpeg",
-                                    speed: -15,
-                                },
-                            ]}
-                            className="aspect-[2/1]"
-                            style={{ height: "100px" }}
-                        /> */}
-                        {/* <Box height={"100px"} width={"100%"}bgImage="/images/homeopathy.jpeg" bgSize={"cover"} bgPosition="center"></Box> */}
                         <Box
                             mr={{ base: "0px", lg: "80px" }}
                             w={{ base: "auto", lg: "70%" }}
@@ -625,14 +514,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as="a"
                                     fontSize="16"
                                 >
-                                    Learn More
+                                    Learn More About Homeopathy
                                 </Button>
                             </NextLink>
                         </Box>
                     </Flex>
                     <Divider></Divider>
                     <Flex
-                        // w={{ base: "80%", lg: "40%" }}
                         w={{ base: "80%", lg: "80%" }}
                         flexDirection={{ base: "column", lg: "row" }}
                         align="center"
@@ -665,28 +553,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 />
                             </Parallax>
                         )}
-                        {/* {isBase ? (
-                            <ParallaxBanner
-                                layers={[
-                                    {
-                                        image: "/images/nutrition.jpeg",
-                                        speed: -15,
-                                    },
-                                ]}
-                                className="aspect-[2/1]"
-                                style={{ height: "200px" }}
-                            />
-                        ) : (
-                            <Avatar src="/images/nutrition.jpeg" size={"2xl"} />
-                        )} */}
-
-                        {/* <ParallaxBanner
-                            layers={[
-                                { image: "/images/nutrition.jpeg", speed: -15 },
-                            ]}
-                            className="aspect-[2/1]"
-                            style={{ height: "200px" }}
-                        /> */}
                         <Box
                             ml={{ base: "0px", lg: "80px" }}
                             w={{ base: "auto", lg: "70%" }}
@@ -716,7 +582,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as="a"
                                     fontSize="16"
                                 >
-                                    Learn More
+                                    Learn More About Nutrition
                                 </Button>
                             </NextLink>
                         </Box>
@@ -727,7 +593,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                         flexDirection={{ base: "column", lg: "row-reverse" }}
                         align="center"
                         justify={"space-evenly"}
-                        // pb="120px"
                     >
                         {isBase ? (
                             <Box
@@ -756,28 +621,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 />
                             </Parallax>
                         )}
-                        {/* {isBase ? (
-                            <ParallaxBanner
-                                layers={[
-                                    {
-                                        image: "/images/ayurveda.jpeg",
-                                        speed: -15,
-                                    },
-                                ]}
-                                className="aspect-[2/1]"
-                                style={{ height: "200px" }}
-                            />
-                        ) : (
-                            <Avatar src="/images/ayurveda.jpeg" size={"2xl"} />
-                        )} */}
-                        {/* <Avatar src="/images/ayurveda.jpeg" size={"2xl"} /> */}
-                        {/* <ParallaxBanner
-                            layers={[
-                                { image: "/images/ayurveda.jpeg", speed: -15 },
-                            ]}
-                            className="aspect-[2/1]"
-                            style={{ height: "100px" }}
-                        /> */}
                         <Box
                             mr={{ base: "0px", lg: "80px" }}
                             w={{ base: "auto", lg: "70%" }}
@@ -810,7 +653,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as="a"
                                     fontSize="16"
                                 >
-                                    Learn More
+                                    Learn More About Ayurveda
                                 </Button>
                             </NextLink>
                         </Box>
@@ -829,10 +672,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                         <Text
                             color="gray.200"
                             fontSize={{ base: 35, lg: 30 }}
-                            // color={"brand.500"}
-                            // m="8"
-                            // fontWeight={"bold"}
-
                             mb="8"
                         >
                             Why choose Dr. Noel's Ark?
@@ -938,36 +777,18 @@ const Home: React.FC<HomeProps> = ({}) => {
                         color={"brand.500"}
                         m="8"
                         fontWeight={"bold"}
-
-                        // id="pricing"
                     >
                         Pricing
                     </Text>
                     <Box width="10" height="1" bg={"brand.600"}></Box>
                 </Box>
-                <Stack
-                    align={"center"}
-                    // mx={{ base: "0", lg: "120" }}
-                    spacing="17"
-                >
+                <Stack align={"center"} spacing="17">
                     <Flex
                         w={{ base: "80%", lg: "80%" }}
                         flexDirection={{ base: "column", lg: "row" }}
                         align="center"
                         justify={"space-evenly"}
                     >
-                        {/* <Avatar src="/images/homeopathy.jpeg" size={"2xl"} /> */}
-                        {/* <ParallaxBanner
-                            layers={[
-                                {
-                                    image: "/images/homeopathy.jpeg",
-                                    speed: -15,
-                                },
-                            ]}
-                            className="aspect-[2/1]"
-                            style={{ height: "100px" }}
-                        /> */}
-                        {/* <Box height={"100px"} width={"100%"}bgImage="/images/homeopathy.jpeg" bgSize={"cover"} bgPosition="center"></Box> */}
                         <Box
                             mr={{ base: "0px", lg: "40px" }}
                             w={{ base: "auto", lg: "70%" }}
@@ -991,14 +812,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 dietary changes. My house call visit takes about
                                 1 to 1.5 hours.
                             </Text>
-                            {/* <Button
-                                rightIcon={<ArrowForwardIcon />}
-                                colorScheme="brand"
-                                variant="outline"
-                                size={"sm"}
-                            >
-                                Learn More
-                            </Button> */}
                         </Box>
 
                         {!isBase && (
@@ -1014,7 +827,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                             fontSize="30px"
                             fontWeight="extrabold"
                             color="brand.500"
-                            // mr="40px"
                             ml={{ base: "0", lg: "40px" }}
                             w={{ base: "auto", lg: "15%" }}
                             my={{ base: "30px", lg: "0px" }}
@@ -1027,28 +839,14 @@ const Home: React.FC<HomeProps> = ({}) => {
                             orientation={"horizontal"}
                             borderColor={"brand.500"}
                             borderWidth=""
-                            // height="100"
                         ></Divider>
                     )}
-                    {/* <Divider></Divider> */}
                     <Flex
                         w={{ base: "80%", lg: "80%" }}
                         flexDirection={{ base: "column", lg: "row" }}
                         align="center"
                         justify={"space-evenly"}
                     >
-                        {/* <Avatar src="/images/homeopathy.jpeg" size={"2xl"} /> */}
-                        {/* <ParallaxBanner
-                            layers={[
-                                {
-                                    image: "/images/homeopathy.jpeg",
-                                    speed: -15,
-                                },
-                            ]}
-                            className="aspect-[2/1]"
-                            style={{ height: "100px" }}
-                        /> */}
-                        {/* <Box height={"100px"} width={"100%"}bgImage="/images/homeopathy.jpeg" bgSize={"cover"} bgPosition="center"></Box> */}
                         <Box
                             mr={{ base: "0px", lg: "40px" }}
                             w={{ base: "auto", lg: "70%" }}
@@ -1070,14 +868,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 remedy, supplements, or diet. Phone follow ups
                                 are recommended every 4 to 6 weeks.
                             </Text>
-                            {/* <Button
-                                rightIcon={<ArrowForwardIcon />}
-                                colorScheme="brand"
-                                variant="outline"
-                                size={"sm"}
-                            >
-                                Learn More
-                            </Button> */}
                         </Box>
 
                         {!isBase && (
@@ -1093,7 +883,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                             fontSize="30px"
                             fontWeight="extrabold"
                             color="brand.500"
-                            // mr="40px"
                             ml={{ base: "0", lg: "40px" }}
                             w={{ base: "auto", lg: "15%" }}
                             my={{ base: "30px", lg: "0px" }}
@@ -1106,7 +895,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                             orientation={"horizontal"}
                             borderColor={"brand.500"}
                             borderWidth=""
-                            // height="100"
                         ></Divider>
                     )}
                     <Flex
@@ -1115,19 +903,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                         align="center"
                         justify={"space-evenly"}
                     >
-                        {/* <Avatar src="/images/homeopathy.jpeg" size={"2xl"} /> */}
-                        {/* <ParallaxBanner
-                            layers={[
-                                {
-                                    image: "/images/homeopathy.jpeg",
-                                    speed: -15,
-                                },
-                            ]}
-                            className="aspect-[2/1]"
-                            style={{ height: "100px" }}
-                        /> */}
-                        {/* <Box height={"100px"} width={"100%"}bgImage="/images/homeopathy.jpeg" bgSize={"cover"} bgPosition="center"></Box> */}
-
                         <Box
                             mr={{ base: "0px", lg: "40px" }}
                             w={{ base: "auto", lg: "70%" }}
@@ -1146,14 +921,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 better reassess your pet so that I can make
                                 well-informed recommendations.
                             </Text>
-                            {/* <Button
-                                rightIcon={<ArrowForwardIcon />}
-                                colorScheme="brand"
-                                variant="outline"
-                                size={"sm"}
-                            >
-                                Learn More
-                            </Button> */}
                         </Box>
                         {!isBase && (
                             <Divider
@@ -1168,7 +935,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                             fontSize="30px"
                             fontWeight="extrabold"
                             color="brand.500"
-                            // mr="40px"
                             ml={{ base: "0", lg: "40px" }}
                             w={{ base: "auto", lg: "15%" }}
                             my={{ base: "30px", lg: "0px" }}

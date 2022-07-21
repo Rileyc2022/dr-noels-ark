@@ -107,16 +107,10 @@ const Admin: React.FC<AdminProps> = ({}) => {
                                 color={"brand.500"}
                                 fontWeight={"bold"}
                                 textAlign={"center"}
-                                // pt="50"
                             >
                                 Admin Portal
                             </Text>
                             <Divider my={10} />
-
-                            {/* <Box>
-    <Text>Current recommendation</Text>
-    
-    </Box> */}
                             <Tabs
                                 isFitted
                                 variant={"enclosed-colored"}
@@ -169,32 +163,6 @@ const Admin: React.FC<AdminProps> = ({}) => {
                                         Sign In
                                     </Button>
                                 </NextLink>
-                                {/* <NextLink
-                                    href={"/create-portal-account"}
-                                    passHref
-                                >
-                                    <Button
-                                        as="a"
-                                        display={{
-                                            base: "none",
-                                            lg: "inline-flex",
-                                        }}
-                                        fontSize="15"
-                                        fontWeight={600}
-                                        color={"white"}
-                                        colorScheme={"brand"}
-                                                flexGrow={1}
-                                                ml={1}
-                                                
-                                        // bg={'pink.400'}
-
-                                        // _hover={{
-                                        //   bg: 'pink.300',
-                                        // }}
-                                    >
-                                        Sign Up
-                                    </Button>
-                                </NextLink> */}
                             </Flex>
                         </Box>
                     </Flex>
@@ -205,21 +173,12 @@ const Admin: React.FC<AdminProps> = ({}) => {
 };
 
 const AppointmentTable = () => {
-    // const appointments = [
-    //     {
-    //         date: "5/10",
-    //         time: "5:15pm",
-    //         name: "Riley Crymble",
-    //         // anim
-    //     },
-    // ];
     const [appointmentRequests, setAppointmentRequests] = React.useState<
         QueryDocumentSnapshot[] | null
     >(null);
     const unsub = onSnapshot(
         collection(db, "appointment_requests"),
         (querySnapshot) => {
-            // console.log("Current data: ", doc.data());
             const requests: any = [];
             querySnapshot.forEach((doc) => {
                 requests.push(doc);
@@ -274,8 +233,6 @@ const AppointmentTable = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {/* initialValues={{ "Date and Time": "", "First name": "", "Last name": "", "Email address": "", "Phone number": "", "City": "", "Message": "" }} */}
-
                         {appointmentRequests?.map(
                             (
                                 appointmentRequest: QueryDocumentSnapshot<DocumentData>
@@ -343,33 +300,24 @@ const AppointmentTable = () => {
                                                     "Message"
                                                 ]
                                             }
-                                            // m={4}
                                             colorScheme="blue"
                                         >
                                             Message
                                         </Button>
-                                        {/* db.collection("cities").doc("DC").delete().then(() => {
-    console.log("Document successfully deleted!");
-}) */}{" "}
                                         <Button
                                             onClick={onDeleteOpen}
-                                            // key={appointmentRequest["Message"]}
-                                            // m={4}
                                             colorScheme="red"
                                             rightIcon={<DeleteIcon />}
                                         >
                                             Delete
                                         </Button>
                                         <AlertDialog
-                                            // motionPreset="slideInBottom"
                                             leastDestructiveRef={cancelRef}
                                             onClose={onDeleteClose}
                                             isOpen={isDeleteOpen}
                                             isCentered
                                         >
                                             <AlertDialogOverlay />
-                                            {/* <ModalOverlay/> */}
-
                                             <AlertDialogContent>
                                                 <AlertDialogHeader>
                                                     Delete request?
@@ -398,16 +346,9 @@ const AppointmentTable = () => {
                                                             );
                                                             toast({
                                                                 title: "Appointment request deleted",
-                                                                // description:
-                                                                // "",
                                                                 status: "success",
                                                             });
                                                             onDeleteClose();
-                                                            // await collection("Appointment Requests").doc(appointmentRequest.id).delete()
-                                                            // setMessage(
-                                                            //     appointmentRequest["Message"]
-                                                            // );
-                                                            // onOpen();
                                                         }}
                                                         colorScheme="red"
                                                         ml={3}
@@ -421,17 +362,6 @@ const AppointmentTable = () => {
                                 </Tr>
                             )
                         )}
-
-                        {/* <Tr>
-                            <Td>feet</Td>
-                            <Td>centimetres (cm)</Td>
-                            <Td>30.48</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>yards</Td>
-                            <Td>metres (m)</Td>
-                            <Td>0.91444</Td>
-                        </Tr> */}
                     </Tbody>
                 </Table>
             </TableContainer>

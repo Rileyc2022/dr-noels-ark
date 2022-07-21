@@ -2,10 +2,10 @@ import Head from "next/head";
 import React from "react";
 
 interface HeadTemplateProps {
-    title: string;
-    description: string;
-    short_description: string;
-    url: string;
+    title?: string;
+    description?: string;
+    short_description?: string;
+    url?: string;
 }
 
 const HeadTemplate: React.FC<HeadTemplateProps> = ({
@@ -17,14 +17,16 @@ const HeadTemplate: React.FC<HeadTemplateProps> = ({
     return (
         <Head>
             {/* <!-- HTML Meta Tags --> */}
-            <title>{title}</title>
+            {title && <title>{title}</title>}
             <meta name="description" content={description} />
 
             {/* <!-- Facebook Meta Tags --> */}
-            <meta property="og:url" content={url} />
+            {url && <meta property="og:url" content={url} />}
             <meta property="og:type" content="website" />
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={short_description} />
+            {title && <meta property="og:title" content={title} />}
+            {short_description && (
+                <meta property="og:description" content={short_description} />
+            )}
 
             {/* <meta property="og:image" content="https://www.drnoelsark.com/images/og-image.png" /> */}
             <meta
@@ -35,9 +37,11 @@ const HeadTemplate: React.FC<HeadTemplateProps> = ({
             {/* <!-- Twitter Meta Tags --> */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta property="twitter:domain" content="drnoelsark.com" />
-            <meta property="twitter:url" content={url} />
-            <meta name="twitter:title" content={title} />
-            <meta name="twitter:description" content={short_description} />
+            {url && <meta property="twitter:url" content={url} />}
+            {title && <meta name="twitter:title" content={title} />}
+            {short_description && (
+                <meta name="twitter:description" content={short_description} />
+            )}
             {/* <meta property="og:image" content="https://www.drnoelsark.com/images/og-image.png" /> */}
             <meta
                 name="twitter:image"

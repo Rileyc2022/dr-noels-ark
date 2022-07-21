@@ -8,7 +8,6 @@ import {
     UnorderedList,
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
-import Head from "next/head";
 import NextLink from "next/link";
 import React from "react";
 import Break from "../../components/Break";
@@ -39,9 +38,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                     <Box
                         bgColor="white"
                         width={"80%"}
-                        // p={{ base: "50px", lg: "120" }}
                         shadow="md"
-                        // position={"relative"}
                         zIndex="1"
                         overflow={"hidden"}
                     >
@@ -49,10 +46,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             backgroundImage={
                                 "linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1)), url(/images/misty-trees.png)"
                             }
-                            //
-                            // position={"absolute"}
                             backgroundPosition={"center 50%"}
-                            // filter={"brightness()"}
                             zIndex="-1"
                             w="100%"
                             backgroundSize={"cover"}
@@ -60,7 +54,6 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             display={"flex"}
                             alignItems={"center"}
                             justifyContent={"center"}
-                            // linear-gradient="(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
                         >
                             <Box>
                                 <Text
@@ -68,7 +61,6 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                     color={"brand.500"}
                                     fontWeight={"bold"}
                                     textAlign={"center"}
-                                    // pt="50"
                                 >
                                     Nutrition
                                 </Text>
@@ -77,7 +69,6 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                     color={"brand.400"}
                                     fontWeight={"bold"}
                                     textAlign={"center"}
-                                    // pt="50"
                                 >
                                     Explained by Dr. Noel
                                 </Text>
@@ -141,15 +132,6 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 Proper nutrition through a lifetime of your cat
                                 or dog provides many benefits:
                                 <Break />
-                                {/* <Text
-                                    fontSize={18}
-                                    fontWeight="bold"
-                                    mb="3"
-                                    color={"brand.400"}
-                                >
-                                    Homeopathy can treat a variety of conditions
-                                    including:
-                                </Text> */}
                                 <UnorderedList spacing={2}>
                                     <ListItem>A strong immune system</ListItem>
                                     <ListItem>
@@ -196,10 +178,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             backgroundImage={
                                 "linear-gradient(to top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1)), url(/images/misty-trees.png)"
                             }
-                            //
-                            // position={"absolute"}
                             backgroundPosition={"center 50%"}
-                            // filter={"brightness()"}
                             zIndex="-1"
                             w="100%"
                             backgroundSize={"cover"}
@@ -207,7 +186,6 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             display={"flex"}
                             alignItems={"center"}
                             justifyContent={"center"}
-                            // linear-gradient="(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))"
                         />
                     </Box>
                 </Flex>

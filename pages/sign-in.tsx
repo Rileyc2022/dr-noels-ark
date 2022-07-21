@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-// import { Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-// import { Link as  ReachLink, useHistory } from "react-router-dom";
 import {
     Box,
     Button,
@@ -33,70 +31,17 @@ export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
     const handleClick = () => setShowPassword((showPassword) => !showPassword);
     const router = useRouter();
-    // const [error, setError] = useState("");
-    // const [loading, setLoading] = useState(false);
-    // const history = useHistory();
+
     const toast = useToast();
-
-    // interface Values {
-    //     email: string;
-    //     password: string;
-    // }
-
-    // async function handleSubmit(
-    //     { email, password }: Values,
-    //     setSubmitting: FormikHelpers<Values>["setSubmitting"]
-    // ) {
-    //     // if (password !== passwordConfirm) {
-    //     //   return setError("Passwords do not match")
-    //     // }
-    //     setLoading(true);
-    //     // setTimeout(async () => {
-    //     console.log("sign up:", email, password);
-    //     try {
-    //         logIn(email, password);
-    //         setLoading(false);
-    //     } catch (err) {
-    //         // Toast({
-    //         //   title: err.toString(),
-    //         //   status: "error",
-    //         //   duration: 9000,
-    //         //   isClosable: true,
-    //         // });
-    //         // setLoading(false);
-    //     }
-    //     // .then(() => {
-    //     // console.log(result)
-    //     // history.push("/");
-    //     console.log(currentUser);
-    //     // }).catch( (err: Error) => {
-
-    //     // });
-    //     // }, 5000);
-    //     // setError("");
-    // }
 
     async function googleHandle() {
         try {
             if (googleLogin) await googleLogin();
-            // history.push("/")
-            // router.push("/portal");
-            // sendToNextPage();
         } catch {
             console.log("Failed to login using google");
         }
     }
 
-    // const sendToNextPage = async () => {
-    //     if (currentUser) {
-    //         if (await checkIsAdmin(currentUser)) {
-    //             router.push("/admin");
-    //         } else {
-    //             router.push("/portal");
-    //         }
-    //         console.log(currentUser.uid);
-    //     }
-    // };
     useEffect(() => {
         (async () => {
             if (currentUser) {
@@ -126,21 +71,12 @@ export default function SignIn() {
             <Flex
                 minH={"100vh"}
                 align={{ base: "end", lg: "end" }}
-                // pb={{ base: 10, lg: 5 }}
                 pt={16}
                 justify={"center"}
                 alignItems={"center"}
                 bg={"gray.50"}
-                // pt="20px"
-                // pt="10"
-                // pb="10"
             >
-                <Stack
-                    spacing={8}
-                    w={{ base: "400px", lg: "500px" }}
-                    // py={12}
-                    px={6}
-                >
+                <Stack spacing={8} w={{ base: "400px", lg: "500px" }} px={6}>
                     <Stack align={"center"}>
                         <Text
                             fontSize={{ base: 25, lg: 40 }}
@@ -152,7 +88,6 @@ export default function SignIn() {
                         </Text>
                         <Text fontSize={"lg"} color={"gray.600"}>
                             Admin Portal
-                            {/* to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️ */}
                         </Text>
                     </Stack>
                     <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
@@ -168,7 +103,7 @@ export default function SignIn() {
                                 try {
                                     await logIn(email, password);
                                     actions.setSubmitting(false);
-                                    // await sendToNextPage();
+
                                     analytics.then((analytics) => {
                                         analytics &&
                                             logEvent(
@@ -207,10 +142,7 @@ export default function SignIn() {
                                                     </FormLabel>
                                                     <Input
                                                         {...field}
-                                                        // autoComplete="off"
                                                         id="email"
-                                                        // variant={"flushed"}
-                                                        // placeholder="Email"
                                                     />
                                                     <FormErrorMessage>
                                                         {form.errors.email}
@@ -233,14 +165,12 @@ export default function SignIn() {
                                                     <InputGroup size="md">
                                                         <Input
                                                             {...field}
-                                                            // autoComplete="off"
                                                             id="password"
                                                             type={
                                                                 showPassword
                                                                     ? "text"
                                                                     : "password"
                                                             }
-                                                            // placeholder="password"
                                                         />
                                                         <InputRightElement width="4.5rem">
                                                             <Button
@@ -292,7 +222,6 @@ export default function SignIn() {
                         </Formik>
                     </Box>
                 </Stack>
-                {/* <Logo boxSize={"700px"} fill="brand.200"></Logo> */}
             </Flex>
         </>
     );

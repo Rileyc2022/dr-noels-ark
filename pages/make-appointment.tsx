@@ -29,67 +29,6 @@ interface MakeAppointmentProps {}
 
 const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
     const toast = useToast();
-    // const form = [
-    //     {
-    //         heading: "Owner's Contact Information",
-    //         subsections: [
-    //             {
-    //                 title: "Name",
-    //                 subfields: [
-    //                     {
-    //                         label: "First Name",
-    //                         required: true,
-    //                     },
-    //                     { label: "Last Name", required: true },
-    //                 ],
-    //             },
-    //             {
-    //                 title: "Address",
-    //                 subfields: [
-    //                     {
-    //                         label: "Street Address",
-    //                         required: true,
-    //                     },
-    //                     { label: "Address Line 2", required: true },
-    //                     { label: "City", required: true },
-    //                     { label: "State / Province / Region", required: true },
-    //                     { label: "ZIP / Postal Code", required: true },
-    //                     { label: "Country", required: true },
-    //                 ],
-    //             },
-    //             {
-    //                 title: "Phone numbers",
-    //                 subfields: [
-    //                     {
-    //                         label: "Day-Time phone number",
-    //                         required: true,
-    //                     },
-    //                     {
-    //                         label: "Evening number",
-    //                         required: true,
-    //                     },
-    //                     {
-    //                         label: "Mobile number",
-    //                         required: true,
-    //                     },
-    //                 ],
-    //             },
-    //             {
-    //                 title: "Email",
-    //                 subfields: [
-    //                     {
-    //                         label: "Email address",
-    //                         required: true,
-    //                     },
-    //                     {
-    //                         label: "Cofirm email address",
-    //                         required: true,
-    //                     },
-    //                 ],
-    //             },
-    //         ],
-    //     },
-    // ];
 
     const appointmentFields = [
         {
@@ -131,14 +70,14 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
             label: "Preferred day of week",
             required: true,
             special: "dropdown",
-            // helperText: "Only these cities are in my range.",
+
             options: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         },
         {
             label: "Preferred time of day",
             required: true,
             special: "dropdown",
-            // helperText: "Only these cities are in my range.",
+
             options: ["Morning", "Afternoon", "No preference"],
         },
         {
@@ -148,10 +87,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
             helperText: "Please describe your pet, and their health challenge.",
         },
     ];
-    // array above but only labels:
-    // ["First name", "Last name", "Email address", "Phone number", "City", "Message"]
-    //then each string in array above is a stringkey with value of an empty string: { "First name": "", "Last name": "", "Email address": "", "Phone number": "", "City": "", "Message": "" }
-    // ["First name", "Last name", "City", "Message"] but each string is a key with value of an empty string: { "First name": "", "Last name": "", "City": "", "Message": "" }
 
     return (
         <>
@@ -159,7 +94,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                 title="Make Appointment - Dr. Noel's Ark"
                 description="All-natural, holistic veterinary care in your home. Request an appointment with Dr. Noel Crymble."
                 short_description="Holistic Bay Area House Call Veterinarian"
-                url="https://www.drnoelsark.com"
+                url="https://www.drnoelsark.com/make-appointment"
             />
             <Navbar
                 variant="dark"
@@ -180,7 +115,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                             color={"brand.500"}
                             fontWeight={"bold"}
                             textAlign={"center"}
-                            // pt="50"
                         >
                             Make Appointment
                         </Text>
@@ -189,7 +123,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                             color={"brand.400"}
                             fontWeight={"bold"}
                             textAlign={"center"}
-                            // pt="50"
                         >
                             with Dr. Noel
                         </Text>
@@ -213,14 +146,13 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                     values["Date and Time"] = moment().format(
                                         "MM/DD/YYYY hh:mm:ss A"
                                     );
-                                    // await logIn(email, password);
-                                    // setDoc(doc(db, "save"), {  userData: values });
+
                                     await addDoc(
                                         collection(db, "appointment_requests"),
                                         values
                                     );
                                     actions.setSubmitting(false);
-                                    // router.push("/portal");
+
                                     toast({
                                         title: "Appointment Request Sent",
                                         description:
@@ -257,32 +189,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                             {(props) => (
                                 <Form>
                                     <Stack spacing={8} maxWidth="100%" mb={20}>
-                                        {/* <Text
-                                                        fontSize={25}
-                                                        fontWeight="bold"
-                                                        pt="20"
-                                                        color={"brand.600"}
-                                                        key={section.heading}
-                                                    >
-                                                        {section.heading}
-                                                    </Text> */}
-                                        {/* 
-                                                    <Text
-                                                        fontSize={25}
-                                                        fontWeight="bold"
-                                                        pt="20"
-                                                        color={"brand.600"}
-                                                    >
-                                                        {section.heading}
-                                                    </Text> */}
-                                        {/* <Text
-                                            fontSize={15}
-                                            fontWeight="bold"
-                                            pt="15"
-                                            color={"brand.700"}
-                                        >
-                                            Your full name
-                                        </Text> */}
                                         {appointmentFields.map(
                                             (appointmentField) => (
                                                 <Field
@@ -340,9 +246,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                                     id={
                                                                         appointmentField.label
                                                                     }
-                                                                    // autoComplete="off"
-                                                                    //   variant={"outline"}
-                                                                    // placeholder="Email"
                                                                 />
                                                             )}
                                                             {appointmentField.special ==
@@ -417,12 +320,8 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                 </Field>
                                             )
                                         )}
-                                        {/* <Divider></Divider> */}
-
-                                        {/* <HStack><Checkbox></Checkbox><Text>Send me a copy</Text></HStack> */}
                                     </Stack>
                                     <Button
-                                        // width={"100%"}
                                         colorScheme="teal"
                                         disabled={props.isSubmitting}
                                         isLoading={props.isSubmitting}

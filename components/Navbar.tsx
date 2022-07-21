@@ -55,34 +55,10 @@ const NAV_ITEMS: Array<NavItem> = [
     {
         label: "Home",
         href: "/",
-        // children: [
-        //   {
-        //     label: 'Explore Design Work',
-        //     subLabel: 'Trending Design to inspire you',
-        //     href: '#',
-        //   },
-        //   {
-        //     label: 'New & Noteworthy',
-        //     subLabel: 'Up-and-coming Designers',
-        //     href: '#',
-        //   },
-        // ],
     },
     {
         label: "About",
         href: "/#about",
-        // children: [
-        //   {
-        //     label: 'Job Board',
-        //     subLabel: 'Find your dream design job',
-        //     href: '#',
-        //   },
-        //   {
-        //     label: 'Freelance Projects',
-        //     subLabel: 'An exclusive list for contract work',
-        //     href: '#',
-        //   },
-        // ],
     },
     {
         label: "Services",
@@ -135,8 +111,6 @@ export default function WithSubnavigation({
     const isBase = useBreakpointValue({ base: true, lg: false });
     const [isAdmin, setIsAdmin] = useState(false);
     async function handleLogout() {
-        // setError("");
-
         try {
             if (currentUser) await logOut();
             router.push("/");
@@ -161,13 +135,10 @@ export default function WithSubnavigation({
             }
         })();
     }, [currentUser]);
-    // const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure();
-    // const [hidden, setHidden] = useState(!isOpen);
 
     return (
         <Box
             width="100%"
-            // position={"absolute"}
             position="fixed"
             bg={
                 variant == "dark"
@@ -182,31 +153,21 @@ export default function WithSubnavigation({
                 withShadow ? (showCompanyName ? "dark-lg" : "none") : "none"
             }
             transition="box-shadow 1s ease, background-color 1s ease"
-            // 2px border on the bottom
             borderColor={variant == "light" ? "gray.200" : "none"}
             borderBottomWidth={variant == "light" ? (bottomBorder ? 1 : 0) : 0}
         >
             <Flex
-                // bg={useColorModeValue('white', 'gray.800')}
                 color={"white"}
                 minH={"60px"}
                 py={{ base: 5 }}
                 px={{ base: 6 }}
-                // borderBottom={1}
-                // borderStyle={'solid'}
-                // borderColor={useColorModeValue('gray.200', 'gray.900')}
                 align={"center"}
                 justify={"space-between"}
             >
-                <Flex
-                    // flex={{ base: 1 }}
-                    // justify={{ base: 'center', lg: 'start' }}
-                    align="center"
-                >
+                <Flex align="center">
                     <LinkBox>
                         <LinkOverlay href="/">
-                            <Logo fill="brand.500" boxSize={10}></Logo>
-                            {/* <Box position={"relative"}> */}
+                            <Logo fill="brand.500" boxSize={10} />
                         </LinkOverlay>
                     </LinkBox>
                     <Box
@@ -215,17 +176,6 @@ export default function WithSubnavigation({
                         transition="1s ease"
                         overflow="hidden"
                     >
-                        {/* <Collapse startingHeight={0} in={showCompanyName}> */}
-                        {/* <motion.div
-                        // {...getDisclosureProps()}
-                        hidden={!showCompanyName}
-                        initial={false}
-                        // onAnimationStart={() => setHidden(false)}
-                        // onAnimationComplete={() => setHidden(!isOpen)}
-                            animate={{ width: showCompanyName ? "initial" : 0 }}
-                            style={{overflow: "hidden", height: "50"}}
-                        > */}
-                        {/* {showCompanyName && ( */}
                         <LinkBox>
                             <LinkOverlay href="/">
                                 <Heading
@@ -238,39 +188,24 @@ export default function WithSubnavigation({
                                 </Heading>
                             </LinkOverlay>
                         </LinkBox>
-
-                        {/* // )} */}
-                        {/* </motion.div> */}
-                        {/* </Collapse> */}
-                        {/* </Box> */}
-                        {/* <Box
-                        width={showCompanyName ? "initial" : 0}
-                    >
-
-                        </Box> */}
                     </Box>
                     <Flex display={{ base: "none", lg: "flex" }} ml={10}>
                         <DesktopNav variant={variant} />
                     </Flex>
                 </Flex>
-                {/* <Button colorScheme='brand'>Orange</Button> */}
-
                 {(!showCompanyName || !isBase) &&
                     (currentUser ? (
                         <Menu>
                             <MenuButton
                                 as={Button}
                                 rounded={"full"}
-                                // borderRadius="20px 20px 0px 20px"
                                 variant={"link"}
-                                // variant={"solid"}
                                 cursor={"pointer"}
                                 minW={0}
                                 borderColor="brand.500"
                                 borderWidth={2}
                                 color="brand.500"
                                 _active={{ color: "gray.400" }}
-                                // _hover={{backgroundColor: "brand.500"}}
                             >
                                 <Flex align={"center"} flexDirection="row">
                                     <Avatar
@@ -300,23 +235,6 @@ export default function WithSubnavigation({
                                 boxShadow={"xl"}
                                 bg={"brand.600"}
                             >
-                                {/* <br />
-                            <Center>
-                                <Avatar
-                                    size="2xl"
-                                    name={
-                                        currentUser.email
-                                            ? currentUser.email
-                                            : undefined
-                                    }
-                                    src={
-                                        currentUser.photoURL
-                                            ? currentUser.photoURL
-                                            : undefined
-                                    }
-                                />
-                            </Center>
-                            <br /> */}
                                 <Center>
                                     <Text>
                                         {" "}
@@ -327,7 +245,6 @@ export default function WithSubnavigation({
                                             : currentUser.email?.split("@")[0]}
                                     </Text>
                                 </Center>
-                                {/* <br /> */}
                                 <MenuDivider />
                                 <MenuItem
                                     _hover={{ bg: "brand.500" }}
@@ -349,13 +266,6 @@ export default function WithSubnavigation({
                                         Admin Portal
                                     </MenuItem>
                                 )}
-                                {/* <MenuItem
-                                    _hover={{ bg: "brand.500" }}
-                                    _focus={{ bg: "brand.500" }}
-                                    icon={<SettingsIcon />}
-                                >
-                                    Account Settings
-                                </MenuItem> */}
                                 <MenuItem
                                     _hover={{ bg: "brand.500" }}
                                     _focus={{ bg: "brand.500" }}
@@ -391,43 +301,8 @@ export default function WithSubnavigation({
                                 Make Appointment
                             </Button>
                         </NextLink>
-                        // <Stack
-                        //     direction={"row"}
-                        //     spacing={6}
-                        // >
-                        //     <NextLink href={"/sign-in"} passHref>
-                        //         <Button
-                        //             as={"a"}
-                        //             fontSize="15"
-                        //             fontWeight={400}
-                        //             variant={"link"}
-                        //             colorScheme={"brand"}
-                        //         >
-                        //             Sign In
-                        //         </Button>
-                        //     </NextLink>
-                        //     <NextLink href={"/create-portal-account"} passHref>
-                        //         <Button
-                        //             as="a"
-                        //             display={{
-                        //                 base: "none",
-                        //                 lg: "inline-flex",
-                        //             }}
-                        //             fontSize="15"
-                        //             fontWeight={600}
-                        //             color={"white"}
-                        //             colorScheme={"brand"}
-                        //         >
-                        //             Sign Up
-                        //         </Button>
-                        //     </NextLink>
-                        // </Stack>
                     ))}
-                <Flex
-                    // flex={{ base: 1, lg: 'auto' }}
-                    // ml={{ base: -2 }}
-                    display={{ base: "flex", lg: "none" }}
-                >
+                <Flex display={{ base: "flex", lg: "none" }}>
                     <IconButton
                         onClick={onToggle}
                         icon={
@@ -439,7 +314,6 @@ export default function WithSubnavigation({
                         }
                         variant={"ghost"}
                         colorScheme="brand"
-                        // _hover={{color: "brand.700"}}
                         aria-label={"Toggle Navigation"}
                     />
                 </Flex>
@@ -473,7 +347,6 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
                                     textDecoration: "none",
                                     color: linkHoverColor,
                                 }}
-                                // scroll={false}
                             >
                                 {navItem.label}
                             </Link>
