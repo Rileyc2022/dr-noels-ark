@@ -19,13 +19,13 @@ import {
     useToast,
     VStack,
 } from "@chakra-ui/react";
+import { logEvent } from "firebase/analytics";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import GoogleButton from "react-google-button";
 import Navbar from "../components/Navbar";
-import { checkIsAdmin } from "../functions/checkIsAdmin";
 import { analytics } from "../constants/firebase";
-import { logEvent } from "firebase/analytics";
+import { checkIsAdmin } from "../functions/checkIsAdmin";
 
 export default function SignIn() {
     const emailRef = useRef<HTMLInputElement>(null);

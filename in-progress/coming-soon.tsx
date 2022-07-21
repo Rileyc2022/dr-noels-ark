@@ -1,10 +1,4 @@
-import {
-    Box,
-    Center, Flex,
-    Heading,
-    Tag,
-    Text
-} from "@chakra-ui/react";
+import { Box, Center, Flex, Heading, Tag, Text } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 

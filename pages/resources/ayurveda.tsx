@@ -1,6 +1,5 @@
 import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
-import Head from "next/head";
 import NextLink from "next/link";
 import React from "react";
 import Break from "../../components/Break";

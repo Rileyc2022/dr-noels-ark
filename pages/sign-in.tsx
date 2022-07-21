@@ -19,7 +19,6 @@ import {
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
 import { Field, FieldProps, Form, Formik } from "formik";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";

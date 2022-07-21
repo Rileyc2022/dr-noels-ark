@@ -1,53 +1,48 @@
 import {
-    Box,
-    Flex,
-    Text,
-    IconButton,
-    Button,
-    Stack,
-    Collapse,
-    Icon,
-    Link,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    useColorModeValue,
-    useBreakpointValue,
-    useDisclosure,
-    Heading,
+    ArrowBackIcon,
+    CalendarIcon,
+    ChevronDownIcon,
+    ChevronRightIcon,
+    CloseIcon,
+    HamburgerIcon,
+    ViewIcon,
+} from "@chakra-ui/icons";
+import {
     Avatar,
+    Box,
+    Button,
     Center,
+    Collapse,
+    Flex,
+    Heading,
+    Icon,
+    IconButton,
+    Link,
+    LinkBox,
+    LinkOverlay,
     Menu,
     MenuButton,
     MenuDivider,
     MenuItem,
     MenuList,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+    Stack,
+    Text,
+    useBreakpointValue,
+    useColorModeValue,
+    useDisclosure,
     useToast,
-    LinkBox,
-    LinkOverlay,
 } from "@chakra-ui/react";
-import {
-    HamburgerIcon,
-    CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-    ArrowForwardIcon,
-    ArrowBackIcon,
-    SettingsIcon,
-    ViewIcon,
-    UnlockIcon,
-    CalendarIcon,
-} from "@chakra-ui/icons";
-import NextLink from "next/link";
-import Logo from "./Logo";
-import { useContext, useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
-import { motion } from "framer-motion";
-import { BiLogOut } from "react-icons/bi";
-import { useRouter } from "next/router";
-import { analytics } from "../constants/firebase";
 import { logEvent } from "firebase/analytics";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { analytics } from "../constants/firebase";
+import { useAuth } from "../contexts/AuthContext";
 import { checkIsAdmin } from "../functions/checkIsAdmin";
+import Logo from "./Logo";
 
 interface NavItem {
     label: string;
@@ -117,7 +112,7 @@ const NAV_ITEMS: Array<NavItem> = [
     {
         label: "Pricing",
         href: "/#pricing",
-    }
+    },
 ];
 
 interface WithSubnavigationProps {
@@ -347,7 +342,7 @@ export default function WithSubnavigation({
                                     <MenuItem
                                         _hover={{ bg: "brand.500" }}
                                         _focus={{ bg: "brand.500" }}
-                                        icon={< CalendarIcon/>}
+                                        icon={<CalendarIcon />}
                                         as="a"
                                         href="/admin"
                                     >

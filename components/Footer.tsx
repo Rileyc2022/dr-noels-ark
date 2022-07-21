@@ -1,14 +1,7 @@
 import {
-    Box,
-    Container,
-    Link,
+    Box, Flex, Link,
     SimpleGrid,
-    Stack,
-    Text,
-    Flex,
-    Tag,
-    useColorModeValue,
-    DarkMode,
+    Stack, Tag, Text
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
 import { ReactNode } from "react";

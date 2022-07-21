@@ -2,7 +2,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import { ParallaxProvider } from "react-scroll-parallax";
 import Fonts from "../components/Fonts";
-import HeadTemplate from "../components/HeadTemplate";
 import { AuthProvider } from "../contexts/AuthContext";
 import "../styles/globals.css";
 import theme from "../theme";

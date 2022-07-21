@@ -1,5 +1,5 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-import React from 'react'
+import React from 'react';
 
 interface LogoProps extends IconProps{}
 

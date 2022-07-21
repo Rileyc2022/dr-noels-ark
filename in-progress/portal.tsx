@@ -13,13 +13,18 @@ const portal: React.FC<portalProps> = ({}) => {
                 withShadow={false}
                 bottomBorder={true}
             ></Navbar>
-        <Flex bg={"#F5F7FB"} height="100vh" justify="space-evenly" alignItems={"center"} flexDirection="row">
-          {/* <Box>
+            <Flex
+                bg={"#F5F7FB"}
+                height="100vh"
+                justify="space-evenly"
+                alignItems={"center"}
+                flexDirection="row"
+            >
+                {/* <Box>
             <Text>Current recommendation</Text>
             
             </Box> */}
-          
-        </Flex>
+            </Flex>
         </>
     );
 };

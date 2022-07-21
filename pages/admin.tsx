@@ -43,7 +43,6 @@ import {
     onSnapshot,
     QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { Head } from "next/document";
 import NextLink from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import HeadTemplate from "../components/HeadTemplate";
