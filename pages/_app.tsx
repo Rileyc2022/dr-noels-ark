@@ -1,12 +1,11 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
+import type { AppProps } from "next/app";
 import { ParallaxProvider } from "react-scroll-parallax";
 import Fonts from "../components/Fonts";
-import theme from "../theme";
+import HeadTemplate from "../components/HeadTemplate";
 import { AuthProvider } from "../contexts/AuthContext";
-
-import { ColorModeScript } from '@chakra-ui/react'
+import "../styles/globals.css";
+import theme from "../theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (

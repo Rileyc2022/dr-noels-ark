@@ -5,7 +5,6 @@ import { useAuth } from "../contexts/AuthContext";
 import {
     Box,
     Button,
-    Divider,
     Flex,
     FormControl,
     FormErrorMessage,
@@ -17,15 +16,15 @@ import {
     Stack,
     Text,
     useToast,
-    VStack,
 } from "@chakra-ui/react";
-import { Field, FieldProps, Form, Formik } from "formik";
-import { useRouter } from "next/router";
-import GoogleButton from "react-google-button";
-import Navbar from "../components/Navbar";
-import { checkIsAdmin } from "../functions/checkIsAdmin";
-import { analytics } from "../constants/firebase";
 import { logEvent } from "firebase/analytics";
+import { Field, FieldProps, Form, Formik } from "formik";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import Navbar from "../components/Navbar";
+import { analytics } from "../constants/firebase";
+import { checkIsAdmin } from "../functions/checkIsAdmin";
+import HeadTemplate from "../components/HeadTemplate";
 
 export default function SignIn() {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -113,6 +112,12 @@ export default function SignIn() {
 
     return (
         <>
+            <HeadTemplate
+                title="Sign In - Dr. Noel's Ark"
+                description="Sign in to Dr. Noel's Ark"
+                short_description="Sign in to Dr. Noel's Ark"
+                url="https://www.drnoelsark.com/sign-in"
+            />
             <Navbar
                 variant="light"
                 showCompanyName={true}

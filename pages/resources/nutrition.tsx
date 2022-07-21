@@ -3,16 +3,17 @@ import {
     Button,
     Divider,
     Flex,
-    Image,
     ListItem,
     Text,
     UnorderedList,
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
+import Head from "next/head";
 import NextLink from "next/link";
 import React from "react";
 import Break from "../../components/Break";
 import Footer from "../../components/Footer";
+import HeadTemplate from "../../components/HeadTemplate";
 import Navbar from "../../components/Navbar";
 import { analytics } from "../../constants/firebase";
 
@@ -21,6 +22,12 @@ interface NutritionProps {}
 const Nutrition: React.FC<NutritionProps> = ({}) => {
     return (
         <>
+            <HeadTemplate
+                title="Nutrition for Pets - Dr. Noel's Ark"
+                description="Good nutritional support works with homeopathic treatment to restore and maintain your pet's health. Schedule a consultation with Dr. Noel Crymble."
+                short_description="Let's help support your pets nutritional needs"
+                url="https://www.drnoelsark.com/resources/nutrition"
+            />
             <Navbar
                 variant="dark"
                 showCompanyName={true}
@@ -78,7 +85,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                         </Box>
                         <Divider borderColor="gray.200" />
                         <Box px={{ base: "50px", lg: "120" }}>
-                            <Text fontSize={15}>
+                            <Text fontSize={16}>
                                 <Text
                                     fontSize={25}
                                     fontWeight="bold"
@@ -145,10 +152,10 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 </Text> */}
                                 <UnorderedList spacing={2}>
                                     <ListItem>A strong immune system</ListItem>
-                                    <ListItem>Weight and disease management</ListItem>
                                     <ListItem>
-                                    Good muscle tone
+                                        Weight and disease management
                                     </ListItem>
+                                    <ListItem>Good muscle tone</ListItem>
                                     <ListItem>Ease of digestion</ListItem>
                                     <ListItem>A healthy skin and coat</ListItem>
                                 </UnorderedList>

@@ -33,7 +33,7 @@ import {
     Thead,
     Tr,
     useDisclosure,
-    useToast
+    useToast,
 } from "@chakra-ui/react";
 import {
     collection,
@@ -41,10 +41,12 @@ import {
     doc,
     DocumentData,
     onSnapshot,
-    QueryDocumentSnapshot
+    QueryDocumentSnapshot,
 } from "firebase/firestore";
+import { Head } from "next/document";
 import NextLink from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { db } from "../constants/firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -70,6 +72,12 @@ const Admin: React.FC<AdminProps> = ({}) => {
     }, [currentUser]);
     return (
         <>
+            <HeadTemplate
+                title="Admin Portal - Dr. Noel's Ark"
+                description="Dr. Noel's Ark admin portal."
+                short_description="Dr. Noel's Ark admin portal."
+                url="https://www.drnoelsark.com/admin"
+            />
             <Navbar
                 variant="dark"
                 showCompanyName={true}
@@ -156,8 +164,8 @@ const Admin: React.FC<AdminProps> = ({}) => {
                                         fontSize="15"
                                         fontWeight={400}
                                         colorScheme={"brand"}
-                                                flexGrow={1}
-                                                mr={1}
+                                        flexGrow={1}
+                                        mr={1}
                                     >
                                         Sign In
                                     </Button>
@@ -259,7 +267,7 @@ const AppointmentTable = () => {
                                 City
                             </Th>
                             <Th fontFamily={"body"} fontSize="14">
-                                Prefered day/time
+                                Preferred day/time
                             </Th>
                             <Th fontFamily={"body"} fontSize="14">
                                 Actions
@@ -311,13 +319,13 @@ const AppointmentTable = () => {
                                     <Td>
                                         {
                                             appointmentRequest.data()[
-                                                "Prefered day of week"
+                                                "Preferred day of week"
                                             ]
                                         }{" "}
                                         /{" "}
                                         {
                                             appointmentRequest.data()[
-                                                "Prefered time of day"
+                                                "Preferred time of day"
                                             ]
                                         }
                                     </Td>

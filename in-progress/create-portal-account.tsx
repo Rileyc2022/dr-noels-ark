@@ -194,7 +194,7 @@ export default function SignUp() {
                                         analytics &&
                                             logEvent(
                                                 analytics,
-                                                "create_account_success",
+                                                "create_account_success"
                                             );
                                     });
                                 } catch {
@@ -209,7 +209,7 @@ export default function SignUp() {
                                         analytics &&
                                             logEvent(
                                                 analytics,
-                                                "create_account_fail",
+                                                "create_account_fail"
                                             );
                                     });
                                 }

@@ -18,8 +18,10 @@ import { logEvent } from "firebase/analytics";
 import { addDoc, collection } from "firebase/firestore";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
+import Head from "next/head";
 import React from "react";
 import Footer from "../components/Footer";
+import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { analytics, db } from "../constants/firebase";
 
@@ -126,14 +128,14 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
             ],
         },
         {
-            label: "Prefered day of week",
+            label: "Preferred day of week",
             required: true,
             special: "dropdown",
             // helperText: "Only these cities are in my range.",
             options: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         },
         {
-            label: "Prefered time of day",
+            label: "Preferred time of day",
             required: true,
             special: "dropdown",
             // helperText: "Only these cities are in my range.",
@@ -153,6 +155,12 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
 
     return (
         <>
+            <HeadTemplate
+                title="Make Appointment - Dr. Noel's Ark"
+                description="All-natural, holistic veterinary care in your home. Request an appointment with Dr. Noel Crymble."
+                short_description="Holistic Bay Area House Call Veterinarian"
+                url="https://www.drnoelsark.com"
+            />
             <Navbar
                 variant="dark"
                 showCompanyName={true}
@@ -196,8 +204,8 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                 "Phone number": "",
                                 City: "",
                                 Message: "",
-                                "Prefered day of week": "",
-                                "Prefered time of day": "",
+                                "Preferred day of week": "",
+                                "Preferred time of day": "",
                             }}
                             onSubmit={async (values, actions) => {
                                 console.log(values);

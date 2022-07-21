@@ -4,22 +4,31 @@ import {
     Button,
     Divider,
     Flex,
-    Heading, List,
-    ListIcon, ListItem, Stack, Text, UnorderedList, useBreakpointValue
+    Heading,
+    List,
+    ListIcon,
+    ListItem,
+    Stack,
+    Text,
+    useBreakpointValue,
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
+import Head from "next/head";
+import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { BsAwardFill } from "react-icons/bs";
 import { MdCheckCircle } from "react-icons/md";
+import { RiGroupFill } from "react-icons/ri";
 import { InView } from "react-intersection-observer";
 import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import Footer from "../components/Footer";
+import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";
-import Image from "next/image";
-import HeroPortraitPhoto from '../public/images/no-background-portrait.png';
-import LookingAtCatPhoto from '../public/images/looking-at-cat.png';
+import LookingAtCatPhoto from "../public/images/looking-at-cat-sm-enhanced.png";
+import HeroPortraitPhoto from "../public/images/no-background-portrait-sm.png";
 
 interface HomeProps {}
 
@@ -31,19 +40,35 @@ const Home: React.FC<HomeProps> = ({}) => {
             setAllowedToCollapse(true);
         }, 500);
     }, []);
-    const { asPath } = useRouter();
 
+    const pricingRef = useRef<HTMLDivElement>(null);
+    const aboutRef = useRef<HTMLDivElement>(null);
+    const servicesRef = useRef<HTMLDivElement>(null);
+    const { asPath } = useRouter();
     useEffect(() => {
-        const hash = asPath.split("#")[1];
-        if (hash) {
-            let elem = document.getElementById(hash);
+        setTimeout(() => {
+            const hash = asPath.split("#")[1];
+            let elem;
+            if (hash == "pricing") {
+                elem = pricingRef.current;
+            } else if (hash == "about") {
+                elem = aboutRef.current;
+            } else if (hash == "services") {
+                elem = aboutRef.current;
+            }
             if (elem) {
                 elem.scrollIntoView({ block: "start", behavior: "smooth" });
             }
-        }
+        }, 500);
     }, [asPath]);
     return (
         <>
+            <HeadTemplate
+                title="Dr. Noel's Ark - Natural Veterinary Care"
+                description="Holistic veterinary practice offering homeopathy, nutritional support, and ayurvedic therapy. Available by house call to the San Francisco Bay Area."
+                short_description="All-Natural Bay Area House Call Veterinarian"
+                url="https://www.drnoelsark.com/admin"
+            />
             <Parallax
                 style={{
                     position: "absolute",
@@ -51,7 +76,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     width: "100%",
                     zIndex: -1,
                 }}
-                speed={-20}
+                speed={-35}
             >
                 <Box
                     position={"absolute"}
@@ -165,10 +190,16 @@ const Home: React.FC<HomeProps> = ({}) => {
                                                 mt="10"
                                                 size={"lg"}
                                                 onClick={() => {
-                                                    analytics.then((analytics) => {
-                                                        analytics && logEvent(analytics, "clicked_make_appointment");
-                                                     })
-                                                 }}
+                                                    analytics.then(
+                                                        (analytics) => {
+                                                            analytics &&
+                                                                logEvent(
+                                                                    analytics,
+                                                                    "clicked_make_appointment"
+                                                                );
+                                                        }
+                                                    );
+                                                }}
                                             >
                                                 Make Appointment
                                             </Button>
@@ -183,8 +214,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         {/* <Parallax
           speed={2}
           > */}
-
-                                        <Image src={HeroPortraitPhoto} placeholder="blur" alt="Dr. Noel Crymble smiling with arms crossed." priority></Image>
+                                        {/* <ChakraImage src="/images/no-background-portrait-sm.png"></ChakraImage> */}
+                                        {/* <Image src={HeroPortraitPhoto} placeholder="blur"  alt="Dr. Noel Crymble smiling with arms crossed." priority></Image> */}
+                                        <Image
+                                            src={HeroPortraitPhoto}
+                                            alt="Dr. Noel Crymble smiling with arms crossed."
+                                            priority
+                                        ></Image>
                                         {/* <Box backgroundImage="/images/no-background-portrait.png" backgroundSize={"cover"} backgroundPosition="center" height="617" width="500"></Box> */}
                                         {/* </Parallax> */}
                                     </Box>
@@ -196,7 +232,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                 }}
             </InView>
             <Box id="about"></Box>
-            <Box bgColor={"white"} py="120px">
+            <Box bgColor={"white"} py="120px" ref={aboutRef}>
                 <Box
                     pb="100"
                     display={"flex"}
@@ -240,11 +276,14 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // w={{ base: "50%", lg: "20%" }}
                                 // shadow="dark-lg"
                             >
-                                <Image src={LookingAtCatPhoto} placeholder="blur"  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
+                                <Image
+                                    src={LookingAtCatPhoto}
+                                    alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
+                                ></Image>
                             </Box>
                         ) : (
                             <Parallax
-                                speed={3}
+                                speed={6}
                                 style={{ height: "100%", width: "100%" }}
                             >
                                 <Box
@@ -253,7 +292,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // w={{ base: "50%", lg: "50%" }}
                                     shadow="dark-lg"
                                 >
-                                    <Image src={LookingAtCatPhoto} placeholder="blur"  alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"></Image>
+                                    <Image
+                                        src={LookingAtCatPhoto}
+                                        placeholder="blur"
+                                        alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
+                                    ></Image>
                                 </Box>
                                 {/* <Box w={{ base: "50%", lg: "20%" }} bg="brand.700"> */}
                                 {/* </Box> */}
@@ -262,7 +305,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Box>
                     <Box
                         w={{ base: "80%", lg: "40%" }}
-                        fontSize="15"
+                        fontSize="16"
                         mt={{ base: "10" }}
                     >
                         <Stack spacing="5">
@@ -304,7 +347,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     justify={"space-evenly"}
                     flexDirection={{ base: "column", lg: "row" }}
                     mb="120"
-                    fontSize="15"
+                    fontSize="16"
                 >
                     <Box w={{ base: "80%", lg: "auto" }}>
                         <Text
@@ -315,29 +358,40 @@ const Home: React.FC<HomeProps> = ({}) => {
                             Memberships
                         </Text>
                         <Divider m="10px 0 20px 0" />
-                        <UnorderedList>
+                        <List>
                             <ListItem>
+                                <ListIcon as={RiGroupFill} color="brand.400" />
                                 American Veterinary Medical Association
                             </ListItem>
                             <ListItem>
+                                <ListIcon as={RiGroupFill} color="brand.400" />
                                 California Veterinary Medical Association
                             </ListItem>
                             <ListItem>
+                                <ListIcon as={RiGroupFill} color="brand.400" />
                                 American Holistic Veterinary Association
                             </ListItem>
                             <ListItem>
+                                <ListIcon as={RiGroupFill} color="brand.400" />
                                 American Association of Feline Practitioners
                             </ListItem>
                             <ListItem>
+                                <ListIcon as={RiGroupFill} color="brand.400" />
                                 Academy of Veterinary Homeopathy
                             </ListItem>
                             <ListItem>
+                                <ListIcon as={RiGroupFill} color="brand.400" />
                                 International Academy of Veterinary Homeopathy
                             </ListItem>
                             <ListItem>
+                                <ListIcon as={RiGroupFill} color="brand.400" />
                                 Bay Area Homeopathic Association
                             </ListItem>
-                        </UnorderedList>
+                            <ListItem>
+                                <ListIcon as={RiGroupFill} color="brand.400" />
+                                New Zealand Veterinary Association
+                            </ListItem>
+                        </List>
                     </Box>
                     <Box
                         w={{ base: "80%", lg: "auto" }}
@@ -351,16 +405,56 @@ const Home: React.FC<HomeProps> = ({}) => {
                             Certificates
                         </Text>
                         <Divider m="10px 0 20px 0" />
-                        <UnorderedList>
+                        <List>
                             <ListItem>
+                                <ListIcon as={BsAwardFill} color="brand.400" />
                                 Professional Course in Veterinary Homeopathy
                             </ListItem>
                             <ListItem>
+                                <ListIcon as={BsAwardFill} color="brand.400" />
                                 Advanced Course in Veterinary Homeopathy
                             </ListItem>
-                            <ListItem>Fear Free Professional</ListItem>
-                        </UnorderedList>
+                            <ListItem>
+                                <ListIcon as={BsAwardFill} color="brand.400" />
+                                Fear Free Professional
+                            </ListItem>
+                        </List>
                     </Box>
+                </Flex>
+                <Flex
+                    display={"flex"}
+                    alignItems={"center"}
+                    justify={"space-evenly"}
+                    // flexDirection={{ base: "column", lg: "row" }}
+                    // mb="120"
+                    fontSize="16"
+                    height={"100px"}
+                >
+                    <Box
+                        // mx="100"
+                        // w="30%"
+                        height={{ base: "80%", lg: "100%" }}
+                        // mb="10"
+                        flex={1}
+                        backgroundImage={
+                            "/images/ff-certified-professional.png"
+                        }
+                        backgroundSize="contain"
+                        backgroundPosition={"center"}
+                        bgRepeat="no-repeat"
+                    ></Box>
+                    <Box
+                        // mx="100"
+                        height={{ base: "140%", lg: "170%" }}
+                        flex={1}
+                        // mt="10"
+                        backgroundImage={"/images/ff-logo.png"}
+                        backgroundSize="contain"
+                        backgroundPosition={"center"}
+                        bgRepeat="no-repeat"
+                    ></Box>
+                    {/* <Image src={FearFreeCertifiedProfessional} alt="Dr. Noel Crymble smiling with arms crossed." priority></Image> */}
+                    {/* <Image src={FearFreeLogo} alt="Dr. Noel Crymble smiling with arms crossed." priority></Image> */}
                 </Flex>
             </Box>
             {isBase ? (
@@ -374,14 +468,14 @@ const Home: React.FC<HomeProps> = ({}) => {
             ) : (
                 <ParallaxBanner
                     layers={[
-                        { image: "/images/forest-mountains.jpeg", speed: -15 },
+                        { image: "/images/forest-mountains.jpeg", speed: -35 },
                     ]}
                     className="aspect-[2/1]"
                     style={{ height: "100vh" }}
                 />
             )}
             <Box id="services"></Box>
-            <Box bgColor={"white"} py="120">
+            <Box bgColor={"white"} py="120" ref={servicesRef}>
                 <Box
                     pb="100"
                     display={"flex"}
@@ -515,21 +609,25 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Homeopathy
                             </Text>
-                            <Text my="5" fontSize={15}>
+                            <Text my="5" fontSize="16">
                                 Homeopathy is a medical system based on the
                                 belief that the body can cure itself. Using tiny
                                 amounts of natural substances, like plants and
                                 minerals, homeopathic remedies are able to
                                 stimulate the healing process.
                             </Text>
-                            <Button
-                                rightIcon={<ArrowForwardIcon />}
-                                colorScheme="brand"
-                                variant="outline"
-                                size={"sm"}
-                            >
-                                Learn More
-                            </Button>
+                            <NextLink href="/resources/homeopathy" passHref>
+                                <Button
+                                    rightIcon={<ArrowForwardIcon />}
+                                    colorScheme="brand"
+                                    variant="outline"
+                                    size={"sm"}
+                                    as="a"
+                                    fontSize="16"
+                                >
+                                    Learn More
+                                </Button>
+                            </NextLink>
                         </Box>
                     </Flex>
                     <Divider></Divider>
@@ -602,21 +700,25 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Nutrition
                             </Text>
-                            <Text my="5" fontSize={15}>
+                            <Text my="5" fontSize="16">
                                 For homeopathic remedies to be effective, the
                                 pet must be nutritionally supported. Using
                                 dietary protocols and nutritional supplements,
                                 we can manage the complex needs of individual
                                 animals, in order to prevent and treat diseases.
                             </Text>
-                            <Button
-                                rightIcon={<ArrowForwardIcon />}
-                                colorScheme="brand"
-                                variant="outline"
-                                size={"sm"}
-                            >
-                                Learn More
-                            </Button>
+                            <NextLink href="/resources/nutrition" passHref>
+                                <Button
+                                    rightIcon={<ArrowForwardIcon />}
+                                    colorScheme="brand"
+                                    variant="outline"
+                                    size={"sm"}
+                                    as="a"
+                                    fontSize="16"
+                                >
+                                    Learn More
+                                </Button>
+                            </NextLink>
                         </Box>
                     </Flex>
                     <Divider></Divider>
@@ -688,7 +790,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Ayurveda
                             </Text>
-                            <Text my="5" fontSize={15}>
+                            <Text my="5" fontSize="16">
                                 Ayurveda is a medicine system with historical
                                 roots in the Indian subcontinent, where around
                                 80% of the population report using it. Ayurveda
@@ -699,14 +801,18 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 and treatments are geared toward specific health
                                 problems.
                             </Text>
-                            <Button
-                                rightIcon={<ArrowForwardIcon />}
-                                colorScheme="brand"
-                                variant="outline"
-                                size={"sm"}
-                            >
-                                Learn More
-                            </Button>
+                            <NextLink href="/resources/ayurveda" passHref>
+                                <Button
+                                    rightIcon={<ArrowForwardIcon />}
+                                    colorScheme="brand"
+                                    variant="outline"
+                                    size={"sm"}
+                                    as="a"
+                                    fontSize="16"
+                                >
+                                    Learn More
+                                </Button>
+                            </NextLink>
                         </Box>
                     </Flex>
                 </Stack>
@@ -787,9 +893,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                             mt={{ base: "10", lg: "0" }}
                             onClick={() => {
                                 analytics.then((analytics) => {
-                                    analytics && logEvent(analytics, "clicked_make_appointment");
-                                 })
-                             }}
+                                    analytics &&
+                                        logEvent(
+                                            analytics,
+                                            "clicked_make_appointment"
+                                        );
+                                });
+                            }}
                         >
                             Make Appointment
                         </Button>
@@ -806,13 +916,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                 />
             ) : (
                 <ParallaxBanner
-                    layers={[{ image: "/images/river.jpeg", speed: -15 }]}
+                    layers={[{ image: "/images/river.jpeg", speed: -35 }]}
                     className="aspect-[2/1]"
                     style={{ height: "100vh" }}
                 />
             )}
             <Box id="pricing"></Box>
-            <Box bgColor={"white"} py="120">
+            <Box bgColor={"white"} py="120" ref={pricingRef}>
                 <Box
                     pb="100"
                     display={"flex"}
@@ -828,6 +938,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         color={"brand.500"}
                         m="8"
                         fontWeight={"bold"}
+
                         // id="pricing"
                     >
                         Pricing
@@ -869,7 +980,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Initial Consultation
                             </Text>
-                            <Text my="5" fontSize={15}>
+                            <Text my="5" fontSize="16">
                                 In-person consultation for me to get to know
                                 your pet and the health issues needing to be
                                 addressed. This fee includes a review of
@@ -906,7 +1017,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             // mr="40px"
                             ml={{ base: "0", lg: "40px" }}
                             w={{ base: "auto", lg: "15%" }}
-                            mt={{ base: "30px", lg: "0px" }}
+                            my={{ base: "30px", lg: "0px" }}
                         >
                             $320
                         </Text>
@@ -950,13 +1061,14 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Phone Follow up
                             </Text>
-                            <Text my="5" fontSize={15}>
+                            <Text my="5" fontSize="16">
                                 Follow up sessions by phone are set for 30
                                 minutes. Any additional time will be billed
                                 incrementally at an hourly rate of $180. I will
                                 check the progress your pet is making, and may
                                 provide a change of recommendation either to
-                                remedy, supplements, or diet. Phone follow ups are recommended every 4 to 6 weeks.
+                                remedy, supplements, or diet. Phone follow ups
+                                are recommended every 4 to 6 weeks.
                             </Text>
                             {/* <Button
                                 rightIcon={<ArrowForwardIcon />}
@@ -984,7 +1096,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             // mr="40px"
                             ml={{ base: "0", lg: "40px" }}
                             w={{ base: "auto", lg: "15%" }}
-                            mt={{ base: "30px", lg: "0px" }}
+                            my={{ base: "30px", lg: "0px" }}
                         >
                             $80
                         </Text>
@@ -1028,11 +1140,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 House Call Follow Up
                             </Text>
-                            <Text my="5" fontSize={15}>
-                                This fee covers an 1/2 hour in-person follow up visit to
-                                your home. Housecalls allow me to better
-                                reassess your pet so that I can make well-informed
-                                recommendations.
+                            <Text my="5" fontSize="16">
+                                This fee covers an 1/2 hour in-person follow up
+                                visit to your home. Housecalls allow me to
+                                better reassess your pet so that I can make
+                                well-informed recommendations.
                             </Text>
                             {/* <Button
                                 rightIcon={<ArrowForwardIcon />}
@@ -1059,7 +1171,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             // mr="40px"
                             ml={{ base: "0", lg: "40px" }}
                             w={{ base: "auto", lg: "15%" }}
-                            mt={{ base: "30px", lg: "0px" }}
+                            my={{ base: "30px", lg: "0px" }}
                         >
                             $160
                         </Text>

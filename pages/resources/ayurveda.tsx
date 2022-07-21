@@ -1,18 +1,11 @@
-import {
-    Box,
-    Button,
-    Divider,
-    Flex,
-    Image,
-    ListItem,
-    Text,
-    UnorderedList,
-} from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
+import Head from "next/head";
 import NextLink from "next/link";
 import React from "react";
 import Break from "../../components/Break";
 import Footer from "../../components/Footer";
+import HeadTemplate from "../../components/HeadTemplate";
 import Navbar from "../../components/Navbar";
 import { analytics } from "../../constants/firebase";
 
@@ -21,6 +14,12 @@ interface AyurvedaProps {}
 const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
     return (
         <>
+            <HeadTemplate
+                title="Ayurveda for Pets - Dr. Noel's Ark"
+                description="Ayurvedic veterinary medicine treats an animal as a whole, and helps restore wellness in a pet facing health challenges."
+                short_description="Using Ayurvedic medicine to support your pet's health"
+                url="https://www.drnoelsark.com/resources/ayurveda"
+            />
             <Navbar
                 variant="dark"
                 showCompanyName={true}
@@ -78,7 +77,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                         </Box>
                         <Divider borderColor="gray.200" />
                         <Box px={{ base: "50px", lg: "120" }}>
-                            <Text fontSize={15}>
+                            <Text fontSize={16}>
                                 <Text
                                     fontSize={25}
                                     fontWeight="bold"
@@ -96,7 +95,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                                 <Break />
                                 This system determines the quality and power of
                                 herbs according to the laws of nature, thus
-                                Aurvedic herbs can be used collectively or
+                                Ayurvedic herbs can be used collectively or
                                 individually to match the patient's conditions,
                                 either to prevent disease or restore balance and
                                 health in a patient facing health challenges.

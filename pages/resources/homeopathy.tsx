@@ -3,16 +3,17 @@ import {
     Button,
     Divider,
     Flex,
-    Image,
     ListItem,
     Text,
     UnorderedList,
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
+import Head from "next/head";
 import NextLink from "next/link";
 import React from "react";
 import Break from "../../components/Break";
 import Footer from "../../components/Footer";
+import HeadTemplate from "../../components/HeadTemplate";
 import Navbar from "../../components/Navbar";
 import { analytics } from "../../constants/firebase";
 
@@ -21,6 +22,86 @@ interface HomeopathyProps {}
 const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
     return (
         <>
+            <HeadTemplate
+                title="Homeopathy for Pets - Explained by Dr. Noel"
+                description="Homeopathy is a holistic approach to healing (in humans and animals) that is based on one simple principle 'like cures like'."
+                short_description="Using Ayurvedic medicine to support your pet's health"
+                url="https://www.drnoelsark.com/resources/homeopathy"
+            />
+            <Head>
+                {/* <!-- HTML Meta Tags --> */}
+                <title>Homeopathy for Pets - Explained by Dr. Noel</title>
+                <meta
+                    name="description"
+                    content="Homeopathy is a holistic approach to healing (in humans and animals) that is based on one simple principle 'like cures like'."
+                />
+
+                {/* <!-- Facebook Meta Tags --> */}
+                <meta property="og:url" content="https://www.drnoelsark.com" />
+                <meta property="og:type" content="website" />
+                <meta
+                    property="og:title"
+                    content="Homeopathy - Explained by Dr. Noel"
+                />
+                <meta
+                    property="og:description"
+                    content="How homeopathy can support your pet's health"
+                />
+                {/* <meta
+                    property="og:image"
+                    content="https://www.drnoelsark.com/images/og-image.png"
+                /> */}
+                <meta
+                    property="og:image"
+                    content="https://cdn.discordapp.com/attachments/766545619170623528/999396424070479972/og-image.png"
+                />
+                {/* https://cdn.discordapp.com/attachments/766545619170623528/999396424070479972/og-image.png */}
+                {/* <!-- Twitter Meta Tags --> */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta property="twitter:domain" content="drnoelsark.com" />
+                <meta
+                    property="twitter:url"
+                    content="https://www.drnoelsark.com"
+                />
+                <meta name="twitter:title" content="Dr. Noel's Ark" />
+                <meta
+                    name="twitter:description"
+                    content="What is veterinary homeopathy?"
+                />
+                <meta
+                    name="twitter:image"
+                    content="https://cdn.discordapp.com/attachments/766545619170623528/999396424070479972/og-image.png"
+                />
+                <meta
+                    name="viewport"
+                    content="initial-scale=1.0, width=device-width"
+                />
+                <link
+                    rel="apple-touch-icon"
+                    sizes="180x180"
+                    href="/apple-touch-icon.png"
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    sizes="32x32"
+                    href="/favicon-32x32.png"
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    sizes="16x16"
+                    href="/favicon-16x16.png"
+                />
+                <link rel="manifest" href="/site.webmanifest" />
+                <link
+                    rel="mask-icon"
+                    href="/safari-pinned-tab.svg"
+                    color="#47a5a9"
+                />
+                <meta name="msapplication-TileColor" content="#12343f" />
+                <meta name="theme-color" content="#12343f" />
+            </Head>
             <Navbar
                 variant="dark"
                 showCompanyName={true}
@@ -78,7 +159,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                         </Box>
                         <Divider borderColor="gray.200" />
                         <Box px={{ base: "50px", lg: "120" }}>
-                            <Text fontSize={15}>
+                            <Text fontSize={16}>
                                 <Text
                                     fontSize={25}
                                     fontWeight="bold"
@@ -121,25 +202,38 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 Samuel Hahnemann (a German physician who
                                 developed homeopathy over 200 years ago):
                                 <Break />
-                                “Dr. Hahnemann found that substances could be
-                                used to stimulate healing by applying the
-                                principle of “like cures like” in very specific
-                                ways. He would give the patient a substance that
-                                would gently nudge their system in the direction
-                                of the “disease”, reproducing the same (or
-                                almost the same) syndrome or whole set of
-                                particular symptoms in a mild form.
-                                <Break />
-                                He found this to be a very effective way to
-                                stimulate their natural defenses. It is almost
-                                as if the patient’s defenses cannot distinguish
-                                between the natural disease and what the similar
-                                substance is doing. Thus homeopaths fine-tune
-                                the use of medicines to enhance the patient’s
-                                own attempts to overcome the disease.” ~ Richard
-                                Pitcairn, DVM, PhD, Pitcairn Institute of
-                                Veterinary Homeopathy
-                                <Break />
+                                <Text
+                                    fontStyle={"italic"}
+                                    fontSize={"18"}
+                                    mx={10}
+                                    my={10}
+                                    color="gray.500"
+                                >
+                                    Dr. Hahnemann found that substances could be
+                                    used to stimulate healing by applying the
+                                    principle of 'like cures like' in very
+                                    specific ways. He would give the patient a
+                                    substance that would gently nudge their
+                                    system in the direction of the 'disease',
+                                    reproducing the same (or almost the same)
+                                    syndrome or whole set of particular symptoms
+                                    in a mild form.
+                                    <Break />
+                                    He found this to be a very effective way to
+                                    stimulate their natural defenses. It is
+                                    almost as if the patient’s defenses cannot
+                                    distinguish between the natural disease and
+                                    what the similar substance is doing. Thus
+                                    homeopaths fine-tune the use of medicines to
+                                    enhance the patient’s own attempts to
+                                    overcome the disease. (Richard Pitcairn,
+                                    DVM, PhD, Pitcairn Institute of Veterinary
+                                    Homeopathy)
+                                </Text>
+                                {/* <Break />
+                                - Richard Pitcairn, DVM, PhD, Pitcairn Institute
+                                of Veterinary Homeopathy
+                                <Break /> */}
                                 <Text
                                     fontSize={25}
                                     fontWeight="bold"
