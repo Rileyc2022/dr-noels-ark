@@ -21,7 +21,7 @@ import { BsAwardFill } from "react-icons/bs";
 import { MdCheckCircle } from "react-icons/md";
 import { RiGroupFill } from "react-icons/ri";
 import { InView } from "react-intersection-observer";
-import { Parallax, ParallaxBanner } from "react-scroll-parallax";
+import { Parallax } from "react-scroll-parallax";
 import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
@@ -98,9 +98,15 @@ const Home: React.FC<HomeProps> = ({}) => {
                     zIndex={"-10"}
                 /> */}
                     {isBase ? (
-                        <Image src={ArkNarrowBackgroundPhoto}  alt="Ark logo outline background"/>
+                        <Image
+                            src={ArkNarrowBackgroundPhoto}
+                            alt="Ark logo outline background"
+                        />
                     ) : (
-                        <Image src={ArkBackgroundPhoto}  alt="Ark logo outline background"/>
+                        <Image
+                            src={ArkBackgroundPhoto}
+                            alt="Ark logo outline background"
+                        />
                     )}
                 </Parallax>
             </Box>
@@ -198,17 +204,32 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         </NextLink>
                                     </Box>
                                     <Box
-                                        width={{ base: 220, lg: 400, xl: 500 }}
+                                        width={{
+                                            base: "220px",
+                                            lg: "400px",
+                                            xl: "500px",
+                                        }}
                                         alignSelf={"center"}
                                         justifySelf={"flex-end"}
                                         mt="auto"
                                         fontSize={0}
                                     >
+                                        {/* {isBase ? ( */}
                                         <Image
-                                            src={HeroPortraitPhoto}
-                                            alt="Dr. Noel Crymble smiling with arms crossed."
-                                            priority
-                                        ></Image>
+                                                // sizes="220px 400px 500px"
+                                                src={HeroPortraitPhoto}
+                                                alt="Dr. Noel Crymble smiling with arms crossed."
+                                                priority
+                                            />
+                                        {/* ) : ( */}
+                                            {/* <Image
+                                                    width={"500px"}
+                                                    layout
+                                                src={HeroPortraitPhoto}
+                                                alt="Dr. Noel Crymble smiling with arms crossed."
+                                                priority
+                                            />
+                                        )} */}
                                     </Box>
                                 </Flex>
                             </Box>
@@ -419,7 +440,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // backgroundPosition={"center"}
                         // bgRepeat="no-repeat"
                     >
-                        <Image src={FearFreeCertifiedPhoto} alt="Fear Free Certification" />
+                        <Image
+                            src={FearFreeCertifiedPhoto}
+                            alt="Fear Free Certification"
+                        />
                     </Box>
                     <Box
                         width={{ base: "80%", lg: "15%" }}
@@ -429,7 +453,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // backgroundPosition={"center"}
                         // bgRepeat="no-repeat"
                     >
-                        <Image src={FearFreeLogoPhoto} alt="Fear Free Certification Logo" />
+                        <Image
+                            src={FearFreeLogoPhoto}
+                            alt="Fear Free Certification Logo"
+                        />
                     </Box>
                 </Flex>
             </Box>
@@ -507,7 +534,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image src={HomeopathyPhoto} alt="Bottle of homeopathy spilling out onto table with flowers" />
+                                <Image
+                                    src={HomeopathyPhoto}
+                                    alt="Bottle of homeopathy spilling out onto table with flowers"
+                                />
                             </Box>
                         ) : (
                             <Parallax
@@ -527,7 +557,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image src={HomeopathyPhoto} alt="Bottle of homeopathy spilling out onto table with flowers"/>
+                                    <Image
+                                        src={HomeopathyPhoto}
+                                        alt="Bottle of homeopathy spilling out onto table with flowers"
+                                    />
                                 </Box>
                             </Parallax>
                         )}
@@ -581,7 +614,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image src={NutritionPhoto} alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"/>
+                                <Image
+                                    src={NutritionPhoto}
+                                    alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"
+                                />
                             </Box>
                         ) : (
                             <Parallax
@@ -601,7 +637,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image src={NutritionPhoto} alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"/>
+                                    <Image
+                                        src={NutritionPhoto}
+                                        alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"
+                                    />
                                 </Box>
                             </Parallax>
                         )}
@@ -656,7 +695,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image src={AyurvedaPhoto} alt="Small bowl filled with orange, powered herb, surrounded by plants"/>
+                                <Image
+                                    src={AyurvedaPhoto}
+                                    alt="Small bowl filled with orange, powered herb, surrounded by plants"
+                                />
                             </Box>
                         ) : (
                             <Parallax
@@ -676,7 +718,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image src={AyurvedaPhoto} alt="Small bowl filled with orange, powered herb, surrounded by plants"/>
+                                    <Image
+                                        src={AyurvedaPhoto}
+                                        alt="Small bowl filled with orange, powered herb, surrounded by plants"
+                                    />
                                 </Box>
                             </Parallax>
                         )}
