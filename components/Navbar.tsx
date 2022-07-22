@@ -49,7 +49,6 @@ interface NavItem {
     subLabel?: string;
     children?: Array<NavItem>;
     href?: string;
-    menu?: boolean;
 }
 
 const NAV_ITEMS: Array<NavItem> = [
@@ -68,7 +67,6 @@ const NAV_ITEMS: Array<NavItem> = [
     {
         label: "Resources",
         // href: "",
-        menu: true,
         children: [
             {
                 label: "Homeopathy",
@@ -239,7 +237,6 @@ export default function WithSubnavigation({
                             >
                                 <Center>
                                     <Text>
-                                        {" "}
                                         {currentUser.displayName
                                             ? currentUser.displayName.split(
                                                   ","
@@ -360,7 +357,7 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
                                     _hover={{
                                         textDecoration: "none",
                                         color: linkHoverColor,
-                                        backgroundColor: "white`Alpha.100"
+                                        backgroundColor: "whiteAlpha.100"
                                     }}
                                         variant="link"
                                         bgColor="transparent"
