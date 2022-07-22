@@ -33,11 +33,16 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                 withShadow={false}
                 bottomBorder={true}
             ></Navbar>
-            <Box minH="100vh" bgColor={"gray.100"} py="120">
+            <Box
+                minH="100vh"
+                bgColor={{ base: "brand.800", lg: "white" }}
+                pt={{ base: "20", lg: "120" }}
+                pb={{ base: "0", lg: "120" }}
+            >
                 <Flex alignItems="center" flexDirection={"column"}>
                     <Box
                         bgColor="white"
-                        width={"80%"}
+                        width={{ base: "100%", lg: "90%" }}
                         shadow="md"
                         zIndex="1"
                         overflow={"hidden"}
@@ -75,17 +80,17 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             </Box>
                         </Box>
                         <Divider borderColor="gray.200" />
-                        <Box px={{ base: "50px", lg: "120" }}>
-                            <Text fontSize={16}>
-                                <Text
-                                    fontSize={25}
-                                    fontWeight="bold"
-                                    pt="12"
-                                    pb="6"
-                                    color={"brand.500"}
-                                >
-                                    Overview
-                                </Text>
+                        <Box px={{ base: "50px", lg: "120" }} fontSize={16}>
+                            <Text
+                                fontSize={25}
+                                fontWeight="bold"
+                                pt="12"
+                                pb="6"
+                                color={"brand.500"}
+                            >
+                                Overview
+                            </Text>
+                            <Text>
                                 Your pet's nutritional needs change during your
                                 its life due to growth and development, the
                                 aging process, and management of various medical
@@ -98,14 +103,20 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 must contain the proper balance of proteins,
                                 fats, carbohydrates, vitamins and minerals for
                                 optimal health.
-                                <Break />
+                            </Text>
+
+                            <Break />
+                            <Text>
                                 Unfortunately, most of the dry and canned pet
                                 foods available today are the by-products of the
                                 human food industry and are so highly processed
                                 that they do not resemble real food at all. A
                                 poor diet can compromise your pet's health and
                                 result in a myriad of food related illnesses.
-                                <Break />
+                            </Text>
+
+                            <Break />
+                            <Text>
                                 For this reason, I provide nutritional
                                 consultations (as part of the homeopathic
                                 consultation or separately) emphasizing whole
@@ -115,64 +126,67 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 support works synergistically with homeopathic
                                 treatment to restore and maintain your pet in
                                 ultimate health and vitality.
-                                <Text
-                                    fontSize={25}
-                                    fontWeight="bold"
-                                    pt="12"
-                                    pb="6"
-                                    color={"brand.500"}
-                                >
-                                    Benefits
-                                </Text>
+                            </Text>
+
+                            <Text
+                                fontSize={25}
+                                fontWeight="bold"
+                                pt="12"
+                                pb="6"
+                                color={"brand.500"}
+                            >
+                                Benefits
+                            </Text>
+                            <Text>
                                 Many health problems such as digestive issues,
                                 chronic skin problems and ear infections
                                 dramatically improve or resolve simply by
                                 switching to a fresh food diet.
-                                <Break />
+                            </Text>
+
+                            <Break />
+                            <Text>
                                 Proper nutrition through a lifetime of your cat
                                 or dog provides many benefits:
-                                <Break />
-                                <UnorderedList spacing={2}>
-                                    <ListItem>A strong immune system</ListItem>
-                                    <ListItem>
-                                        Weight and disease management
-                                    </ListItem>
-                                    <ListItem>Good muscle tone</ListItem>
-                                    <ListItem>Ease of digestion</ListItem>
-                                    <ListItem>A healthy skin and coat</ListItem>
-                                </UnorderedList>
-                                <Text mt="10">
-                                    If you are ready for a holistic approach to
-                                    your pet's chronic health problems, please
-                                    contact Dr Crymble to schedule a
-                                    consultation.
-                                </Text>
-                                <NextLink href={"/make-appointment"} passHref>
-                                    <Button
-                                        as={"a"}
-                                        fontSize={{
-                                            base: "14",
-                                            lg: "16",
-                                        }}
-                                        fontWeight={400}
-                                        variant={"solid"}
-                                        colorScheme={"brand"}
-                                        mt="10"
-                                        size={"lg"}
-                                        onClick={() => {
-                                            analytics.then((analytics) => {
-                                                analytics &&
-                                                    logEvent(
-                                                        analytics,
-                                                        "clicked_make_appointment"
-                                                    );
-                                            });
-                                        }}
-                                    >
-                                        Make Appointment
-                                    </Button>
-                                </NextLink>
                             </Text>
+
+                            <Break />
+                            <UnorderedList spacing={2}>
+                                <ListItem>A strong immune system</ListItem>
+                                <ListItem>
+                                    Weight and disease management
+                                </ListItem>
+                                <ListItem>Good muscle tone</ListItem>
+                                <ListItem>Ease of digestion</ListItem>
+                                <ListItem>A healthy skin and coat</ListItem>
+                            </UnorderedList>
+                            <Text mt="10">
+                                If you are ready for a holistic approach to your
+                                pet's chronic health problems, please contact Dr
+                                Crymble to schedule a consultation.
+                            </Text>
+                            <NextLink href={"/make-appointment"} passHref>
+                                <Button
+                                    as={"a"}
+                                    fontSize={"16"}
+                                    fontWeight={400}
+                                    variant={"solid"}
+                                    colorScheme={"brand"}
+                                    mt="10"
+                                    size={"lg"}
+                                    onClick={() => {
+                                        analytics.then((analytics) => {
+                                            analytics &&
+                                                logEvent(
+                                                    analytics,
+                                                    "clicked_make_appointment"
+                                                );
+                                        });
+                                    }}
+                                >
+                                    Make Appointment
+                                </Button>
+                            </NextLink>
                         </Box>
                         <Box
                             backgroundImage={

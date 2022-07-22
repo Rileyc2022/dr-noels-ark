@@ -66,7 +66,7 @@ const NAV_ITEMS: Array<NavItem> = [
     },
     {
         label: "Resources",
-        href: "#",
+        href: "",
         children: [
             {
                 label: "Homeopathy",
@@ -193,7 +193,7 @@ export default function WithSubnavigation({
                         <DesktopNav variant={variant} />
                     </Flex>
                 </Flex>
-                {(!showCompanyName || !isBase) &&
+                {(!isBase) &&
                     (currentUser ? (
                         <Menu>
                             <MenuButton
@@ -276,14 +276,11 @@ export default function WithSubnavigation({
                                 </MenuItem>
                             </MenuList>
                         </Menu>
-                    ) : (
+                ) : (
                         <NextLink href={"/make-appointment"} passHref>
                             <Button
                                 as={"a"}
-                                fontSize={{
-                                    base: "14",
-                                    lg: "16",
-                                }}
+                                fontSize={"16"}
                                 fontWeight={400}
                                 variant={"solid"}
                                 colorScheme={"brand"}
@@ -337,19 +334,36 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
                 <Box key={navItem.label}>
                     <Popover trigger={"hover"} placement={"bottom-start"}>
                         <PopoverTrigger>
-                            <Link
-                                p={2}
-                                href={navItem.href ?? "#"}
-                                fontSize="15"
-                                fontWeight={500}
-                                color={linkColor}
-                                _hover={{
-                                    textDecoration: "none",
-                                    color: linkHoverColor,
-                                }}
-                            >
-                                {navItem.label}
-                            </Link>
+                            {navItem.href ? (
+                                <Link
+                                    p={2}
+                                    href={navItem.href ?? "#"}
+                                    fontSize="15"
+                                    fontWeight={500}
+                                    color={linkColor}
+                                    _hover={{
+                                        textDecoration: "none",
+                                        color: linkHoverColor,
+                                    }}
+                                >
+                                    {navItem.label}
+                                </Link>
+                            ) : (
+                                <Text
+                                    p={2}
+                                    fontSize="15"
+                                    fontWeight={500}
+                                    color={linkColor}
+                                    _hover={{
+                                        textDecoration: "none",
+                                        color: linkHoverColor,
+                                    }}
+                                        display="inline"
+                                        cursor="pointer"
+                                >
+                                    {navItem.label}
+                                </Text>
+                            )}
                         </PopoverTrigger>
                         {navItem.children && (
                             <PopoverContent
@@ -434,8 +448,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         <Stack spacing={4} onClick={children && onToggle}>
             <Flex
                 py={2}
-                as={Link}
-                href={href ?? "#"}
+                as={href ? Link : Flex}
+                href={href ?? null}
                 justify={"space-between"}
                 align={"center"}
                 _hover={{

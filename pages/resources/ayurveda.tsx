@@ -25,11 +25,16 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                 withShadow={false}
                 bottomBorder={true}
             ></Navbar>
-            <Box minH="100vh" bgColor={"gray.100"} py="120">
+            <Box
+                minH="100vh"
+                bgColor={{ base: "brand.800", lg: "white" }}
+                pt={{ base: "20", lg: "120" }}
+                pb={{ base: "0", lg: "120" }}
+            >
                 <Flex alignItems="center" flexDirection={"column"}>
                     <Box
-                        bgColor="white"
-                        width={"80%"}
+                        bgColor={"white"}
+                        width={{ base: "100%", lg: "90%" }}
                         shadow="md"
                         zIndex="1"
                         overflow={"hidden"}
@@ -67,80 +72,86 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                             </Box>
                         </Box>
                         <Divider borderColor="gray.200" />
-                        <Box px={{ base: "50px", lg: "120" }}>
-                            <Text fontSize={16}>
-                                <Text
-                                    fontSize={25}
-                                    fontWeight="bold"
-                                    pt="12"
-                                    pb="6"
-                                    color={"brand.500"}
-                                >
-                                    History
-                                </Text>
+                        <Box px={{ base: "50px", lg: "120" }} fontSize={16}>
+                            <Text
+                                fontSize={25}
+                                fontWeight="bold"
+                                pt="12"
+                                pb="6"
+                                color={"brand.500"}
+                            >
+                                History
+                            </Text>
+                            <Text>
                                 The ancient healing science, Ayurveda,
                                 originated in India somewhere around 6000BC,
                                 perhaps making it the oldest form of medicine.
                                 Ayurveda is a Sanskrit word and literally means
                                 the "Science of Life".
-                                <Break />
+                            </Text>
+
+                            <Break />
+                            <Text>
                                 This system determines the quality and power of
                                 herbs according to the laws of nature, thus
                                 Ayurvedic herbs can be used collectively or
                                 individually to match the patient's conditions,
                                 either to prevent disease or restore balance and
                                 health in a patient facing health challenges.
-                                <Text
-                                    fontSize={25}
-                                    fontWeight="bold"
-                                    pt="12"
-                                    pb="6"
-                                    color={"brand.500"}
-                                >
-                                    Benefits
-                                </Text>
+                            </Text>
+
+                            <Text
+                                fontSize={25}
+                                fontWeight="bold"
+                                pt="12"
+                                pb="6"
+                                color={"brand.500"}
+                            >
+                                Benefits
+                            </Text>
+                            <Text>
                                 Ayurvedic veterinary medicine treats an animal
                                 as a whole, rather than just the symptoms or the
                                 affected parts of the body, unlike conventional
                                 veterinary medicine.
-                                <Break />
+                            </Text>
+
+                            <Break />
+                            <Text>
                                 When appropriate, I may prescribe certain
                                 Ayurvedic herbal supplements, in conjunction
                                 with a homeopathic remedy, to assist with the
                                 healing process.
-                                <Break />
-                                <Text>
-                                    If you are ready for a holistic approach to
-                                    your pet's chronic health problems, please
-                                    contact Dr Crymble to schedule a
-                                    consultation.
-                                </Text>
-                                <NextLink href={"/make-appointment"} passHref>
-                                    <Button
-                                        as={"a"}
-                                        fontSize={{
-                                            base: "14",
-                                            lg: "16",
-                                        }}
-                                        fontWeight={400}
-                                        variant={"solid"}
-                                        colorScheme={"brand"}
-                                        mt="10"
-                                        size={"lg"}
-                                        onClick={() => {
-                                            analytics.then((analytics) => {
-                                                analytics &&
-                                                    logEvent(
-                                                        analytics,
-                                                        "clicked_make_appointment"
-                                                    );
-                                            });
-                                        }}
-                                    >
-                                        Make Appointment
-                                    </Button>
-                                </NextLink>
                             </Text>
+
+                            <Break />
+                            <Text>
+                                If you are ready for a holistic approach to your
+                                pet's chronic health problems, please contact Dr
+                                Crymble to schedule a consultation.
+                            </Text>
+                            <NextLink href={"/make-appointment"} passHref>
+                                <Button
+                                    as={"a"}
+                                    fontSize={"16"}
+                                    fontWeight={400}
+                                    variant={"solid"}
+                                    colorScheme={"brand"}
+                                    mt="10"
+                                    size={"lg"}
+                                    onClick={() => {
+                                        analytics.then((analytics) => {
+                                            analytics &&
+                                                logEvent(
+                                                    analytics,
+                                                    "clicked_make_appointment"
+                                                );
+                                        });
+                                    }}
+                                >
+                                    Make Appointment
+                                </Button>
+                            </NextLink>
                         </Box>
                         <Box
                             backgroundImage={

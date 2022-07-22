@@ -100,10 +100,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Box height={{ base: 760, lg: "100vh" }}>
                                 <Flex
                                     direction={{ base: "column", lg: "row" }}
-                                    justify={{
-                                        base: "flex-end",
-                                        lg: "space-evenly",
-                                    }}
+                                    justify={"space-evenly"}
                                     height="100%"
                                     px={10}
                                 >
@@ -163,10 +160,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         >
                                             <Button
                                                 as={"a"}
-                                                fontSize={{
-                                                    base: "14",
-                                                    lg: "16",
-                                                }}
+                                                fontSize={"16"}
                                                 fontWeight={400}
                                                 variant={"solid"}
                                                 colorScheme={"brand"}
@@ -189,13 +183,17 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         </NextLink>
                                     </Box>
                                     <Box
-                                        width={{ base: 280, lg: 400, xl: 500 }}
-                                        alignSelf={"flex-end"}
+                                        width={{ base: 220, lg: 400, xl: 500 }}
+                                        alignSelf={"center"}
                                         justifySelf={"flex-end"}
+                                        mt="auto"
                                     >
                                         <Image
                                             src={HeroPortraitPhoto}
                                             alt="Dr. Noel Crymble smiling with arms crossed."
+                                            sizes="800px"
+                                            width={800}
+                                            height={987}
                                             priority
                                         ></Image>
                                     </Box>
@@ -246,6 +244,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Box borderColor={"brand.500"} borderWidth="10px">
                                 <Image
                                     src={LookingAtCatPhoto}
+                                    sizes="800px"
+                                    width={800}
+                                    height={702}
                                     alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                 ></Image>
                             </Box>
@@ -261,7 +262,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 >
                                     <Image
                                         src={LookingAtCatPhoto}
-                                        placeholder="blur"
                                         alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                     ></Image>
                                 </Box>
@@ -729,6 +729,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             colorScheme={"brand"}
                             size="lg"
                             p="10"
+                            fontSize={"16"}
                             mt={{ base: "10", lg: "0" }}
                             onClick={() => {
                                 analytics.then((analytics) => {

@@ -12,10 +12,10 @@ body {
   margin: 0; */
   scroll-behavior: smooth;
 }
-
+/* 
 #__next > div > div > div > span, #__next > div:nth-child(5) > div > div > div > div > span{
   display: inline !important;
-}
+} */
 
 a {
   color: inherit;
