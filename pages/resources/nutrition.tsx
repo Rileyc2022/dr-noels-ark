@@ -35,7 +35,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
             ></Navbar>
             <Box
                 minH="100vh"
-                bgColor={{ base: "brand.800", lg: "white" }}
+                bgColor={{ base: "brand.800", lg: "gray.100" }}
                 pt={{ base: "20", lg: "120" }}
                 pb={{ base: "0", lg: "120" }}
             >
@@ -49,7 +49,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                     >
                         <Box
                             backgroundImage={
-                                "linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1)), url(/images/misty-trees.png)"
+                                "linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(/images/misty-trees.png)"
                             }
                             backgroundPosition={"center 50%"}
                             zIndex="-1"
@@ -162,8 +162,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             </UnorderedList>
                             <Text mt="10">
                                 If you are ready for a holistic approach to your
-                                pet's chronic health problems, please contact Dr
-                                Crymble to schedule a consultation.
+                                pet's health problems, please contact Dr. Noel to schedule a consultation.
                             </Text>
                             <NextLink href={"/make-appointment"} passHref>
                                 <Button

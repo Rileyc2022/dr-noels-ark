@@ -63,7 +63,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                 "Orinda",
                 "Lafayette",
                 "Walnut Creek",
-                "Mill Valley",
             ],
         },
         {
@@ -84,7 +83,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
             label: "Message",
             required: true,
             special: "text-area",
-            helperText: "Please describe your pet, and their health challenge.",
+            helperText: "Please describe your pet and their health challenge.",
         },
     ];
 
@@ -92,7 +91,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
         <>
             <HeadTemplate
                 title="Make Appointment - Dr. Noel's Ark"
-                description="All-natural, holistic veterinary care in your home. Request an appointment with Dr. Noel Crymble."
+                description="All-natural, holistic veterinary house calls in the San Francisco Bay Area. Request an appointment with Dr. Noel Crymble."
                 short_description="Holistic Bay Area House Call Veterinarian"
                 url="https://www.drnoelsark.com/make-appointment"
             />

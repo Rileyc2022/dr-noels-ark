@@ -23,8 +23,8 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
         <>
             <HeadTemplate
                 title="Homeopathy for Pets - Dr. Noel's Ark"
-                description="Homeopathy is a holistic approach to healing (in humans and animals) that is based on one simple principle 'like cures like'."
-                short_description="Using Ayurvedic medicine to support your pet's health"
+                description="Homeopathy is a holistic approach to healing (in humans and animals) that is based on one simple principle: 'like cures like'."
+                short_description="Using Homeopathy to support your pet's health"
                 url="https://www.drnoelsark.com/resources/homeopathy"
             />
             <Navbar
@@ -35,7 +35,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
             ></Navbar>
             <Box
                 minH="100vh"
-                bgColor={{ base: "brand.800", lg: "white" }}
+                bgColor={{ base: "brand.800", lg: "gray.100" }}
                 pt={{ base: "20", lg: "120" }}
                 pb={{ base: "0", lg: "120" }}
             >
@@ -49,7 +49,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                     >
                         <Box
                             backgroundImage={
-                                "linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1)), url(/images/mountain-range.png)"
+                                "linear-gradient(to top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/mountain-range.png)"
                             }
                             backgroundPosition={"center 50%"}
                             zIndex="-1"
@@ -88,12 +88,12 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 pb="6"
                                 color={"brand.500"}
                             >
-                                History
+                                Overview
                             </Text>
                             <Text>
                                 Homeopathy is a holistic approach to healing (in
                                 humans and animals) that is based on one simple
-                                principle "like cures like".
+                                principle: 'like cures like'.
                             </Text>
                             <Break />
                             <Text>
@@ -175,7 +175,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 pb="6"
                                 color={"brand.500"}
                             >
-                                Uses
+                                Benefits
                             </Text>
                             <Text
                                 fontSize={18}
@@ -195,7 +195,6 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 <ListItem>Seizures</ListItem>
                                 <ListItem>Immune-mediated diseases</ListItem>
                                 <ListItem>Vaccine reactions</ListItem>
-                                <ListItem>Cancer</ListItem>
                             </UnorderedList>
                             <Text
                                 fontSize={18}
@@ -204,7 +203,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 mb="3"
                                 color={"brand.400"}
                             >
-                                The benefits of homeopathy:
+                                Unique advantages of homeopathy:
                             </Text>
                             <UnorderedList spacing={2}>
                                 <ListItem>
@@ -212,24 +211,23 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                     especially when treating a chronic disease.
                                 </ListItem>
                                 <ListItem>
-                                    Produces longer lasting results with a
+                                    Produces long lasting results with a
                                     decreasing number of treatments.
                                 </ListItem>
                                 <ListItem>
-                                    A homeopathic approach can eliminate the
-                                    toxic side effects associated with
-                                    pharmaceuticals.
+                                    Eliminates some toxic side effects
+                                    associated with pharmaceuticals.
                                 </ListItem>
                                 <ListItem>
-                                    It's less expensive and much safer than
-                                    conventional medicine, and it can reduce
+                                    Is less expensive and safer than
+                                    conventional medicine, and can reduce
                                     healthcare costs over the life of your pet.
                                 </ListItem>
                             </UnorderedList>
                             <Text mt="10">
                                 If you are ready for a holistic approach to your
-                                pet's chronic health problems, please contact Dr
-                                Crymble to schedule a consultation.
+                                pet's health problems, please contact Dr. Noel
+                                to schedule a consultation.
                             </Text>
                             <NextLink href={"/make-appointment"} passHref>
                                 <Button

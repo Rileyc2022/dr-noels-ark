@@ -144,11 +144,7 @@ const Admin: React.FC<AdminProps> = ({}) => {
                     >
                         <Box p="16" borderWidth={1} m={10}>
                             <Text color="white">
-                                You are not authorized to view this page.
-                            </Text>
-                            <Text color="white" mt="2">
-                                Please log into an account with Administrator
-                                privileges.
+                                This page is for administrator access only.
                             </Text>
                             <Flex mt="10" w="100%">
                                 <NextLink href={"/sign-in"} passHref>

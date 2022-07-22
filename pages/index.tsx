@@ -62,8 +62,8 @@ const Home: React.FC<HomeProps> = ({}) => {
         <>
             <HeadTemplate
                 title="Dr. Noel's Ark - Natural Veterinary Care"
-                description="Holistic veterinary practice offering homeopathy, nutritional support, and ayurvedic therapy. Available by house call to the San Francisco Bay Area."
-                short_description="All-Natural Bay Area House Call Veterinarian"
+                description="Holistic veterinary practice offering homeopathy, nutritional support, and ayurvedic supplements. Available for house calls in the San Francisco Bay Area."
+                short_description="Holistic Bay Area House Call Veterinarian"
                 url="https://www.drnoelsark.com"
             />
             <Parallax
@@ -138,8 +138,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             for cats and dogs in Berkeley,
                                             Albany, Kensington, Montclair,
                                             Piedmont, Moraga, Orinda, Lafayette,
-                                            Walnut Creek, Danville, and Mill
-                                            Valley.
+                                            Walnut Creek, and Danville.
                                         </Text>
                                         <Text
                                             mt="10"
@@ -252,7 +251,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             </Box>
                         ) : (
                             <Parallax
-                                speed={6}
+                                speed={15}
                                 style={{ height: "100%", width: "100%" }}
                             >
                                 <Box
@@ -474,7 +473,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             />
                         ) : (
                             <Parallax
-                                speed={3}
+                                speed={15}
                                 style={{ height: "300px", width: "700px" }}
                             >
                                 <Box
@@ -541,7 +540,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             />
                         ) : (
                             <Parallax
-                                speed={3}
+                                speed={15}
                                 style={{ height: "300px", width: "700px" }}
                             >
                                 <Box
@@ -609,7 +608,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             />
                         ) : (
                             <Parallax
-                                speed={3}
+                                speed={15}
                                 style={{ height: "300px", width: "700px" }}
                             >
                                 <Box
@@ -685,7 +684,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
-                                Non toxic
+                                Non-toxic
                             </ListItem>
                             <ListItem>
                                 <ListIcon
@@ -866,7 +865,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Text my="5" fontSize="16">
                                 Follow up sessions by phone are set for 30
                                 minutes. Any additional time will be billed
-                                incrementally at an hourly rate of $180. I will
+                                incrementally at an hourly rate of $160. I will
                                 check the progress your pet is making, and may
                                 provide a change of recommendation either to
                                 remedy, supplements, or diet. Phone follow ups
@@ -920,8 +919,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 House Call Follow Up
                             </Text>
                             <Text my="5" fontSize="16">
-                                This fee covers an 1/2 hour in-person follow up
-                                visit to your home. Housecalls allow me to
+                                This fee covers a 1/2 hour in-person follow up
+                                visit to your home. House calls allow me to
                                 better reassess your pet so that I can make
                                 well-informed recommendations.
                             </Text>

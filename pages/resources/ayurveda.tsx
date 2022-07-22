@@ -27,7 +27,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
             ></Navbar>
             <Box
                 minH="100vh"
-                bgColor={{ base: "brand.800", lg: "white" }}
+                bgColor={{ base: "brand.800", lg: "gray.100" }}
                 pt={{ base: "20", lg: "120" }}
                 pb={{ base: "0", lg: "120" }}
             >
@@ -41,7 +41,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                     >
                         <Box
                             backgroundImage={
-                                "linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1)), url(/images/sunset-water.png)"
+                                "linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(/images/sunset-water.png)"
                             }
                             backgroundPosition={"center 40%"}
                             zIndex="-1"
@@ -80,7 +80,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                                 pb="6"
                                 color={"brand.500"}
                             >
-                                History
+                                Overview
                             </Text>
                             <Text>
                                 The ancient healing science, Ayurveda,
@@ -127,8 +127,8 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                             <Break />
                             <Text>
                                 If you are ready for a holistic approach to your
-                                pet's chronic health problems, please contact Dr
-                                Crymble to schedule a consultation.
+                                pet's health problems, please contact Dr.
+                                Noel to schedule a consultation.
                             </Text>
                             <NextLink href={"/make-appointment"} passHref>
                                 <Button
