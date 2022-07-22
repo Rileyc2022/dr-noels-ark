@@ -17,6 +17,13 @@ body {
   display: inline !important;
 } */
 
+
+// Fix Next.js images
+/* #__next > div:nth-child(8) > div.chakra-stack.css-rekqn0 > div:nth-child(1) > div:nth-child(1) > div > span {
+  display: block !important;
+} */
+
+
 a {
   color: inherit;
   text-decoration: none;

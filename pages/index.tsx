@@ -26,8 +26,17 @@ import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";
-import LookingAtCatPhoto from "../public/images/looking-at-cat-sm-enhanced.png";
-import HeroPortraitPhoto from "../public/images/no-background-portrait-sm.png";
+import LookingAtCatPhoto from "../public/images/looking-at-cat-enhanced.png";
+import HeroPortraitPhoto from "../public/images/no-background-portrait.png";
+import ForestMountainsPhoto from "../public/images/forest-mountains.jpeg";
+import RiverPhoto from "../public/images/river.jpeg";
+import ArkBackgroundPhoto from "../public/images/ark-background.png";
+import ArkNarrowBackgroundPhoto from "../public/images/ark-background-phone.png";
+import HomeopathyPhoto from "../public/images/homeopathy.jpeg";
+import NutritionPhoto from "../public/images/nutrition.jpeg";
+import AyurvedaPhoto from "../public/images/ayurveda.jpeg";
+import FearFreeCertifiedPhoto from "../public/images/ff-certified-professional.png";
+import FearFreeLogoPhoto from "../public/images/ff-logo.png";
 
 interface HomeProps {}
 
@@ -66,16 +75,17 @@ const Home: React.FC<HomeProps> = ({}) => {
                 short_description="Holistic Bay Area House Call Veterinarian"
                 url="https://www.drnoelsark.com"
             />
-            <Parallax
-                style={{
-                    position: "absolute",
-                    height: "100vh",
-                    width: "100%",
-                    zIndex: -1,
-                }}
-                speed={-35}
-            >
-                <Box
+            <Box zIndex={-10}>
+                <Parallax
+                    style={{
+                        position: "absolute",
+                        height: "100vh",
+                        width: "100%",
+                        zIndex: -1,
+                    }}
+                    speed={-35}
+                >
+                    {/* <Box
                     position={"absolute"}
                     backgroundImage={{
                         base: "/images/ark-background-phone.png",
@@ -86,8 +96,14 @@ const Home: React.FC<HomeProps> = ({}) => {
                     height={{ base: 760, lg: "100vh" }}
                     width="100%"
                     zIndex={"-10"}
-                />
-            </Parallax>
+                /> */}
+                    {isBase ? (
+                        <Image src={ArkNarrowBackgroundPhoto} />
+                    ) : (
+                        <Image src={ArkBackgroundPhoto} />
+                    )}
+                </Parallax>
+            </Box>
             <InView rootMargin="-200px" triggerOnce={false}>
                 {({ inView, ref }) => {
                     return (
@@ -186,13 +202,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         alignSelf={"center"}
                                         justifySelf={"flex-end"}
                                         mt="auto"
+                                        fontSize={0}
                                     >
                                         <Image
                                             src={HeroPortraitPhoto}
                                             alt="Dr. Noel Crymble smiling with arms crossed."
-                                            sizes="800px"
-                                            width={800}
-                                            height={987}
                                             priority
                                         ></Image>
                                     </Box>
@@ -240,12 +254,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                 >
                     <Box w={{ base: "80%", lg: "30%" }}>
                         {isBase ? (
-                            <Box borderColor={"brand.500"} borderWidth="10px">
+                            <Box
+                                borderColor={"brand.500"}
+                                borderWidth="10px"
+                                fontSize={0}
+                            >
                                 <Image
                                     src={LookingAtCatPhoto}
-                                    sizes="800px"
-                                    width={800}
-                                    height={702}
                                     alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                 ></Image>
                             </Box>
@@ -258,12 +273,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     borderColor={"brand.500"}
                                     borderWidth="10px"
                                     shadow="dark-lg"
+                                    fontSize={0}
                                 >
                                     <Image
                                         src={LookingAtCatPhoto}
-                                        sizes="800px"
-                                        width={800}
-                                        height={702}
                                         alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                     ></Image>
                                 </Box>
@@ -390,47 +403,70 @@ const Home: React.FC<HomeProps> = ({}) => {
                 </Flex>
                 <Flex
                     display={"flex"}
-                    alignItems={"center"}
+                    alignItems={"flex-end"}
                     justify={"space-evenly"}
                     fontSize="16"
-                    height={"100px"}
+                    height={"130px"}
                 >
                     <Box
-                        height={{ base: "80%", lg: "100%" }}
-                        flex={1}
-                        backgroundImage={
-                            "/images/ff-certified-professional.png"
-                        }
-                        backgroundSize="contain"
-                        backgroundPosition={"center"}
-                        bgRepeat="no-repeat"
-                    ></Box>
+                        width={{ base: "80%", lg: "20%" }}
+                        // height={{ base: "80%", lg: "100%" }}
+                        // flex={1}
+                        // backgroundImage={
+                        //     "/images/ff-certified-professional.png"
+                        // }
+                        // backgroundSize="contain"
+                        // backgroundPosition={"center"}
+                        // bgRepeat="no-repeat"
+                    >
+                        <Image src={FearFreeCertifiedPhoto} />
+                    </Box>
                     <Box
-                        height={{ base: "140%", lg: "170%" }}
-                        flex={1}
-                        backgroundImage={"/images/ff-logo.png"}
-                        backgroundSize="contain"
-                        backgroundPosition={"center"}
-                        bgRepeat="no-repeat"
-                    ></Box>
+                        width={{ base: "80%", lg: "15%" }}
+                        // flex={1}
+                        // backgroundImage={"/images/ff-logo.png"}
+                        // backgroundSize="contain"
+                        // backgroundPosition={"center"}
+                        // bgRepeat="no-repeat"
+                    >
+                        <Image src={FearFreeLogoPhoto} />
+                    </Box>
                 </Flex>
             </Box>
             {isBase ? (
-                <Box
-                    height={"400px"}
+                // <Box
+                //     height={"400px"}
+                //     width={"100%"}
+                //     bgSize={"cover"}
+                //     bgPos="center"
+                //     bgImage="/images/forest-mountains.jpeg"
+                // />
+                <Image
+                    src={RiverPhoto}
+                    alt="Forest and mountains background"
+                    // sizes="5760px"
                     width={"100%"}
-                    bgSize={"cover"}
-                    bgPos="center"
-                    bgImage="/images/forest-mountains.jpeg"
+                    height={"400px"}
                 />
             ) : (
-                <ParallaxBanner
-                    layers={[
-                        { image: "/images/forest-mountains.jpeg", speed: -35 },
-                    ]}
-                    className="aspect-[2/1]"
-                    style={{ height: "100vh" }}
-                />
+                // <ParallaxBanner
+                //     layers={[
+                //         { image: "/images/forest-mountains.jpeg", speed: -35 },
+                //     ]}
+                //     className="aspect-[2/1]"
+                //     style={{ height: "100vh" }}
+                // />
+                <Box zIndex={-100} position="relative">
+                    <Parallax speed={-35}>
+                        <Image
+                            src={ForestMountainsPhoto}
+                            alt="Forest and mountains background"
+                            // sizes="5760px"
+                            // width={5760}
+                            // height={3840}
+                        />
+                    </Parallax>
+                </Box>
             )}
             <Box id="services"></Box>
             <Box bgColor={"white"} py="120" ref={servicesRef}>
@@ -467,10 +503,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 borderWidth="10px"
                                 height={"200px"}
                                 width={"100%"}
-                                bgSize={"cover"}
-                                bgPos="center"
-                                bgImage="/images/homeopathy.jpeg"
-                            />
+                                // bgSize={"cover"}
+                                // bgPos="center"
+                                // bgImage="/images/homeopathy.jpeg"
+                            >
+                                <Image src={HomeopathyPhoto} />
+                            </Box>
                         ) : (
                             <Parallax
                                 speed={15}
@@ -480,12 +518,17 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     borderColor={"brand.600"}
                                     borderWidth="10px"
                                     height={"100%"}
-                                    width={"100%"}
+                                    // width={"100%"}
+                                    overflow="hidden"
+                                    // objectFit={"cover"}
                                     shadow="dark-lg"
-                                    bgSize={"cover"}
-                                    bgPos="center"
-                                    bgImage="/images/homeopathy.jpeg"
-                                />
+                                    fontSize={0}
+                                    // bgSize={"cover"}
+                                    // bgPos="center"
+                                    // bgImage="/images/homeopathy.jpeg"
+                                >
+                                    <Image src={HomeopathyPhoto} />
+                                </Box>
                             </Parallax>
                         )}
                         <Box
@@ -533,26 +576,33 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 borderColor={"brand.500"}
                                 borderWidth="10px"
                                 height={"200px"}
-                                width="100%"
-                                bgSize={"cover"}
-                                bgPos="center"
-                                bgImage="/images/nutrition.jpeg"
-                            />
+                                width={"100%"}
+                                // bgSize={"cover"}
+                                // bgPos="center"
+                                // bgImage="/images/homeopathy.jpeg"
+                            >
+                                <Image src={NutritionPhoto} />
+                            </Box>
                         ) : (
                             <Parallax
                                 speed={15}
                                 style={{ height: "300px", width: "700px" }}
                             >
                                 <Box
-                                    borderColor={"brand.500"}
+                                    borderColor={"brand.600"}
                                     borderWidth="10px"
                                     height={"100%"}
-                                    width={"100%"}
+                                    // width={"100%"}
+                                    overflow="hidden"
+                                    // objectFit={"cover"}
                                     shadow="dark-lg"
-                                    bgSize={"cover"}
-                                    bgPos="center"
-                                    bgImage="/images/nutrition.jpeg"
-                                />
+                                    fontSize={0}
+                                    // bgSize={"cover"}
+                                    // bgPos="center"
+                                    // bgImage="/images/homeopathy.jpeg"
+                                >
+                                    <Image src={NutritionPhoto} />
+                                </Box>
                             </Parallax>
                         )}
                         <Box
@@ -601,26 +651,33 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 borderColor={"brand.500"}
                                 borderWidth="10px"
                                 height={"200px"}
-                                width="100%"
-                                bgSize={"cover"}
-                                bgPos="center"
-                                bgImage="/images/ayurveda.jpeg"
-                            />
+                                width={"100%"}
+                                // bgSize={"cover"}
+                                // bgPos="center"
+                                // bgImage="/images/homeopathy.jpeg"
+                            >
+                                <Image src={AyurvedaPhoto} />
+                            </Box>
                         ) : (
                             <Parallax
                                 speed={15}
                                 style={{ height: "300px", width: "700px" }}
                             >
                                 <Box
-                                    borderColor={"brand.500"}
+                                    borderColor={"brand.600"}
                                     borderWidth="10px"
                                     height={"100%"}
-                                    width={"100%"}
+                                    // width={"100%"}
+                                    overflow="hidden"
+                                    // objectFit={"cover"}
                                     shadow="dark-lg"
-                                    bgSize={"cover"}
-                                    bgPos="center"
-                                    bgImage="/images/ayurveda.jpeg"
-                                />
+                                    fontSize={0}
+                                    // bgSize={"cover"}
+                                    // bgPos="center"
+                                    // bgImage="/images/homeopathy.jpeg"
+                                >
+                                    <Image src={AyurvedaPhoto} />
+                                </Box>
                             </Parallax>
                         )}
                         <Box
@@ -662,7 +719,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Flex>
                 </Stack>
             </Box>
-            <Flex height="90vh" my="50" justify={{ base: "center" }}>
+            <Flex
+                height="90vh"
+                my="50"
+                justify={{ base: "center" }}
+                bgColor="brand.800"
+            >
                 <Flex
                     direction={{ base: "column", lg: "row" }}
                     width={{ base: "80%", lg: "100%" }}
@@ -749,19 +811,37 @@ const Home: React.FC<HomeProps> = ({}) => {
                 </Flex>
             </Flex>
             {isBase ? (
-                <Box
-                    height={"400px"}
+                // <Box
+                //     height={"400px"}
+                //     width={"100%"}
+                //     bgSize={"cover"}
+                //     bgPos="center"
+                //     bgImage="/images/river.jpeg"
+                // />
+                <Image
+                    src={RiverPhoto}
+                    alt="Forest and mountains background"
+                    // sizes="5760px"
                     width={"100%"}
-                    bgSize={"cover"}
-                    bgPos="center"
-                    bgImage="/images/river.jpeg"
+                    height={"400px"}
                 />
             ) : (
-                <ParallaxBanner
-                    layers={[{ image: "/images/river.jpeg", speed: -35 }]}
-                    className="aspect-[2/1]"
-                    style={{ height: "100vh" }}
-                />
+                // <ParallaxBanner
+                //     layers={[{ image: "/images/river.jpeg", speed: -35 }]}
+                //     className="aspect-[2/1]"
+                //     style={{ height: "100vh" }}
+                //     />
+                <Box zIndex={-100} position="relative">
+                    <Parallax speed={-35}>
+                        <Image
+                            src={RiverPhoto}
+                            alt="Forest and mountains background"
+                            // sizes="5760px"
+                            // width={5760}
+                            // height={3840}
+                        />
+                    </Parallax>
+                </Box>
             )}
             <Box id="pricing"></Box>
             <Box bgColor={"white"} py="120" ref={pricingRef}>
