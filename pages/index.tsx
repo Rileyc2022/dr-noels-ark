@@ -98,9 +98,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                     zIndex={"-10"}
                 /> */}
                     {isBase ? (
-                        <Image src={ArkNarrowBackgroundPhoto} />
+                        <Image src={ArkNarrowBackgroundPhoto}  alt="Ark logo outline background"/>
                     ) : (
-                        <Image src={ArkBackgroundPhoto} />
+                        <Image src={ArkBackgroundPhoto}  alt="Ark logo outline background"/>
                     )}
                 </Parallax>
             </Box>
@@ -419,7 +419,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // backgroundPosition={"center"}
                         // bgRepeat="no-repeat"
                     >
-                        <Image src={FearFreeCertifiedPhoto} />
+                        <Image src={FearFreeCertifiedPhoto} alt="Fear Free Certification" />
                     </Box>
                     <Box
                         width={{ base: "80%", lg: "15%" }}
@@ -429,7 +429,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // backgroundPosition={"center"}
                         // bgRepeat="no-repeat"
                     >
-                        <Image src={FearFreeLogoPhoto} />
+                        <Image src={FearFreeLogoPhoto} alt="Fear Free Certification Logo" />
                     </Box>
                 </Flex>
             </Box>
@@ -507,7 +507,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image src={HomeopathyPhoto} />
+                                <Image src={HomeopathyPhoto} alt="Bottle of homeopathy spilling out onto table with flowers" />
                             </Box>
                         ) : (
                             <Parallax
@@ -527,7 +527,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image src={HomeopathyPhoto} />
+                                    <Image src={HomeopathyPhoto} alt="Bottle of homeopathy spilling out onto table with flowers"/>
                                 </Box>
                             </Parallax>
                         )}
@@ -581,7 +581,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image src={NutritionPhoto} />
+                                <Image src={NutritionPhoto} alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"/>
                             </Box>
                         ) : (
                             <Parallax
@@ -601,7 +601,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image src={NutritionPhoto} />
+                                    <Image src={NutritionPhoto} alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"/>
                                 </Box>
                             </Parallax>
                         )}
@@ -656,7 +656,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image src={AyurvedaPhoto} />
+                                <Image src={AyurvedaPhoto} alt="Small bowl filled with orange, powered herb, surrounded by plants"/>
                             </Box>
                         ) : (
                             <Parallax
@@ -676,7 +676,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image src={AyurvedaPhoto} />
+                                    <Image src={AyurvedaPhoto} alt="Small bowl filled with orange, powered herb, surrounded by plants"/>
                                 </Box>
                             </Parallax>
                         )}
