@@ -49,6 +49,7 @@ interface NavItem {
     subLabel?: string;
     children?: Array<NavItem>;
     href?: string;
+    menu?: boolean;
 }
 
 const NAV_ITEMS: Array<NavItem> = [
@@ -66,7 +67,8 @@ const NAV_ITEMS: Array<NavItem> = [
     },
     {
         label: "Resources",
-        href: "",
+        // href: "",
+        menu: true,
         children: [
             {
                 label: "Homeopathy",
@@ -193,7 +195,7 @@ export default function WithSubnavigation({
                         <DesktopNav variant={variant} />
                     </Flex>
                 </Flex>
-                {(!isBase) &&
+                {!isBase &&
                     (currentUser ? (
                         <Menu>
                             <MenuButton
@@ -276,7 +278,7 @@ export default function WithSubnavigation({
                                 </MenuItem>
                             </MenuList>
                         </Menu>
-                ) : (
+                    ) : (
                         <NextLink href={"/make-appointment"} passHref>
                             <Button
                                 as={"a"}
@@ -329,27 +331,28 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
     const popoverContentBgColor = "brand.600";
 
     return (
-        <Stack direction={"row"} spacing={4}>
+        <Stack direction={"row"} spacing={4} align="center">
             {NAV_ITEMS.map((navItem) => (
-                <Box key={navItem.label}>
-                    <Popover trigger={"hover"} placement={"bottom-start"}>
-                        <PopoverTrigger>
-                            {navItem.href ? (
-                                <Link
-                                    p={2}
-                                    href={navItem.href ?? "#"}
-                                    fontSize="15"
-                                    fontWeight={500}
-                                    color={linkColor}
-                                    _hover={{
-                                        textDecoration: "none",
-                                        color: linkHoverColor,
-                                    }}
-                                >
-                                    {navItem.label}
-                                </Link>
-                            ) : (
+                <Box key={navItem.label} >
+                    {navItem.href ? (
+                        <Link
+                            p={2}
+                            href={navItem.href ?? "#"}
+                            fontSize="15"
+                            fontWeight={500}
+                            color={linkColor}
+                            _hover={{
+                                textDecoration: "none",
+                                color: linkHoverColor,
+                            }}
+                        >
+                            {navItem.label}
+                        </Link>
+                    ) : (
+                        <Popover trigger={"click"} placement={"bottom-start"}>
+                            <PopoverTrigger>
                                 <Text
+                                    as={Button}
                                     p={2}
                                     fontSize="15"
                                     fontWeight={500}
@@ -357,34 +360,40 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
                                     _hover={{
                                         textDecoration: "none",
                                         color: linkHoverColor,
+                                        backgroundColor: "white`Alpha.100"
                                     }}
-                                        display="inline"
-                                        cursor="pointer"
+                                        variant="link"
+                                        bgColor="transparent"
+                                    // display="inline"
+                                        
+                                    cursor="pointer"
+                                    rightIcon={<ChevronDownIcon />}
                                 >
                                     {navItem.label}
                                 </Text>
+                                {/* {navItem.label} */}
+                            </PopoverTrigger>
+                            {navItem.children && (
+                                <PopoverContent
+                                    border={0}
+                                    boxShadow={"xl"}
+                                    bg={popoverContentBgColor}
+                                    p={4}
+                                    rounded={"xl"}
+                                    minW={"sm"}
+                                >
+                                    <Stack>
+                                        {navItem.children.map((child) => (
+                                            <DesktopSubNav
+                                                key={child.label}
+                                                {...child}
+                                            />
+                                        ))}
+                                    </Stack>
+                                </PopoverContent>
                             )}
-                        </PopoverTrigger>
-                        {navItem.children && (
-                            <PopoverContent
-                                border={0}
-                                boxShadow={"xl"}
-                                bg={popoverContentBgColor}
-                                p={4}
-                                rounded={"xl"}
-                                minW={"sm"}
-                            >
-                                <Stack>
-                                    {navItem.children.map((child) => (
-                                        <DesktopSubNav
-                                            key={child.label}
-                                            {...child}
-                                        />
-                                    ))}
-                                </Stack>
-                            </PopoverContent>
-                        )}
-                    </Popover>
+                        </Popover>
+                    )}
                 </Box>
             ))}
         </Stack>

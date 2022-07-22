@@ -28,11 +28,7 @@ const HeadTemplate: React.FC<HeadTemplateProps> = ({
                 <meta property="og:description" content={short_description} />
             )}
 
-            {/* <meta property="og:image" content="https://www.drnoelsark.com/images/og-image.png" /> */}
-            <meta
-                property="og:image"
-                content="https://cdn.discordapp.com/attachments/766545619170623528/999396424070479972/og-image.png"
-            />
+            <meta property="og:image" content="https://www.drnoelsark.com/og-image.png" />
 
             {/* <!-- Twitter Meta Tags --> */}
             <meta name="twitter:card" content="summary_large_image" />
@@ -42,10 +38,9 @@ const HeadTemplate: React.FC<HeadTemplateProps> = ({
             {short_description && (
                 <meta name="twitter:description" content={short_description} />
             )}
-            {/* <meta property="og:image" content="https://www.drnoelsark.com/images/og-image.png" /> */}
             <meta
                 name="twitter:image"
-                content="https://cdn.discordapp.com/attachments/766545619170623528/999396424070479972/og-image.png"
+                content="https://www.drnoelsark.com/og-image.png"
             />
             <meta
                 name="viewport"

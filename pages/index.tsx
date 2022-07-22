@@ -26,8 +26,8 @@ import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";
-import LookingAtCatPhoto from "../public/images/looking-at-cat-enhanced.png";
-import HeroPortraitPhoto from "../public/images/no-background-portrait.png";
+import LookingAtCatPhoto from "../public/images/looking-at-cat-sm-enhanced.png";
+import HeroPortraitPhoto from "../public/images/no-background-portrait-sm.png";
 
 interface HomeProps {}
 
