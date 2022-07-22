@@ -31,7 +31,7 @@ const HeadTemplate: React.FC<HeadTemplateProps> = ({
             <meta
                 property="og:image"
                 // content="https://www.drnoelsark.com/og-image.png"
-                content="https://cdn.discordapp.com/attachments/766545619170623528/999912250078933133/og-image.png"
+                content="https://cdn.discordapp.com/attachments/766545619170623528/999940942377275432/Group_198.png"
             />
 
             {/* <!-- Twitter Meta Tags --> */}
@@ -45,7 +45,7 @@ const HeadTemplate: React.FC<HeadTemplateProps> = ({
             <meta
                 name="twitter:image"
                 // content="https://www.drnoelsark.com/og-image.png"
-                content="https://cdn.discordapp.com/attachments/766545619170623528/999912250078933133/og-image.png"
+                content="https://cdn.discordapp.com/attachments/766545619170623528/999940942377275432/Group_198.png"
             />
             <meta
                 name="viewport"
