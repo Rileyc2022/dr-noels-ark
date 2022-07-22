@@ -26,8 +26,8 @@ import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";
-import LookingAtCatPhoto from "../public/images/looking-at-cat-sm-enhanced.png";
-import HeroPortraitPhoto from "../public/images/no-background-portrait-sm.png";
+import LookingAtCatPhoto from "../public/images/looking-at-cat-enhanced.png";
+import HeroPortraitPhoto from "../public/images/no-background-portrait.png";
 
 interface HomeProps {}
 
@@ -262,6 +262,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 >
                                     <Image
                                         src={LookingAtCatPhoto}
+                                        sizes="800px"
+                                        width={800}
+                                        height={702}
                                         alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                     ></Image>
                                 </Box>
