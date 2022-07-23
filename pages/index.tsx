@@ -432,7 +432,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                     height={"130px"}
                 >
                     <Box
-                        width={{ base: "80%", lg: "20%" }}
+                        width={{ base: "30%", lg: "20%" }}
+                        fontSize={0}
                         // height={{ base: "80%", lg: "100%" }}
                         // flex={1}
                         // backgroundImage={
@@ -448,7 +449,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                         />
                     </Box>
                     <Box
-                        width={{ base: "80%", lg: "15%" }}
+                        width={{ base: "30%", lg: "15%" }}
+                        fontSize={0}
                         // flex={1}
                         // backgroundImage={"/images/ff-logo.png"}
                         // backgroundSize="contain"
@@ -462,41 +464,43 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Box>
                 </Flex>
             </Box>
-            {isBase ? (
-                // <Box
-                //     height={"400px"}
-                //     width={"100%"}
-                //     bgSize={"cover"}
-                //     bgPos="center"
-                //     bgImage="/images/forest-mountains.jpeg"
-                // />
-                <Image
-                    src={RiverPhoto}
-                    alt="Forest and mountains background"
-                    // sizes="5760px"
-                    width={"100%"}
-                    height={"400px"}
-                />
-            ) : (
-                // <ParallaxBanner
-                //     layers={[
-                //         { image: "/images/forest-mountains.jpeg", speed: -35 },
-                //     ]}
-                //     className="aspect-[2/1]"
-                //     style={{ height: "100vh" }}
-                // />
-                <Box zIndex={-100} position="relative">
-                    <Parallax speed={-35}>
-                        <Image
-                            src={ForestMountainsPhoto}
-                            alt="Forest and mountains background"
-                            // sizes="5760px"
-                            // width={5760}
-                            // height={3840}
-                        />
-                    </Parallax>
-                </Box>
-            )}
+            <Box fontSize={0}>
+                {isBase ? (
+                    // <Box
+                    //     height={"400px"}
+                    //     width={"100%"}
+                    //     bgSize={"cover"}
+                    //     bgPos="center"
+                    //     bgImage="/images/forest-mountains.jpeg"
+                    // />
+                    <Image
+                        src={RiverPhoto}
+                        alt="Forest and mountains background"
+                        // sizes="5760px"
+                        // width={"100%"}
+                        // height={"400px"}
+                    />
+                ) : (
+                    // <ParallaxBanner
+                    //     layers={[
+                    //         { image: "/images/forest-mountains.jpeg", speed: -35 },
+                    //     ]}
+                    //     className="aspect-[2/1]"
+                    //     style={{ height: "100vh" }}
+                    // />
+                    <Box zIndex={-100} position="relative">
+                        <Parallax speed={-35}>
+                            <Image
+                                src={ForestMountainsPhoto}
+                                alt="Forest and mountains background"
+                                // sizes="5760px"
+                                // width={5760}
+                                // height={3840}
+                            />
+                        </Parallax>
+                    </Box>
+                )}
+            </Box>
             <Box id="services"></Box>
             <Box bgColor={"white"} py="120" ref={servicesRef}>
                 <Box
@@ -530,14 +534,16 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Box
                                 borderColor={"brand.500"}
                                 borderWidth="10px"
-                                height={"200px"}
+                                // height={"200px"}
                                 width={"100%"}
+                                fontSize={0}
                                 // bgSize={"cover"}
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
                                     src={HomeopathyPhoto}
+                                    objectFit="cover"
                                     alt="Bottle of homeopathy spilling out onto table with flowers"
                                 />
                             </Box>
@@ -552,15 +558,15 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     height={"100%"}
                                     // width={"100%"}
                                     overflow="hidden"
-                                    // objectFit={"cover"}
                                     shadow="dark-lg"
-                                    fontSize={0}
+                                    // fontSize={0}
                                     // bgSize={"cover"}
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                     <Image
-                                        src={HomeopathyPhoto}
+                                            src={HomeopathyPhoto}
+                                            objectFit="cover"
                                         alt="Bottle of homeopathy spilling out onto table with flowers"
                                     />
                                 </Box>
@@ -610,14 +616,17 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Box
                                 borderColor={"brand.500"}
                                 borderWidth="10px"
-                                height={"200px"}
+                                // height={"200px"}
                                 width={"100%"}
+                                fontSize={0}
                                 // bgSize={"cover"}
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
                                     src={NutritionPhoto}
+                                    objectFit="cover"
+
                                     alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"
                                 />
                             </Box>
@@ -640,7 +649,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                     <Image
-                                        src={NutritionPhoto}
+                                            src={NutritionPhoto}
+                                            objectFit="cover"
+                                            
                                         alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"
                                     />
                                 </Box>
@@ -691,14 +702,17 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Box
                                 borderColor={"brand.500"}
                                 borderWidth="10px"
-                                height={"200px"}
+                                // height={"200px"}
                                 width={"100%"}
+                                fontSize={0}
                                 // bgSize={"cover"}
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
                                     src={AyurvedaPhoto}
+                                    objectFit="cover"
+
                                     alt="Small bowl filled with orange, powered herb, surrounded by plants"
                                 />
                             </Box>
@@ -721,7 +735,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                     <Image
-                                        src={AyurvedaPhoto}
+                                            src={AyurvedaPhoto}
+                                            objectFit="cover"
+                                            
                                         alt="Small bowl filled with orange, powered herb, surrounded by plants"
                                     />
                                 </Box>
@@ -857,39 +873,43 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </NextLink>
                 </Flex>
             </Flex>
-            {isBase ? (
-                // <Box
-                //     height={"400px"}
-                //     width={"100%"}
-                //     bgSize={"cover"}
-                //     bgPos="center"
-                //     bgImage="/images/river.jpeg"
-                // />
-                <Image
-                    src={RiverPhoto}
-                    alt="Forest and mountains background"
-                    // sizes="5760px"
-                    width={"100%"}
-                    height={"400px"}
-                />
-            ) : (
-                // <ParallaxBanner
-                //     layers={[{ image: "/images/river.jpeg", speed: -35 }]}
-                //     className="aspect-[2/1]"
-                //     style={{ height: "100vh" }}
-                //     />
-                <Box zIndex={-100} position="relative">
-                    <Parallax speed={-35}>
-                        <Image
-                            src={RiverPhoto}
-                            alt="Forest and mountains background"
-                            // sizes="5760px"
-                            // width={5760}
-                            // height={3840}
-                        />
-                    </Parallax>
-                </Box>
-            )}
+            <Box fontSize={0}>
+                {isBase ? (
+                    // <Box
+                    //     height={"400px"}
+                    //     width={"100%"}
+                    //     bgSize={"cover"}
+                    //     bgPos="center"
+                    //     bgImage="/images/river.jpeg"
+                    // />
+                    <Image
+                        src={RiverPhoto}
+                        alt="Forest and mountains background"
+                        // sizes="5760px"
+                        // width={"100%"}
+                        // height={"400px"}
+                    />
+                ) : (
+                    // <ParallaxBanner
+                    //     layers={[{ image: "/images/river.jpeg", speed: -35 }]}
+                    //     className="aspect-[2/1]"
+                    //     style={{ height: "100vh" }}
+                    //     />
+                    <Box zIndex={-100} position="relative">
+                        <Parallax speed={-35}>
+                            <Image
+                                src={RiverPhoto}
+                                alt="Forest and mountains background"
+                                // width={"100%"}
+
+                                // sizes="5760px"
+                                // width={5760}
+                                // height={3840}
+                            />
+                        </Parallax>
+                    </Box>
+                )}
+            </Box>
             <Box id="pricing"></Box>
             <Box bgColor={"white"} py="120" ref={pricingRef}>
                 <Box
