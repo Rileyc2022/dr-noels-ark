@@ -2,8 +2,8 @@ import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
     fonts: {
-        heading: "Quantify Bold",
-        body: "Gotham Pro Regular",
+        heading: "Quantify Bold, Arial, sans-serif",
+        body: "Gotham Pro Regular, Arial, sans-serif",
     },
     colors: {
         brand: {

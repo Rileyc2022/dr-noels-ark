@@ -101,11 +101,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                         <Image
                             src={ArkNarrowBackgroundPhoto}
                             alt="Ark logo outline background"
+                            priority
                         />
                     ) : (
                         <Image
                             src={ArkBackgroundPhoto}
                             alt="Ark logo outline background"
+                            priority
                         />
                     )}
                 </Parallax>
@@ -216,13 +218,13 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     >
                                         {/* {isBase ? ( */}
                                         <Image
-                                                // sizes="220px 400px 500px"
-                                                src={HeroPortraitPhoto}
-                                                alt="Dr. Noel Crymble smiling with arms crossed."
-                                                priority
-                                            />
+                                            // sizes="220px 400px 500px"
+                                            src={HeroPortraitPhoto}
+                                            alt="Dr. Noel Crymble smiling with arms crossed."
+                                            priority
+                                        />
                                         {/* ) : ( */}
-                                            {/* <Image
+                                        {/* <Image
                                                     width={"500px"}
                                                     layout
                                                 src={HeroPortraitPhoto}
