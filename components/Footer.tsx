@@ -34,23 +34,28 @@ export default function LargeWithLogoCentered({
             color={isLight ? "gray.700" : "gray.200"}
         >
             <Flex justify={"center"} py={10}>
-                <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={8}>
-                    <Stack align={"flex-start"}>
+                <SimpleGrid
+                    columns={{ base: 2, sm: 2, lg: 4 }}
+                    spacing={8}
+                    px={10}
+                >
+                    <Stack align={"flex-start"} fontSize={{base: "sm", md: "initial"}}>
                         <ListHeader>Quick Links</ListHeader>
 
                         <Link href={"#about"}>About Me</Link>
                         <Link href={"#services"}>Services</Link>
                         <Link href={"#pricing"}>Pricing</Link>
                     </Stack>
-                    <Stack align={"flex-start"}>
+                    <Stack align={"flex-start"} fontSize={{base: "sm", md: "initial"}}>
                         <ListHeader>Read More</ListHeader>
                         <Link href={"/resources/homeopathy"}>Homeopathy</Link>
                         <Link href={"/resources/nutrition"}>Nutrition</Link>
                         <Link href={"/resources/ayurveda"}>Ayurveda</Link>
                     </Stack>
-                    <Stack align={"flex-start"}>
+                    <Stack align={"flex-start"} fontSize={{base: "sm", md: "initial"}}>
                         <ListHeader>Contact Me</ListHeader>
                         <Link
+                            // fontSize={"sm"}
                             href={"/make-appointment"}
                             onClick={() => {
                                 analytics.then((analytics) => {
@@ -65,6 +70,7 @@ export default function LargeWithLogoCentered({
                             Make appointment
                         </Link>
                         <Link
+                            // fontSize={"sm"}
                             href="tel:+15105605494"
                             onClick={() => {
                                 analytics.then((analytics) => {
@@ -79,6 +85,7 @@ export default function LargeWithLogoCentered({
                             +1 (510) 560-5494
                         </Link>
                         <Link
+                            // fontSize={"sm"}
                             href={
                                 "https://www.linkedin.com/in/noel-crymble-bvsc-bsc-ba-llb-a92572124"
                             }
@@ -92,12 +99,15 @@ export default function LargeWithLogoCentered({
                             LinkedIn
                         </Link>
                     </Stack>
-                    <Stack align={"flex-start"}>
+                    <Stack
+                        align={"flex-start"}
+                        fontSize={{ base: "sm", md: "initial" }}
+                    >
                         <ListHeader>Portals</ListHeader>
-                        <Stack direction={"row"} align={"center"} spacing={2}>
-                            <Text>Pet Portal</Text>
+                        <Stack direction={{base: "column-reverse", sm: "row"}} spacing={2}>
+                            <Text mb={{base: "2", sm: "0"}}>Pet Portal</Text>
                             <Tag
-                                size={"sm"}
+                                // size={"sm"}
                                 bg={isLight ? "blue.300" : "blue.500"}
                                 ml={2}
                                 color={"white"}
@@ -105,7 +115,7 @@ export default function LargeWithLogoCentered({
                                 Coming Soon
                             </Tag>
                         </Stack>
-                        <Stack direction={"row"} align={"center"} spacing={2}>
+                        <Stack direction={{base: "column-reverse", sm: "row"}} spacing={2}>
                             <Link
                                 href={"/admin"}
                                 onClick={() => {
@@ -121,9 +131,9 @@ export default function LargeWithLogoCentered({
                                 Admin Portal
                             </Link>
                             <Tag
-                                size={"sm"}
                                 bg={isLight ? "red.300" : "red.500"}
                                 ml={2}
+                                // w={"100%"}
                                 color={"white"}
                             >
                                 Restricted

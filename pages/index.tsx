@@ -99,14 +99,18 @@ const Home: React.FC<HomeProps> = ({}) => {
                 /> */}
                     {isBase ? (
                         <Image
-                        placeholder="blur"
+                        
+                            
+                        
                             src={ArkNarrowBackgroundPhoto}
                             alt="Ark logo outline background"
                             priority
                         />
                     ) : (
                             <Image
-                            placeholder="blur"
+                            
+                                
+                            
                             src={ArkBackgroundPhoto}
                             alt="Ark logo outline background"
                             priority
@@ -184,6 +188,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             passHref
                                         >
                                             <Button
+                                                // zIndex={10}
                                                 as={"a"}
                                                 fontSize={"16"}
                                                 fontWeight={400}
@@ -209,20 +214,23 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     </Box>
                                     <Box
                                         width={{
-                                            base: "220px",
-                                            lg: "400px",
-                                            xl: "500px",
+                                            base: "65%",
+                                            lg: "58%",
+                                            xl: "38%",
                                         }}
                                         alignSelf={"center"}
                                         justifySelf={"flex-end"}
                                         mt="auto"
                                         fontSize={0}
+                                        
                                     >
                                         {/* {isBase ? ( */}
                                         <Image
-                                            // placeholder="blur"
+                                        
                                             
-                                            // sizes="220px 400px 500px"
+                                            // 
+                                            
+                                            // sizes="200px 500px"
                                             src={HeroPortraitPhoto}
                                             alt="Dr. Noel Crymble smiling with arms crossed."
                                             priority
@@ -287,7 +295,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 fontSize={0}
                             >
                                 <Image
-                                    placeholder="blur"
+                                        
+                                    
                                     src={LookingAtCatPhoto}
                                     alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                 ></Image>
@@ -304,7 +313,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     fontSize={0}
                                 >
                                         <Image
-                                            placeholder="blur"
+                                        
+                                            
+                                            
                                         src={LookingAtCatPhoto}
                                         alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                     ></Image>
@@ -450,7 +461,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // bgRepeat="no-repeat"
                     >
                         <Image
-                            placeholder="blur"
+                                        
+                            
+                            
                             src={FearFreeCertifiedPhoto}
                             alt="Fear Free Certification"
                         />
@@ -465,7 +478,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // bgRepeat="no-repeat"
                     >
                         <Image
-                            placeholder="blur"
+                                        
+                            
+                            
                             src={FearFreeLogoPhoto}
                             alt="Fear Free Certification Logo"
                         />
@@ -482,7 +497,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     bgImage="/images/forest-mountains.jpeg"
                     // />
                     <Image
-                    placeholder="blur"
+                    
+                        
+                    
                         src={ForestMountainsPhoto}
                         alt="Forest and mountains background"
                         // sizes="5760px"
@@ -500,7 +517,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                     <Box zIndex={-100} position="relative">
                         <Parallax speed={-35}>
                                 <Image
-                                    placeholder="blur"
+                                        
+                                    
+                                    
                                 src={ForestMountainsPhoto}
                                 alt="Forest and mountains background"
                                 // sizes="5760px"
@@ -552,7 +571,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
-                                    placeholder="blur"
+                                        
+                                    
+                                    
                                     src={HomeopathyPhoto}
                                     objectFit="cover"
                                     alt="Bottle of homeopathy spilling out onto table with flowers"
@@ -576,7 +597,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                         <Image
-                                            placeholder="blur"
+                                        
+                                            
+                                            
                                             src={HomeopathyPhoto}
                                             objectFit="cover"
                                         alt="Bottle of homeopathy spilling out onto table with flowers"
@@ -636,7 +659,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
-                                    placeholder="blur"
+                                        
+                                    
+                                    
                                     src={NutritionPhoto}
                                     objectFit="cover"
 
@@ -662,7 +687,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                         <Image
-                                            placeholder="blur"
+                                        
+                                            
+                                            
                                             src={NutritionPhoto}
                                             objectFit="cover"
                                             
@@ -724,7 +751,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
-                                    placeholder="blur"
+                                        
+                                    
+                                    
                                     src={AyurvedaPhoto}
                                     objectFit="cover"
 
@@ -750,7 +779,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                         <Image
-                                            placeholder="blur"
+                                        
+                                            
+                                            
                                             src={AyurvedaPhoto}
                                             objectFit="cover"
                                             
@@ -899,7 +930,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     bgImage="/images/river.jpeg"
                     // />
                     <Image
-                    placeholder="blur"
+                    
+                        
+                    
                         src={RiverPhoto}
                         alt="Forest and mountains background"
                         // sizes="5760px"
@@ -915,7 +948,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                     <Box zIndex={-100} position="relative">
                         <Parallax speed={-35}>
                                 <Image
-                                    placeholder="blur"
+                                        
+                                    
+                                    
                                 src={RiverPhoto}
                                 alt="Forest and mountains background"
                                 // width={"100%"}
