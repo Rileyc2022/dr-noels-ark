@@ -223,6 +223,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                     healthcare costs over the life of your pet.
                                 </ListItem>
                             </UnorderedList>
+
                             <Text mt="10">
                                 If you are ready for a holistic approach to your
                                 pet's health problems, please contact Dr. Noel
@@ -267,6 +268,18 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                     </Box>
                 </Flex>
             </Box>
+            <Text
+                fontSize={14}
+                color="gray.500"
+                mt={20}
+                mb={10}
+                mx={10}
+                textAlign="center"
+            >
+                Always read and follow label directions. Claims based on
+                traditional homeopathic practice, not accepted medical evidence.
+                Not FDA evaluated.
+            </Text>
             <Footer variant="dark"></Footer>
         </>
     );

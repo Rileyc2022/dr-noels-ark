@@ -203,6 +203,18 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                     </Box>
                 </Flex>
             </Box>
+            <Text
+                fontSize={14}
+                color="gray.500"
+                mt={20}
+                mb={10}
+                mx={10}
+                textAlign="center"
+            >
+                Always read and follow label directions. Claims based on
+                traditional homeopathic practice, not accepted medical evidence.
+                Not FDA evaluated.
+            </Text>
             <Footer variant="dark"></Footer>
         </>
     );

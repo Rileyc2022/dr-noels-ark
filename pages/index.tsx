@@ -215,6 +215,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     <Box
                                         width={{
                                             base: "65%",
+                                            md: "40%",
                                             lg: "58%",
                                             xl: "38%",
                                         }}
@@ -230,7 +231,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             
                                             // 
                                             
-                                            // sizes="200px 500px"
+                                            sizes="500px"
                                             src={HeroPortraitPhoto}
                                             alt="Dr. Noel Crymble smiling with arms crossed."
                                             priority
@@ -294,7 +295,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 borderWidth="10px"
                                 fontSize={0}
                             >
-                                <Image
+                                <Image placeholder="blur"
                                         
                                     
                                     src={LookingAtCatPhoto}
@@ -312,7 +313,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     shadow="dark-lg"
                                     fontSize={0}
                                 >
-                                        <Image
+                                        <Image placeholder="blur"
                                         
                                             
                                             
@@ -460,7 +461,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // backgroundPosition={"center"}
                         // bgRepeat="no-repeat"
                     >
-                        <Image
+                        <Image placeholder="blur"
                                         
                             
                             
@@ -477,7 +478,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // backgroundPosition={"center"}
                         // bgRepeat="no-repeat"
                     >
-                        <Image
+                        <Image placeholder="blur"
                                         
                             
                             
@@ -496,7 +497,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     bgPos="center"
                     //     bgImage="/images/forest-mountains.jpeg"
                     // />
-                    <Image
+                    <Image placeholder="blur"
                     
                         
                     
@@ -516,7 +517,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     // />
                     <Box zIndex={-100} position="relative">
                         <Parallax speed={-35}>
-                                <Image
+                                <Image placeholder="blur"
                                         
                                     
                                     
@@ -570,7 +571,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image
+                                <Image placeholder="blur"
                                         
                                     
                                     
@@ -596,7 +597,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                        <Image
+                                        <Image placeholder="blur"
                                         
                                             
                                             
@@ -658,7 +659,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image
+                                <Image placeholder="blur"
                                         
                                     
                                     
@@ -686,7 +687,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                        <Image
+                                        <Image placeholder="blur"
                                         
                                             
                                             
@@ -750,7 +751,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image
+                                <Image placeholder="blur"
                                         
                                     
                                     
@@ -778,7 +779,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                        <Image
+                                        <Image placeholder="blur"
                                         
                                             
                                             
@@ -929,7 +930,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     bgPos="center"
                     //     bgImage="/images/river.jpeg"
                     // />
-                    <Image
+                    <Image placeholder="blur"
                     
                         
                     
@@ -947,7 +948,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     />
                     <Box zIndex={-100} position="relative">
                         <Parallax speed={-35}>
-                                <Image
+                                <Image placeholder="blur"
                                         
                                     
                                     

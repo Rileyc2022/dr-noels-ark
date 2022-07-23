@@ -16,6 +16,10 @@ const HeadTemplate: React.FC<HeadTemplateProps> = ({
 }) => {
     return (
         <Head>
+            <link rel="preconnect" href="https://www.googletagmanager.com" />
+            <link rel="preload" href="/fonts/Gotham_Pro_Regular.ttf" as="font" />
+            <link rel="preload" href="/fonts/Quantify_Bold.ttf" as="font" />
+            {/* <link rel="preconnect" href="https://www.googletagmanager.com" /> */}
             {/* <!-- HTML Meta Tags --> */}
             {title && <title>{title}</title>}
             <meta name="description" content={description} />
