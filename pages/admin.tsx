@@ -1,4 +1,4 @@
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import {
     AlertDialog,
     AlertDialogBody,
@@ -11,6 +11,7 @@ import {
     Button,
     Divider,
     Flex,
+    Link,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -57,18 +58,54 @@ const Admin: React.FC<AdminProps> = ({}) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [statusFetched, setStatusFetched] = useState(false);
     const { currentUser } = useAuth();
+    // useEffect(() => {
+    //     if (currentUser) {
+    //         checkIsAdmin(currentUser).then((isAdmin) => {
+    //             setStatusFetched(true);
+    //             setIsAdmin(isAdmin);
+    //         });
+    //         console.log(currentUser.uid);
+    //     } else {
+    //         setIsAdmin(false);
+    //         setStatusFetched(true);
+    //     }
+    // }, [currentUser]);
+
     useEffect(() => {
         if (currentUser) {
             checkIsAdmin(currentUser).then((isAdmin) => {
-                setIsAdmin(isAdmin);
                 setStatusFetched(true);
+                setIsAdmin(isAdmin);
             });
             console.log(currentUser.uid);
-        } else {
-            setIsAdmin(false);
-            setStatusFetched(true);
         }
     }, [currentUser]);
+    useEffect(() => {
+        setTimeout(() => {
+            setStatusFetched(true);
+        }, 1500)
+    //     if (!currentUser) {
+    //         setStatusFetched(true);
+            
+    //     }
+    }, []);
+
+    // useEffect(() => {
+
+    //     if (currentUser) {
+    //         checkIsAdmin(currentUser).then((isAdmin) => {
+    //             setStatusFetched(true);
+    //             setIsAdmin(isAdmin);
+    //         });
+    //         console.log(currentUser.uid);
+    //     }
+    //     else {
+    //         setStatusFetched(true);
+
+    //         setIsAdmin(false);
+    //     }
+
+    // }, []);
     return (
         <>
             <HeadTemplate
@@ -254,18 +291,42 @@ const AppointmentTable = () => {
                                     {appointmentRequest.data()["Last name"]}
                                 </Td> */}
                                     <Td>
-                                        {
-                                            appointmentRequest.data()[
-                                                "Email address"
-                                            ]
-                                        }
+                                        <NextLink
+                                            href={`mailto:${
+                                                appointmentRequest.data()[
+                                                    "Email address"
+                                                ]
+                                            }`}
+                                            passHref
+                                        >
+                                            <Link color="brand.500">
+                                                <EmailIcon mr={2} />
+                                                {
+                                                    appointmentRequest.data()[
+                                                        "Email address"
+                                                    ]
+                                                }
+                                            </Link>
+                                        </NextLink>
                                     </Td>
                                     <Td>
-                                        {
-                                            appointmentRequest.data()[
-                                                "Phone number"
-                                            ]
-                                        }
+                                        <NextLink
+                                            href={`tel:${
+                                                appointmentRequest.data()[
+                                                    "Phone number"
+                                                ]
+                                            }`}
+                                            passHref
+                                        >
+                                            <Link color="brand.500">
+                                                <PhoneIcon mr={2} />
+                                                {
+                                                    appointmentRequest.data()[
+                                                        "Phone number"
+                                                    ]
+                                                }
+                                            </Link>
+                                        </NextLink>
                                     </Td>
                                     <Td>{appointmentRequest.data()["City"]}</Td>
                                     <Td>
@@ -283,6 +344,7 @@ const AppointmentTable = () => {
                                     </Td>
                                     <Td>
                                         <Button
+                                            mr={2}
                                             onClick={() => {
                                                 setMessage(
                                                     appointmentRequest.data()[
@@ -333,6 +395,7 @@ const AppointmentTable = () => {
                                                     </Button>
                                                     <Button
                                                         onClick={async () => {
+                                                            onDeleteClose();
                                                             await deleteDoc(
                                                                 doc(
                                                                     db,
@@ -344,7 +407,6 @@ const AppointmentTable = () => {
                                                                 title: "Appointment request deleted",
                                                                 status: "success",
                                                             });
-                                                            onDeleteClose();
                                                         }}
                                                         colorScheme="red"
                                                         ml={3}

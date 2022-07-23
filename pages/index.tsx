@@ -10,7 +10,7 @@ import {
     ListItem,
     Stack,
     Text,
-    useBreakpointValue,
+    useBreakpointValue
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
 import Image from "next/image";
@@ -26,17 +26,17 @@ import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";
-import LookingAtCatPhoto from "../public/images/looking-at-cat-enhanced.png";
-import HeroPortraitPhoto from "../public/images/no-background-portrait.png";
-import ForestMountainsPhoto from "../public/images/forest-mountains.jpeg";
-import RiverPhoto from "../public/images/river.jpeg";
-import ArkBackgroundPhoto from "../public/images/ark-background.png";
 import ArkNarrowBackgroundPhoto from "../public/images/ark-background-phone.png";
-import HomeopathyPhoto from "../public/images/homeopathy.jpeg";
-import NutritionPhoto from "../public/images/nutrition.jpeg";
+import ArkBackgroundPhoto from "../public/images/ark-background.png";
 import AyurvedaPhoto from "../public/images/ayurveda.jpeg";
 import FearFreeCertifiedPhoto from "../public/images/ff-certified-professional.png";
 import FearFreeLogoPhoto from "../public/images/ff-logo.png";
+import ForestMountainsPhoto from "../public/images/forest-mountains.jpeg";
+import HomeopathyPhoto from "../public/images/homeopathy.jpeg";
+import LookingAtCatPhoto from "../public/images/looking-at-cat-enhanced.png";
+import HeroPortraitPhoto from "../public/images/no-background-portrait.png";
+import NutritionPhoto from "../public/images/nutrition.jpeg";
+import RiverPhoto from "../public/images/river.jpeg";
 
 interface HomeProps {}
 
@@ -99,12 +99,14 @@ const Home: React.FC<HomeProps> = ({}) => {
                 /> */}
                     {isBase ? (
                         <Image
+                        placeholder="blur"
                             src={ArkNarrowBackgroundPhoto}
                             alt="Ark logo outline background"
                             priority
                         />
                     ) : (
-                        <Image
+                            <Image
+                            placeholder="blur"
                             src={ArkBackgroundPhoto}
                             alt="Ark logo outline background"
                             priority
@@ -218,6 +220,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     >
                                         {/* {isBase ? ( */}
                                         <Image
+                                            // placeholder="blur"
+                                            
                                             // sizes="220px 400px 500px"
                                             src={HeroPortraitPhoto}
                                             alt="Dr. Noel Crymble smiling with arms crossed."
@@ -283,6 +287,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 fontSize={0}
                             >
                                 <Image
+                                    placeholder="blur"
                                     src={LookingAtCatPhoto}
                                     alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                 ></Image>
@@ -298,7 +303,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     shadow="dark-lg"
                                     fontSize={0}
                                 >
-                                    <Image
+                                        <Image
+                                            placeholder="blur"
                                         src={LookingAtCatPhoto}
                                         alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                     ></Image>
@@ -444,6 +450,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // bgRepeat="no-repeat"
                     >
                         <Image
+                            placeholder="blur"
                             src={FearFreeCertifiedPhoto}
                             alt="Fear Free Certification"
                         />
@@ -458,6 +465,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // bgRepeat="no-repeat"
                     >
                         <Image
+                            placeholder="blur"
                             src={FearFreeLogoPhoto}
                             alt="Fear Free Certification Logo"
                         />
@@ -474,7 +482,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     bgImage="/images/forest-mountains.jpeg"
                     // />
                     <Image
-                        src={RiverPhoto}
+                    placeholder="blur"
+                        src={ForestMountainsPhoto}
                         alt="Forest and mountains background"
                         // sizes="5760px"
                         // width={"100%"}
@@ -490,7 +499,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                     // />
                     <Box zIndex={-100} position="relative">
                         <Parallax speed={-35}>
-                            <Image
+                                <Image
+                                    placeholder="blur"
                                 src={ForestMountainsPhoto}
                                 alt="Forest and mountains background"
                                 // sizes="5760px"
@@ -542,6 +552,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
+                                    placeholder="blur"
                                     src={HomeopathyPhoto}
                                     objectFit="cover"
                                     alt="Bottle of homeopathy spilling out onto table with flowers"
@@ -564,7 +575,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image
+                                        <Image
+                                            placeholder="blur"
                                             src={HomeopathyPhoto}
                                             objectFit="cover"
                                         alt="Bottle of homeopathy spilling out onto table with flowers"
@@ -624,6 +636,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
+                                    placeholder="blur"
                                     src={NutritionPhoto}
                                     objectFit="cover"
 
@@ -648,7 +661,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image
+                                        <Image
+                                            placeholder="blur"
                                             src={NutritionPhoto}
                                             objectFit="cover"
                                             
@@ -710,6 +724,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
+                                    placeholder="blur"
                                     src={AyurvedaPhoto}
                                     objectFit="cover"
 
@@ -734,7 +749,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                    <Image
+                                        <Image
+                                            placeholder="blur"
                                             src={AyurvedaPhoto}
                                             objectFit="cover"
                                             
@@ -883,6 +899,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     bgImage="/images/river.jpeg"
                     // />
                     <Image
+                    placeholder="blur"
                         src={RiverPhoto}
                         alt="Forest and mountains background"
                         // sizes="5760px"
@@ -897,7 +914,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     />
                     <Box zIndex={-100} position="relative">
                         <Parallax speed={-35}>
-                            <Image
+                                <Image
+                                    placeholder="blur"
                                 src={RiverPhoto}
                                 alt="Forest and mountains background"
                                 // width={"100%"}
@@ -959,8 +977,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 after the consultation to decide on the
                                 appropriate homeopathic remedy selection, and to
                                 determine nutritional supplements as well as
-                                dietary changes. My house call visit takes about
-                                1 to 1.5 hours.
+                                dietary changes. My house call visit takes 1 hour.
                             </Text>
                         </Box>
 

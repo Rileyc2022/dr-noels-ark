@@ -188,7 +188,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                             </Text>
                             <UnorderedList spacing={2}>
                                 <ListItem>Injuries, pain relief</ListItem>
-                                <ListItem>Itching skin</ListItem>
+                                <ListItem>Itchy skin</ListItem>
                                 <ListItem>Allergies & ear infections</ListItem>
                                 <ListItem>Kidney disease</ListItem>
                                 <ListItem>Arthritis</ListItem>
@@ -211,11 +211,10 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                     especially when treating a chronic disease.
                                 </ListItem>
                                 <ListItem>
-                                    Produces long lasting results with a
-                                    decreasing number of treatments.
+                                    Produces long lasting results.
                                 </ListItem>
                                 <ListItem>
-                                    Eliminates some toxic side effects
+                                    Has none of the toxic side effects normally
                                     associated with pharmaceuticals.
                                 </ListItem>
                                 <ListItem>
