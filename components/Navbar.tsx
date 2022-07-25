@@ -17,7 +17,7 @@ import {
     Heading,
     Icon,
     IconButton,
-    Link,
+    // Link,
     LinkBox,
     LinkOverlay,
     Menu,
@@ -43,6 +43,7 @@ import { analytics } from "../constants/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { checkIsAdmin } from "../functions/checkIsAdmin";
 import Logo from "./Logo";
+import SimpleLink from "./SimpleLink";
 
 interface NavItem {
     label: string;
@@ -332,7 +333,7 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
             {NAV_ITEMS.map((navItem) => (
                 <Box key={navItem.label} >
                     {navItem.href ? (
-                        <Link
+                        <SimpleLink
                             p={2}
                             href={navItem.href ?? "#"}
                             fontSize="15"
@@ -344,7 +345,7 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
                             }}
                         >
                             {navItem.label}
-                        </Link>
+                        </SimpleLink>
                     ) : (
                         <Popover trigger={"click"} placement={"bottom-start"}>
                             <PopoverTrigger>
@@ -399,7 +400,7 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
     return (
-        <Link
+        <SimpleLink
             href={href}
             role={"group"}
             display={"block"}
@@ -433,7 +434,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
                     <Icon color={"white"} w={5} h={5} as={ChevronRightIcon} />
                 </Flex>
             </Stack>
-        </Link>
+        </SimpleLink>
     );
 };
 
@@ -454,7 +455,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         <Stack spacing={4} onClick={children && onToggle}>
             <Flex
                 py={2}
-                as={href ? Link : Flex}
+                as={href ? SimpleLink : Flex}
                 href={href ?? null}
                 justify={"space-between"}
                 align={"center"}
@@ -494,7 +495,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                 >
                     {children &&
                         children.map((child) => (
-                            <Link
+                            <SimpleLink
                                 key={child.label}
                                 py={2}
                                 href={child.href}
@@ -511,7 +512,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                                 }}
                             >
                                 {child.label}
-                            </Link>
+                            </SimpleLink>
                         ))}
                 </Stack>
             </Collapse>

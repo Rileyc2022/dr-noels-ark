@@ -33,6 +33,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                 withShadow={false}
                 bottomBorder={true}
             ></Navbar>
+            <Box h={"20"} w="100%" position={"fixed"} bgColor="brand.800"></Box>
             <Box
                 minH="100vh"
                 bgColor={{ base: "brand.800", lg: "gray.100" }}

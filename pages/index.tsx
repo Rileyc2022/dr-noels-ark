@@ -5,12 +5,13 @@ import {
     Divider,
     Flex,
     Heading,
+    Icon,
     List,
     ListIcon,
     ListItem,
     Stack,
     Text,
-    useBreakpointValue
+    useBreakpointValue,
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
 import Image from "next/image";
@@ -26,8 +27,8 @@ import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";
-import ArkNarrowBackgroundPhoto from "../public/images/ark-background-phone.png";
-import ArkBackgroundPhoto from "../public/images/ark-background.png";
+// import ArkNarrowBackgroundPhoto from "../public/images/ark-background-phone.png";
+// import ArkBackgroundPhoto from "../public/images/ark-background.png";
 import AyurvedaPhoto from "../public/images/ayurveda.jpeg";
 import FearFreeCertifiedPhoto from "../public/images/ff-certified-professional.png";
 import FearFreeLogoPhoto from "../public/images/ff-logo.png";
@@ -75,13 +76,15 @@ const Home: React.FC<HomeProps> = ({}) => {
                 short_description="Holistic Bay Area House Call Veterinarian"
                 url="https://www.drnoelsark.com"
             />
-            <Box zIndex={-10}>
+
+            <Box zIndex={-10} position="absolute" height={"100vh"} w="100%">
                 <Parallax
                     style={{
-                        position: "absolute",
-                        height: "100vh",
+                        // position: "relative",
+                        height: "100%",
+                        // objectPosition: 'bottom right'
                         width: "100%",
-                        zIndex: -1,
+                        // zIndex: -1,
                     }}
                     speed={-35}
                 >
@@ -97,7 +100,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                     width="100%"
                     zIndex={"-10"}
                 /> */}
-                    {isBase ? (
+                    {/* <Box height={"100%"}>
+
+                    </Box> */}
+                    {/* {isBase ? (
                         <Image
                         
                             
@@ -115,7 +121,78 @@ const Home: React.FC<HomeProps> = ({}) => {
                             alt="Ark logo outline background"
                             priority
                         />
-                    )}
+                    )} */}
+
+                    <Box position={"absolute"} bottom="0" right={"0"}>
+                        <Icon
+                            boxSize={{ base: "400", md: "500", lg: "705" }}
+                            viewBox="0 0 705 659"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            {/* <svg > */}
+                            <mask
+                                id="mask0_227_218"
+                                style={{ maskType: "alpha" }}
+                                maskUnits="userSpaceOnUse"
+                                x="13"
+                                y="46"
+                                width="705"
+                                height="659"
+                            >
+                                <rect
+                                    x="13"
+                                    y="46"
+                                    width="705"
+                                    height="659"
+                                    fill="#D9D9D9"
+                                />
+                            </mask>
+                            <g mask="url(#mask0_227_218)">
+                                <path
+                                    d="M479.69 722.964L479.982 723.053L480.274 722.964L743.189 642.582H939.271L479.982 782.956L20.6932 642.582H216.775L479.69 722.964Z"
+                                    stroke="#1E4A50"
+                                    strokeWidth="2"
+                                />
+                                <path
+                                    d="M501.051 692.271V591.276L666.413 641.683L501.051 692.271Z"
+                                    stroke="#1E4A50"
+                                    strokeWidth="2"
+                                />
+                                <path
+                                    d="M293.535 641.683L458.898 591.276V692.271L293.535 641.683Z"
+                                    stroke="#1E4A50"
+                                    strokeWidth="2"
+                                />
+                                <path
+                                    d="M501.051 556.397V378.648L811.172 473.345L704.08 618.526L501.051 556.397Z"
+                                    stroke="#1E4A50"
+                                    strokeWidth="2"
+                                />
+                                <path
+                                    d="M255.811 618.526L148.72 473.345L458.841 378.648V556.397L255.811 618.526Z"
+                                    stroke="#1E4A50"
+                                    strokeWidth="2"
+                                />
+                                <path
+                                    d="M825.72 443.034L501.051 343.763V192.637L864.833 303.844L825.72 443.034Z"
+                                    stroke="#1E4A50"
+                                    strokeWidth="2"
+                                />
+                                <path
+                                    d="M458.853 343.763L134.184 443.034L95.0709 303.844L458.853 192.637V343.763Z"
+                                    stroke="#1E4A50"
+                                    strokeWidth="2"
+                                />
+                                <path
+                                    d="M480.283 151.416L479.99 151.326L479.698 151.416L268.385 215.994V112.713L479.99 48.0457L691.596 112.713V215.994L480.283 151.416Z"
+                                    stroke="#1E4A50"
+                                    strokeWidth="2"
+                                />
+                            </g>
+                            {/* </svg> */}
+                        </Icon>
+                    </Box>
                 </Parallax>
             </Box>
             <InView rootMargin="-200px" triggerOnce={false}>
@@ -223,14 +300,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         justifySelf={"flex-end"}
                                         mt="auto"
                                         fontSize={0}
-                                        
                                     >
                                         {/* {isBase ? ( */}
                                         <Image
-                                        
-                                            
-                                            // 
-                                            
+                                            //
+
                                             sizes="500px"
                                             src={HeroPortraitPhoto}
                                             alt="Dr. Noel Crymble smiling with arms crossed."
@@ -295,9 +369,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 borderWidth="10px"
                                 fontSize={0}
                             >
-                                <Image placeholder="blur"
-                                        
-                                    
+                                <Image
+                                    placeholder="blur"
                                     src={LookingAtCatPhoto}
                                     alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                 ></Image>
@@ -313,10 +386,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     shadow="dark-lg"
                                     fontSize={0}
                                 >
-                                        <Image placeholder="blur"
-                                        
-                                            
-                                            
+                                    <Image
+                                        placeholder="blur"
                                         src={LookingAtCatPhoto}
                                         alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                     ></Image>
@@ -461,10 +532,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // backgroundPosition={"center"}
                         // bgRepeat="no-repeat"
                     >
-                        <Image placeholder="blur"
-                                        
-                            
-                            
+                        <Image
+                            placeholder="blur"
                             src={FearFreeCertifiedPhoto}
                             alt="Fear Free Certification"
                         />
@@ -478,10 +547,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // backgroundPosition={"center"}
                         // bgRepeat="no-repeat"
                     >
-                        <Image placeholder="blur"
-                                        
-                            
-                            
+                        <Image
+                            placeholder="blur"
                             src={FearFreeLogoPhoto}
                             alt="Fear Free Certification Logo"
                         />
@@ -497,16 +564,33 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     bgPos="center"
                     //     bgImage="/images/forest-mountains.jpeg"
                     // />
-                    <Image placeholder="blur"
-                    
-                        
-                    
-                        src={ForestMountainsPhoto}
-                        alt="Forest and mountains background"
-                        // sizes="5760px"
-                        // width={"100%"}
-                        // height={"400px"}
-                    />
+
+                    <Box
+                        position={"relative"}
+                        h="80vh"
+                        w="100%"
+                        clipPath={"inset(0)"}
+                    >
+                        <Box
+                            position={"fixed"}
+                            height="100vh"
+                            w="100%"
+                            top="0"
+                            bottom="0"
+                        >
+                            <Image
+                                layout="fill"
+                                // height="100vh"
+                                objectFit="cover"
+                                placeholder="blur"
+                                src={ForestMountainsPhoto}
+                                alt="Forest and mountains background"
+                                sizes="800px"
+                                // width={"100%"}
+                                // height={"400px"}
+                            />
+                        </Box>
+                    </Box>
                 ) : (
                     // <ParallaxBanner
                     //     layers={[
@@ -517,10 +601,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                     // />
                     <Box zIndex={-100} position="relative">
                         <Parallax speed={-35}>
-                                <Image placeholder="blur"
-                                        
-                                    
-                                    
+                            <Image
+                                placeholder="blur"
                                 src={ForestMountainsPhoto}
                                 alt="Forest and mountains background"
                                 // sizes="5760px"
@@ -571,10 +653,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image placeholder="blur"
-                                        
-                                    
-                                    
+                                <Image
+                                    placeholder="blur"
                                     src={HomeopathyPhoto}
                                     objectFit="cover"
                                     alt="Bottle of homeopathy spilling out onto table with flowers"
@@ -597,12 +677,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                        <Image placeholder="blur"
-                                        
-                                            
-                                            
-                                            src={HomeopathyPhoto}
-                                            objectFit="cover"
+                                    <Image
+                                        placeholder="blur"
+                                        src={HomeopathyPhoto}
+                                        objectFit="cover"
                                         alt="Bottle of homeopathy spilling out onto table with flowers"
                                     />
                                 </Box>
@@ -659,13 +737,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image placeholder="blur"
-                                        
-                                    
-                                    
+                                <Image
+                                    placeholder="blur"
                                     src={NutritionPhoto}
                                     objectFit="cover"
-
                                     alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"
                                 />
                             </Box>
@@ -687,13 +762,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                        <Image placeholder="blur"
-                                        
-                                            
-                                            
-                                            src={NutritionPhoto}
-                                            objectFit="cover"
-                                            
+                                    <Image
+                                        placeholder="blur"
+                                        src={NutritionPhoto}
+                                        objectFit="cover"
                                         alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"
                                     />
                                 </Box>
@@ -751,13 +823,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgPos="center"
                                 // bgImage="/images/homeopathy.jpeg"
                             >
-                                <Image placeholder="blur"
-                                        
-                                    
-                                    
+                                <Image
+                                    placeholder="blur"
                                     src={AyurvedaPhoto}
                                     objectFit="cover"
-
                                     alt="Small bowl filled with orange, powered herb, surrounded by plants"
                                 />
                             </Box>
@@ -779,13 +848,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgPos="center"
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
-                                        <Image placeholder="blur"
-                                        
-                                            
-                                            
-                                            src={AyurvedaPhoto}
-                                            objectFit="cover"
-                                            
+                                    <Image
+                                        placeholder="blur"
+                                        src={AyurvedaPhoto}
+                                        objectFit="cover"
                                         alt="Small bowl filled with orange, powered herb, surrounded by plants"
                                     />
                                 </Box>
@@ -930,16 +996,33 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     bgPos="center"
                     //     bgImage="/images/river.jpeg"
                     // />
-                    <Image placeholder="blur"
-                    
-                        
-                    
-                        src={RiverPhoto}
-                        alt="Forest and mountains background"
-                        // sizes="5760px"
-                        // width={"100%"}
-                        // height={"400px"}
-                    />
+                    // <Box>
+                    <Box
+                        position={"relative"}
+                        h="80vh"
+                        w="100%"
+                        clipPath={"inset(0)"}
+                    >
+                        <Box
+                            position={"fixed"}
+                            height="100vh"
+                            w="100%"
+                            top="0"
+                            bottom="0"
+                        >
+                            <Image
+                                layout="fill"
+                                // height="100vh"
+                                objectFit="cover"
+                                placeholder="blur"
+                                src={RiverPhoto}
+                                alt="Shallow river at sunset with foliage and mountains in the background"
+                                sizes="800px"
+                                // width={"100%"}
+                                // height={"400px"}
+                            />
+                        </Box>
+                    </Box>
                 ) : (
                     // <ParallaxBanner
                     //     layers={[{ image: "/images/river.jpeg", speed: -35 }]}
@@ -948,12 +1031,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     />
                     <Box zIndex={-100} position="relative">
                         <Parallax speed={-35}>
-                                <Image placeholder="blur"
-                                        
-                                    
-                                    
+                            <Image
+                                placeholder="blur"
                                 src={RiverPhoto}
-                                alt="Forest and mountains background"
+                                alt="Shallow river at sunset with foliage and mountains in the background"
                                 // width={"100%"}
 
                                 // sizes="5760px"
@@ -1013,7 +1094,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 after the consultation to decide on the
                                 appropriate homeopathic remedy selection, and to
                                 determine nutritional supplements as well as
-                                dietary changes. My house call visit takes 1 hour.
+                                dietary changes. My house call visit takes 1
+                                hour.
                             </Text>
                         </Box>
 
