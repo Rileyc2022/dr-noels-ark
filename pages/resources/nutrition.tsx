@@ -92,14 +92,14 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 Overview
                             </Text>
                             <Text>
-                                Your pet's nutritional needs change during your
-                                its life due to growth and development, the
-                                aging process, and management of various medical
-                                conditions. The breed, size, energy level and
+                                Your pet's nutritional needs change during its
+                                life due to growth and development, the aging
+                                process, and management of various medical
+                                conditions. The breed, size, energy level, and
                                 environment of your pet are also factors in
-                                determining proper nutritional needs such as
+                                determining proper nutritional needs, such as
                                 calorie intake and frequency of feeding. It is
-                                also vital that to make sure your dog or cat
+                                also vital to make sure your dog or cat
                                 gets the necessary basic nutrients. A good diet
                                 must contain the proper balance of proteins,
                                 fats, carbohydrates, vitamins and minerals for
@@ -110,7 +110,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             <Text>
                                 Unfortunately, most of the dry and canned pet
                                 foods available today are the by-products of the
-                                human food industry and are so highly processed
+                                human food industry, and are so highly processed
                                 that they do not resemble real food at all. A
                                 poor diet can compromise your pet's health and
                                 result in a myriad of food related illnesses.
@@ -163,7 +163,8 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             </UnorderedList>
                             <Text mt="10">
                                 If you are ready for a holistic approach to your
-                                pet's health problems, please contact Dr. Noel to schedule a consultation.
+                                pet's health problems, please contact Dr. Noel
+                                to schedule a consultation.
                             </Text>
                             <NextLink href={"/make-appointment"} passHref>
                                 <Button

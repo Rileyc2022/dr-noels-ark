@@ -235,10 +235,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             mt="10"
                                             color={"gray.300"}
                                             w={{ base: "100%", lg: "35em" }}
-                                            fontSize={{
-                                                base: "14",
-                                                lg: "18",
-                                            }}
+                                            fontSize={{ base: 16, sm: 18 }}
                                         >
                                             Professional holisitic veterinary
                                             services available as house calls
@@ -267,7 +264,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             <Button
                                                 // zIndex={10}
                                                 as={"a"}
-                                                fontSize={"16"}
+                                                fontSize={16}
                                                 fontWeight={400}
                                                 variant={"solid"}
                                                 colorScheme={"brand"}
@@ -397,7 +394,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Box>
                     <Box
                         w={{ base: "80%", lg: "40%" }}
-                        fontSize="16"
+                        fontSize={16}
                         mt={{ base: "10" }}
                     >
                         <Stack spacing="5">
@@ -439,7 +436,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     justify={"space-evenly"}
                     flexDirection={{ base: "column", lg: "row" }}
                     mb="120"
-                    fontSize="16"
+                    fontSize={16}
                 >
                     <Box w={{ base: "80%", lg: "auto" }}>
                         <Text
@@ -517,7 +514,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     display={"flex"}
                     alignItems={"flex-end"}
                     justify={"space-evenly"}
-                    fontSize="16"
+                    fontSize={16}
                     height={"130px"}
                 >
                     <Box
@@ -700,7 +697,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Homeopathy
                             </Text>
-                            <Text my="5" fontSize="16">
+                            <Text my="5" fontSize={16}>
                                 Homeopathy is a medical system based on the
                                 belief that the body can cure itself. Using tiny
                                 amounts of natural substances, like plants and
@@ -714,7 +711,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     variant="outline"
                                     size={"sm"}
                                     as="a"
-                                    fontSize="16"
+                                    fontSize={16}
                                 >
                                     Learn More About Homeopathy
                                 </Button>
@@ -786,7 +783,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Nutrition
                             </Text>
-                            <Text my="5" fontSize="16">
+                            <Text my="5" fontSize={16}>
                                 For homeopathic remedies to be effective, the
                                 pet must be nutritionally supported. Using
                                 dietary protocols and nutritional supplements,
@@ -800,7 +797,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     variant="outline"
                                     size={"sm"}
                                     as="a"
-                                    fontSize="16"
+                                    fontSize={16}
                                 >
                                     Learn More About Nutrition
                                 </Button>
@@ -871,7 +868,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Ayurveda
                             </Text>
-                            <Text my="5" fontSize="16">
+                            <Text my="5" fontSize={16}>
                                 Ayurveda is a medicine system with historical
                                 roots in the Indian subcontinent, where around
                                 80% of the population report using it. Ayurveda
@@ -889,7 +886,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     variant="outline"
                                     size={"sm"}
                                     as="a"
-                                    fontSize="16"
+                                    fontSize={16}
                                 >
                                     Learn More About Ayurveda
                                 </Button>
@@ -914,18 +911,23 @@ const Home: React.FC<HomeProps> = ({}) => {
                     <Box>
                         <Text
                             color="gray.200"
-                            fontSize={{ base: 35, lg: 30 }}
+                            fontSize={{ base: 20, lg: 30 }}
                             mb="8"
+                            fontWeight={"bold"}
                         >
                             Why choose Dr. Noel's Ark?
                         </Text>
-                        <List spacing={3} fontSize="20" color="gray.200">
+                        <List
+                            spacing={{base: 8, sm: 3}}
+                            fontSize={{ base: 18, sm: 20 }}
+                            color="gray.200"
+                        >
                             <ListItem>
                                 <ListIcon
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
-                                Non-toxic
+                                Non-toxic approach
                             </ListItem>
                             <ListItem>
                                 <ListIcon

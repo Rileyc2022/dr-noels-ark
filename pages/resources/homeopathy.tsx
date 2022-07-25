@@ -127,8 +127,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 as clues that guide him/her to the exact
                                 homeopathic prescription that, when given to a
                                 sick animal, will stimulate a healing response
-                                in the patient and return it to full health and
-                                vitality.
+                                with a goal of optimum health and vitality.
                             </Text>
 
                             <Break />
@@ -145,7 +144,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 fontSize={{ base: 15, sm: 16 }}
                                 mx={[4, 20]}
                                 my={10}
-                                color="gray.500"
+                                color="gray.600"
                             >
                                 <Text>
                                     Dr. Hahnemann found that substances could be
