@@ -63,6 +63,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                 "Orinda",
                 "Lafayette",
                 "Walnut Creek",
+                "Danville"
             ],
         },
         {

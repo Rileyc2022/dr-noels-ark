@@ -570,6 +570,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         h="80vh"
                         w="100%"
                         clipPath={"inset(0)"}
+                        zIndex="-20"
                     >
                         <Box
                             position={"fixed"}
@@ -577,6 +578,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             w="100%"
                             top="0"
                             bottom="0"
+                            zIndex="-20"
                         >
                             <Image
                                 layout="fill"
@@ -1002,6 +1004,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         h="80vh"
                         w="100%"
                         clipPath={"inset(0)"}
+                        zIndex="-20"
                     >
                         <Box
                             position={"fixed"}
@@ -1009,6 +1012,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             w="100%"
                             top="0"
                             bottom="0"
+                            zIndex="-20"
                         >
                             <Image
                                 layout="fill"
