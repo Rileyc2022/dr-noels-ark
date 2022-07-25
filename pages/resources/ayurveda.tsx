@@ -134,7 +134,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                             <NextLink href={"/make-appointment"} passHref>
                                 <Button
                                     as={"a"}
-                                    fontSize={"16"}
+                                    fontSize={16}
                                     fontWeight={400}
                                     variant={"solid"}
                                     colorScheme={"brand"}

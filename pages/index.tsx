@@ -1101,9 +1101,9 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Initial Consultation
                             </Text>
                             <Text my="5" fontSize="16">
-                                In-person consultation for me to get to know
+                                This is an in-person consultation for me to get to know
                                 your pet and the health issues needing to be
-                                addressed. This fee includes a review of
+                                addressed. The fee includes a review of
                                 previous medical records, and case research
                                 after the consultation to decide on the
                                 appropriate homeopathic remedy selection, and to

@@ -1,5 +1,10 @@
 import { DeleteIcon, EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import {
+    Accordion,
+    AccordionButton,
+    AccordionIcon,
+    AccordionItem,
+    AccordionPanel,
     AlertDialog,
     AlertDialogBody,
     AlertDialogCloseButton,
@@ -7,10 +12,13 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogOverlay,
+    Avatar,
+    Badge,
     Box,
     Button,
     Divider,
     Flex,
+    HStack,
     Link,
     Modal,
     ModalBody,
@@ -20,6 +28,7 @@ import {
     ModalHeader,
     ModalOverlay,
     Spinner,
+    Stack,
     Tab,
     Table,
     TableContainer,
@@ -27,6 +36,7 @@ import {
     TabPanel,
     TabPanels,
     Tabs,
+    Tag,
     Tbody,
     Td,
     Text,
@@ -35,22 +45,29 @@ import {
     Tr,
     useDisclosure,
     useToast,
+    VStack,
 } from "@chakra-ui/react";
 import {
     collection,
     deleteDoc,
     doc,
+    query,
     DocumentData,
     onSnapshot,
+    orderBy,
     QueryDocumentSnapshot,
 } from "firebase/firestore";
+import moment from "moment";
 import NextLink from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
+import SimpleLink from "../components/SimpleLink";
 import { db } from "../constants/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { checkIsAdmin } from "../functions/checkIsAdmin";
+import randomPick from "../functions/randomPick";
 
 interface AdminProps {}
 
@@ -83,11 +100,11 @@ const Admin: React.FC<AdminProps> = ({}) => {
     useEffect(() => {
         setTimeout(() => {
             setStatusFetched(true);
-        }, 1500)
-    //     if (!currentUser) {
-    //         setStatusFetched(true);
-            
-    //     }
+        }, 1500);
+        //     if (!currentUser) {
+        //         setStatusFetched(true);
+
+        //     }
     }, []);
 
     // useEffect(() => {
@@ -137,18 +154,31 @@ const Admin: React.FC<AdminProps> = ({}) => {
                         <Box
                             bgColor="white"
                             width={"90%"}
-                            p={{ base: "50px", lg: "50" }}
+                            p={{ base: "0px", lg: "50" }}
                         >
-                            <Text
-                                fontSize={{ base: 25, lg: 40 }}
-                                color={"brand.500"}
-                                fontWeight={"bold"}
-                                textAlign={"center"}
-                            >
-                                Admin Portal
-                            </Text>
-                            <Divider my={10} />
-                            <Tabs
+                            <Box p={{ base: "50px", lg: "0" }}>
+                                <Text
+                                    fontSize={{ base: 25, lg: 40 }}
+                                    color={"brand.500"}
+                                    fontWeight={"bold"}
+                                    textAlign={"center"}
+                                >
+                                    Admin Portal
+                                </Text>
+                                {/* <Divider my={10} /> */}
+                                <Text
+                                    color="brand.600"
+                                    fontSize={20}
+                                    my={10}
+                                    textAlign={{
+                                        base: "center",
+                                        lg: "initial",
+                                    }}
+                                >
+                                    Appointment Requests
+                                </Text>
+                            </Box>
+                            {/* <Tabs
                                 isFitted
                                 variant={"enclosed-colored"}
                                 colorScheme="brand"
@@ -168,7 +198,8 @@ const Admin: React.FC<AdminProps> = ({}) => {
                                         <Text>No pet portal accounts yet.</Text>
                                     </TabPanel>
                                 </TabPanels>
-                            </Tabs>
+                            </Tabs> */}
+                            <AppointmentTable />
                         </Box>
                     </Flex>
                 </Box>
@@ -201,6 +232,7 @@ const Admin: React.FC<AdminProps> = ({}) => {
                     </Flex>
                 </Box>
             )}
+            <Footer variant="dark"></Footer>
         </>
     );
 };
@@ -209,16 +241,29 @@ const AppointmentTable = () => {
     const [appointmentRequests, setAppointmentRequests] = React.useState<
         QueryDocumentSnapshot[] | null
     >(null);
-    const unsub = onSnapshot(
-        collection(db, "appointment_requests"),
-        (querySnapshot) => {
-            const requests: any = [];
-            querySnapshot.forEach((doc) => {
-                requests.push(doc);
-            });
-            setAppointmentRequests(requests);
-        }
-    );
+
+    useEffect(() => {
+        const unsub = onSnapshot(
+            query(
+                collection(db, "appointment_requests"),
+                orderBy("timestamp", "desc")
+            ),
+            (querySnapshot) => {
+                const requests: any = [];
+                querySnapshot.forEach((doc) => {
+                    requests.push(doc.data());
+                });
+                // requests.sort(function (a: any, b: any) {
+                //     // alert(a.timestamp + b.timestamp)
+                //     return a.timestamp + b.timestamp;
+                // });
+                console.log(requests);
+                setAppointmentRequests(requests);
+            }
+        );
+        return unsub;
+    }, []);
+
     const {
         isOpen: isMessageOpen,
         onOpen: onMessageOpen,
@@ -235,7 +280,7 @@ const AppointmentTable = () => {
 
     return (
         <>
-            <TableContainer w="100%" fontSize={16} py="10">
+            {/* <TableContainer w="100%" fontSize={16} py="10">
                 <Table variant="simple">
                     <Thead>
                         <Tr>
@@ -245,9 +290,6 @@ const AppointmentTable = () => {
                             <Th fontFamily={"body"} fontSize="14">
                                 Name
                             </Th>
-                            {/* <Th fontFamily={"body"} fontSize="14">
-                                Last name
-                            </Th> */}
                             <Th fontFamily={"body"} fontSize="14">
                                 Email address
                             </Th>
@@ -287,9 +329,6 @@ const AppointmentTable = () => {
                                                 "Last name"
                                             ]}
                                     </Td>
-                                    {/* <Td>
-                                    {appointmentRequest.data()["Last name"]}
-                                </Td> */}
                                     <Td>
                                         <NextLink
                                             href={`mailto:${
@@ -394,19 +433,20 @@ const AppointmentTable = () => {
                                                         No
                                                     </Button>
                                                     <Button
-                                                        onClick={async () => {
+                                                        onClick={() => {
                                                             onDeleteClose();
-                                                            await deleteDoc(
+                                                            deleteDoc(
                                                                 doc(
                                                                     db,
                                                                     "appointment_requests",
                                                                     appointmentRequest.id
                                                                 )
-                                                            );
-                                                            toast({
-                                                                title: "Appointment request deleted",
-                                                                status: "success",
-                                                            });
+                                                            ).then(() => {
+                                                                toast({
+                                                                    title: "Appointment request deleted",
+                                                                    status: "success",
+                                                                });
+                                                            })
                                                         }}
                                                         colorScheme="red"
                                                         ml={3}
@@ -422,9 +462,177 @@ const AppointmentTable = () => {
                         )}
                     </Tbody>
                 </Table>
-            </TableContainer>
+            </TableContainer> */}
 
-            <Modal isCentered isOpen={isMessageOpen} onClose={onMessageClose}>
+            {/* {appointmentRequests?.map(
+                (
+                    apReq: QueryDocumentSnapshot<DocumentData>
+                ) => (
+                    apReq.data()
+                ))} */}
+            {/* // JSON.stringify(apReq) */}
+            <Accordion defaultIndex={[0]} allowMultiple allowToggle>
+                {appointmentRequests?.map((apReq: DocumentData) => (
+                    <AccordionItem>
+                        <h2>
+                            <AccordionButton>
+                                <HStack
+                                    spacing={{ base: 2, md: 5 }}
+                                    flex="1"
+                                    textAlign={"left"}
+                                >
+                                    <Avatar
+                                        // mr={3}
+                                        size={{ base: "sm", md: "md" }}
+                                        name={
+                                            apReq["First name"] +
+                                            " " +
+                                            apReq["Last name"]
+                                        }
+                                        bgColor={apReq.color + ".500"}
+                                        color="white"
+                                        fontWeight={"bold"}
+                                    ></Avatar>
+                                    <Text
+                                        fontSize={{ base: 16, md: "lg" }}
+                                        mr={{ base: 0, md: 0 }}
+                                    >
+                                        {apReq["First name"] +
+                                            " " +
+                                            apReq["Last name"]}
+                                    </Text>
+                                    {moment().diff(
+                                        moment(apReq.timestamp.toDate()),
+                                        "minutes"
+                                    ) <= 50 && (
+                                        <Badge colorScheme="green">New</Badge>
+                                    )}
+                                </HStack>
+                                <Text
+                                    fontSize={{ base: "xs", md: "sm" }}
+                                    mr={{ base: "1", md: "10" }}
+                                >
+                                    {moment(apReq.timestamp.toDate()).fromNow()}
+                                </Text>
+                                <AccordionIcon />
+                            </AccordionButton>
+                        </h2>
+                        <AccordionPanel pb={4}>
+                            <Stack spacing={4}>
+                                <HStack spacing={4}>
+                                    <Tag
+                                    // variant="solid"
+                                    // colorScheme="gray"
+                                    >
+                                        {apReq["City"]}
+                                    </Tag>
+                                    <Tag
+                                    // variant="solid"
+                                    // colorScheme="gray"
+                                    >
+                                        {`Prefers ${apReq["Preferred day of week"]} ${apReq["Preferred time of day"]}s`}
+                                    </Tag>
+                                </HStack>
+                                <Text fontSize={16}>{apReq["Message"]}</Text>
+                                <Box>
+                                    <NextLink
+                                        href={`mailto:${apReq["Email address"]}`}
+                                        passHref
+                                    >
+                                        <Button
+                                            colorScheme="brand"
+                                            mr={5}
+                                            fontSize={{ base: 13, md: 16 }}
+                                            mt={{ base: 2, sm: 0 }}
+                                            w={{ base: "100%", sm: "initial" }}
+                                        >
+                                            <EmailIcon mr={2} />
+                                            {apReq["Email address"]}
+                                        </Button>
+                                    </NextLink>
+                                    <NextLink
+                                        href={`tel:${apReq["Phone number"]}`}
+                                        passHref
+                                    >
+                                        <Button
+                                            colorScheme="brand"
+                                            fontSize={{ base: 13, md: 16 }}
+                                            mt={{ base: 2, sm: 0 }}
+                                            w={{ base: "100%", sm: "initial" }}
+                                        >
+                                            <PhoneIcon mr={2} />
+                                            {apReq["Phone number"]}
+                                        </Button>
+                                    </NextLink>
+                                </Box>
+                            </Stack>
+                            {/* <NextLink
+                                            href={`mailto:${
+                                                appointmentRequest.data()[
+                                                    "Email address"
+                                                ]
+                                            }`}
+                                            passHref
+                                        >
+                                            <Link color="brand.500">
+                                                <EmailIcon mr={2} />
+                                                {
+                                                    appointmentRequest.data()[
+                                                        "Email address"
+                                                    ]
+                                                }
+                                            </Link>
+                                        </NextLink>
+                                    </Td>
+                                    <Td>
+                                        <NextLink
+                                            href={`tel:${
+                                                appointmentRequest.data()[
+                                                    "Phone number"
+                                                ]
+                                            }`}
+                                            passHref
+                                        >
+                                            <Link color="brand.500">
+                                                <PhoneIcon mr={2} />
+                                                {
+                                                    appointmentRequest.data()[
+                                                        "Phone number"
+                                                    ]
+                                                }
+                                            </Link>
+                                        </NextLink> */}
+                            {/* Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. */}
+                        </AccordionPanel>
+                    </AccordionItem>
+                ))}
+            </Accordion>
+            {/* <Box p="10" shadow="md" borderRadius={20} m={20}>
+                    <Flex justify={"space-between"}>
+                        <Avatar
+                            size={"xl"}
+                            name={
+                                apReq["First name"] + " " + apReq["Last name"]
+                            }
+                            bgColor={apReq.color + ".500"}
+                        ></Avatar>
+                        <Box>
+                            <Text fontSize="lg" fontWeight="bold">
+                                {apReq["First name"] + " " + apReq["Last name"]}
+                            </Text>
+                        </Box>
+                        <Box>
+                            <Button>Archive</Button>
+                            <Button ml={2} colorScheme="red" variant={"outline"} ><DeleteIcon/></Button>
+                        </Box>
+                    </Flex>
+                 </Box> */}
+
+            {/* <Modal isCentered isOpen={isMessageOpen} onClose={onMessageClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Message</ModalHeader>
@@ -435,10 +643,9 @@ const AppointmentTable = () => {
                         <Button colorScheme="brand" onClick={onMessageClose}>
                             Close
                         </Button>
-                        {/* <Button variant="ghost">Secondary Action</Button> */}
                     </ModalFooter>
                 </ModalContent>
-            </Modal>
+            </Modal> */}
         </>
     );
 };

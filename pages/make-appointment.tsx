@@ -15,7 +15,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { Field, FieldProps, Form, Formik } from "formik";
 import moment from "moment";
 import Head from "next/head";
@@ -63,7 +63,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                 "Orinda",
                 "Lafayette",
                 "Walnut Creek",
-                "Danville"
+                "Danville",
             ],
         },
         {
@@ -87,6 +87,127 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
             helperText: "Please describe your pet and their health challenge.",
         },
     ];
+    const handleTest = async () => {
+        // async () => {
+            const randomPick = (arr: any) => {
+                return arr[
+                    Math.floor(
+                        Math.random() *
+                        arr.length
+                    )
+                ];
+            };
+            // array of 20 random first names:
+            const firstNames = [
+                "John",
+                "Jane",
+                "Mary",
+                "Patricia",
+                "Linda",
+                "Barbara",
+                "Elizabeth",
+                "Jennifer",
+                "Maria",
+                "Susan",
+                "Margaret",
+                "Dorothy",
+                "Lisa",
+                "Nancy",
+                "Karen",
+                "Betty",
+                "Helen",
+                "Sandra",
+                "Donna",
+                "Carol",
+                "Ruth",
+                "Sharon",
+                "Michelle",
+                "Laura",
+                "Sarah",
+                "Kimberly",
+                "Deborah",
+                "Jessica",
+                "Shirley",
+                "Cynthia",
+                "Angela",
+                "Melissa",
+                "Brenda",
+                "Amy",
+                "Anna",
+                "Rebecca",
+                "Virginia",
+                "Kathleen",
+                "Pamela",
+                "Martha",
+                "Debra",
+                "Amanda",
+                "Stephanie",
+                "Carolyn",
+                "Christine",
+                "Marie",
+                "Janet",
+                "Catherine",
+                "Frances",
+                "Ann",
+                "Joyce",
+                "Diane",
+                "Alice",
+                "Julie",
+                "Heather",
+                "Teresa",
+                "Doris",
+                "Gloria",
+                "Evelyn",
+                "Jean",
+                "Cheryl",
+                "Mildred",
+                "Katherine",
+                "Joan",
+            ];
+
+            const appointment = {
+                "First name":
+                    randomPick(firstNames),
+                "Last name":
+                    randomPick(firstNames),
+                "Email address":
+                    randomPick(firstNames) +
+                    "@gmail.com",
+                "Phone number":
+                    "123-456-7890",
+                City: "Berkeley",
+                Message:
+                    "I have a pet with a health challenge.",
+                "Preferred day of week":
+                    randomPick([
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday",
+                        "Sunday",
+                    ]),
+                "Preferred time of day":
+                    randomPick([
+                        "Morning",
+                        "Afternoon",
+                    ]),
+            };
+            await addDoc(
+                collection(
+                    db,
+                    "appointment_requests"
+                ),
+                {
+                    timestamp:
+                        serverTimestamp(),
+                    color: randomPick(["red", "orange", "yellow", "green", "teal", "blue", "cyan", "purple", "pink"]),
+                    ...appointment,
+                }
+            );
+        // };
+    }
 
     return (
         <>
@@ -168,7 +289,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                         <Box p={{ base: "50px", lg: "120" }} fontSize={16}>
                             <Formik
                                 initialValues={{
-                                    "Date and Time": "",
                                     "First name": "",
                                     "Last name": "",
                                     "Email address": "",
@@ -180,18 +300,29 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                 }}
                                 onSubmit={async (values, actions) => {
                                     console.log(values);
-                                    try {
-                                        values["Date and Time"] =
-                                            moment().format(
-                                                "MM/DD/YYYY hh:mm:ss A"
-                                            );
+                                    // values: {
+                                    //     "Date and Time": string;
+                                    //     "First name": string;
+                                    //     "Last name": string;
+                                    //     "Email address": string;
+                                    //     "Phone number": string;
+                                    //     City: string;
+                                    //     Message: string;
+                                    //     "Preferred day of week": string;
+                                    //     "Preferred time of day": string;
+                                    // }
+                                    // create on object with fake values that follow the above type
 
+                                    try {
                                         await addDoc(
                                             collection(
                                                 db,
                                                 "appointment_requests"
                                             ),
-                                            values
+                                            {
+                                                timestamp: serverTimestamp(),
+                                                ...values,
+                                            }
                                         );
                                         actions.setSubmitting(false);
 
@@ -380,6 +511,12 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                             size={"lg"}
                                         >
                                             Submit
+                                        </Button>
+                                        <Button
+                                            ml={2}
+                                            onClick={handleTest}
+                                        >
+                                            Test
                                         </Button>
                                     </Form>
                                 )}

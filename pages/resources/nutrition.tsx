@@ -99,7 +99,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 environment of your pet are also factors in
                                 determining proper nutritional needs, such as
                                 calorie intake and frequency of feeding. It is
-                                also vital to make sure your dog or cat
+                                also vital to make sure that your dog or cat
                                 gets the necessary basic nutrients. A good diet
                                 must contain the proper balance of proteins,
                                 fats, carbohydrates, vitamins and minerals for
@@ -169,7 +169,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             <NextLink href={"/make-appointment"} passHref>
                                 <Button
                                     as={"a"}
-                                    fontSize={"16"}
+                                    fontSize={16}
                                     fontWeight={400}
                                     variant={"solid"}
                                     colorScheme={"brand"}

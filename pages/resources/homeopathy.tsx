@@ -83,7 +83,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                         <Divider borderColor="gray.200" />
                         <Box
                             px={{ base: "50px", lg: "120" }}
-                            fontSize={{ base: 15, sm: 16 }}
+                            fontSize={16}
                         >
                             <Text
                                 fontSize={25}
@@ -141,7 +141,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                             <Break />
                             <Box
                                 fontStyle={"italic"}
-                                fontSize={{ base: 15, sm: 16 }}
+                                fontSize={16}
                                 mx={[4, 20]}
                                 my={10}
                                 color="gray.600"
@@ -235,7 +235,8 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                             <NextLink href={"/make-appointment"} passHref>
                                 <Button
                                     as={"a"}
-                                    fontSize={{ base: 15, sm: 16 }}
+                                    fontSize={16}
+
                                     fontWeight={400}
                                     variant={"solid"}
                                     colorScheme={"brand"}
