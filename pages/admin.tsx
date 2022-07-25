@@ -1,61 +1,32 @@
-import { DeleteIcon, EmailIcon, PhoneIcon } from "@chakra-ui/icons";
+import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import {
     Accordion,
     AccordionButton,
     AccordionIcon,
     AccordionItem,
     AccordionPanel,
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogCloseButton,
-    AlertDialogContent,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogOverlay,
     Avatar,
     Badge,
     Box,
     Button,
-    Divider,
     Flex,
     HStack,
-    Link,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
     Spinner,
     Stack,
-    Tab,
-    Table,
-    TableContainer,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Tabs,
     Tag,
-    Tbody,
-    Td,
     Text,
-    Th,
-    Thead,
-    Tr,
     useDisclosure,
     useToast,
-    VStack,
 } from "@chakra-ui/react";
 import {
     collection,
-    deleteDoc,
     doc,
-    query,
     DocumentData,
     onSnapshot,
     orderBy,
+    query,
     QueryDocumentSnapshot,
+    updateDoc,
 } from "firebase/firestore";
 import moment from "moment";
 import NextLink from "next/link";
@@ -63,11 +34,13 @@ import React, { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
-import SimpleLink from "../components/SimpleLink";
 import { db } from "../constants/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { checkIsAdmin } from "../functions/checkIsAdmin";
-import randomPick from "../functions/randomPick";
+import {
+    AppointmentRequest,
+    AppointmentRequestFieldValues,
+} from "../types/request";
 
 interface AdminProps {}
 
@@ -100,7 +73,7 @@ const Admin: React.FC<AdminProps> = ({}) => {
     useEffect(() => {
         setTimeout(() => {
             setStatusFetched(true);
-        }, 1500);
+        }, 2000);
         //     if (!currentUser) {
         //         setStatusFetched(true);
 
@@ -137,6 +110,7 @@ const Admin: React.FC<AdminProps> = ({}) => {
                 withShadow={false}
                 bottomBorder={true}
             ></Navbar>
+            <Box h={"20"} w="100%" position={"fixed"} bgColor="brand.800"></Box>
 
             {!statusFetched ? (
                 <Box height="100vh">
@@ -149,12 +123,20 @@ const Admin: React.FC<AdminProps> = ({}) => {
                     </Flex>
                 </Box>
             ) : isAdmin ? (
-                <Box minH="100vh" bgColor={"gray.200"} py="120">
+                <Box
+                    minH="100vh"
+                    bgColor={{ base: "brand.800", lg: "gray.100" }}
+                    pt={{ base: "20", lg: "120" }}
+                    pb={{ base: "0", lg: "120" }}
+                >
                     <Flex alignItems="center" flexDirection={"column"}>
                         <Box
                             bgColor="white"
-                            width={"90%"}
-                            p={{ base: "0px", lg: "50" }}
+                            width={{ base: "100%", lg: "90%" }}
+                            shadow="md"
+                            zIndex="1"
+                                overflow={"hidden"}
+                                p={{ base: "0px", lg: "50" }}
                         >
                             <Box p={{ base: "50px", lg: "0" }}>
                                 <Text
@@ -239,7 +221,7 @@ const Admin: React.FC<AdminProps> = ({}) => {
 
 const AppointmentTable = () => {
     const [appointmentRequests, setAppointmentRequests] = React.useState<
-        QueryDocumentSnapshot[] | null
+        AppointmentRequest[] | null
     >(null);
 
     useEffect(() => {
@@ -249,16 +231,22 @@ const AppointmentTable = () => {
                 orderBy("timestamp", "desc")
             ),
             (querySnapshot) => {
-                const requests: any = [];
-                querySnapshot.forEach((doc) => {
-                    requests.push(doc.data());
-                });
+                // const requests: any = [];
+                let reqs = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                })) as AppointmentRequest[];
+                // typescript type of reqs:
+
+                //     forEach((doc) => {
+                //     requests.push({ id: doc.id, ...doc.data() });
+                // });
                 // requests.sort(function (a: any, b: any) {
                 //     // alert(a.timestamp + b.timestamp)
                 //     return a.timestamp + b.timestamp;
                 // });
-                console.log(requests);
-                setAppointmentRequests(requests);
+                console.log(reqs);
+                setAppointmentRequests(reqs);
             }
         );
         return unsub;
@@ -471,11 +459,28 @@ const AppointmentTable = () => {
                     apReq.data()
                 ))} */}
             {/* // JSON.stringify(apReq) */}
-            <Accordion defaultIndex={[0]} allowMultiple allowToggle>
-                {appointmentRequests?.map((apReq: DocumentData) => (
+
+            {/* {appointmentRequests?.length == 0 && (
+                <Text textAlign={"center"} mb={10}>
+                    No request yet :(
+                </Text>
+            )} */}
+            <Accordion defaultIndex={[0]} allowToggle>
+                {appointmentRequests?.map((apReq) => (
                     <AccordionItem key={apReq["First name"]}>
                         <h2>
-                            <AccordionButton>
+                            <AccordionButton
+                                onClick={async () => {
+                                    const readDocRef = doc(
+                                        db,
+                                        "appointment_requests",
+                                        apReq.id
+                                    );
+                                    await updateDoc(readDocRef, {
+                                        read: true,
+                                    });
+                                }}
+                            >
                                 <HStack
                                     spacing={{ base: 2, md: 5 }}
                                     flex="1"
@@ -501,15 +506,20 @@ const AppointmentTable = () => {
                                             " " +
                                             apReq["Last name"]}
                                     </Text>
-                                    {moment().diff(
-                                        moment(apReq.timestamp.toDate()),
-                                        "minutes"
-                                    ) <= 50 && (
-                                        <Badge colorScheme="green">New</Badge>
-                                    )}
+                                    {
+                                        // moment().diff(
+                                        // moment(apReq.timestamp.toDate()),
+                                        // "minutes"
+                                        // ) <= 120
+                                        !apReq.read && (
+                                            <Badge colorScheme="green">
+                                                New
+                                            </Badge>
+                                        )
+                                    }
                                 </HStack>
                                 <Text
-                                    fontSize={{ base: "xs", md: "sm" }}
+                                    fontSize={{ base: "14", md: "sm" }}
                                     mr={{ base: "1", md: "10" }}
                                 >
                                     {moment(apReq.timestamp.toDate()).fromNow()}

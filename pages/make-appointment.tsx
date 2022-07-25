@@ -200,6 +200,8 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                     "appointment_requests"
                 ),
                 {
+                    read:
+                    false,
                     timestamp:
                         serverTimestamp(),
                     color: randomPick(["red", "orange", "yellow", "green", "teal", "blue", "cyan", "purple", "pink"]),
