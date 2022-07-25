@@ -195,7 +195,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Box>
                 </Parallax>
             </Box>
-            <InView rootMargin="-200px" triggerOnce={false}>
+            <InView  triggerOnce={false}>
                 {({ inView, ref }) => {
                     return (
                         <>
@@ -204,7 +204,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 withShadow={true}
                                 bottomBorder={false}
                             />
-                            <Box height={{ base: 760, lg: "100vh" }}>
+                            <Box height={{ base: 700, lg: "100vh" }}>
                                 <Flex
                                     direction={{ base: "column", lg: "row" }}
                                     justify={"space-evenly"}
@@ -213,12 +213,15 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 >
                                     <Box
                                         alignSelf={"center"}
-                                        ref={ref}
-                                        transform={{ base: "translateY(70px)" }}
+
+                                        mt={20}
+                                        // transform={{ base: "translateY(70px)" }}
                                     >
                                         <Heading
                                             fontSize={{ base: "40", lg: "70" }}
                                             color="white"
+                                            ref={ref}
+
                                         >
                                             DR. NOEL'S ARK
                                         </Heading>
@@ -228,11 +231,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                                                 lg: "32.4",
                                             }}
                                             color="text.sub-heading"
+
                                         >
                                             NATURAL VETERINARY CARE
                                         </Text>
                                         <Text
-                                            mt="10"
+                                            mt={{base: "5", lg: "10"}}
                                             color={"gray.300"}
                                             w={{ base: "100%", lg: "35em" }}
                                             fontSize={{
@@ -248,7 +252,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             Walnut Creek, and Danville.
                                         </Text>
                                         <Text
-                                            mt="10"
+                                            mt={{base: "5", lg: "10"}}
                                             color={"gray.300"}
                                             w={{ base: "100%", lg: "35em" }}
                                             fontSize={{
@@ -271,7 +275,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                                 fontWeight={400}
                                                 variant={"solid"}
                                                 colorScheme={"brand"}
-                                                mt="10"
+                                                mt={{base: "5", lg: "10"}}
+
                                                 size={"lg"}
                                                 onClick={() => {
                                                     analytics.then(
