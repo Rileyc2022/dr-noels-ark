@@ -235,7 +235,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             mt="10"
                                             color={"gray.300"}
                                             w={{ base: "100%", lg: "35em" }}
-                                            fontSize={{ base: 16, sm: 18 }}
+                                            fontSize={{
+                                                base: "15",
+                                                lg: "18",
+                                            }}
                                         >
                                             Professional holisitic veterinary
                                             services available as house calls
@@ -249,7 +252,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             color={"gray.300"}
                                             w={{ base: "100%", lg: "35em" }}
                                             fontSize={{
-                                                base: "14",
+                                                base: "15",
                                                 lg: "18",
                                             }}
                                         >

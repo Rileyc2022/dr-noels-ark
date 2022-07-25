@@ -172,7 +172,7 @@ export default function WithSubnavigation({
                         </LinkOverlay>
                     </LinkBox>
                     <Box
-                        width={showCompanyName ? "18em" : "0px"}
+                        width={showCompanyName ? "initial" : "0px"}
                         opacity={showCompanyName ? "1" : "0"}
                         transition="1s ease"
                         overflow="hidden"
@@ -184,6 +184,7 @@ export default function WithSubnavigation({
                                     ml="30px"
                                     width={"100%"}
                                     whiteSpace="nowrap"
+                                    fontSize={{base: "2xl", lg: "3xl"}}
                                 >
                                     DR. NOEL'S ARK
                                 </Heading>
