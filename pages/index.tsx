@@ -204,7 +204,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 withShadow={true}
                                 bottomBorder={false}
                             />
-                            <Box height={{ base: 700, lg: "100vh" }}>
+                            <Box height={{ base: 760, lg: "100vh" }}>
                                 <Flex
                                     direction={{ base: "column", lg: "row" }}
                                     justify={"space-evenly"}
