@@ -139,7 +139,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 Benefits
                             </Text>
                             <Text>
-                                Many health problems such as digestive issues,
+                                Many health problems, such as digestive issues,
                                 chronic skin problems and ear infections
                                 dramatically improve or resolve simply by
                                 switching to a fresh food diet.
