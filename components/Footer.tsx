@@ -163,7 +163,7 @@ export default function LargeWithLogoCentered({
                     <Logo boxSize={10} fill={isLight ? "gray.400" : "white"} />
                 </Flex>
                 <Text pt={6} fontSize={"sm"} textAlign={"center"}>
-                    © 2022 Dr. Noel's Ark. All rights reserved
+                    Copyright © 2022 Dr. Noel's Ark. All rights reserved.
                 </Text>
             </Box>
         </Box>
