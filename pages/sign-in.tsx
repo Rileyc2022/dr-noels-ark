@@ -202,7 +202,7 @@ export default function SignIn() {
                                         >
                                             Sign In
                                         </Button>
-                                        <Text
+                                        {/* <Text
                                             w={"100"}
                                             textAlign="center"
                                             mt={5}
@@ -215,7 +215,7 @@ export default function SignIn() {
                                             >
                                                 Sign Up
                                             </Link>
-                                        </Text>
+                                        </Text> */}
                                     </Stack>
                                 </Form>
                             )}

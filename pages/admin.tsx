@@ -473,7 +473,7 @@ const AppointmentTable = () => {
             {/* // JSON.stringify(apReq) */}
             <Accordion defaultIndex={[0]} allowMultiple allowToggle>
                 {appointmentRequests?.map((apReq: DocumentData) => (
-                    <AccordionItem>
+                    <AccordionItem key={apReq["First name"]}>
                         <h2>
                             <AccordionButton>
                                 <HStack
