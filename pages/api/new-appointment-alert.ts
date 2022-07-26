@@ -34,7 +34,7 @@ export default function handler(
     // res.status(200).json({ name: "John Doe" });
     const msg = {
         to: "rileyc2022@gmail.com",
-        from: "drnoel@drnoels.ark",
+        from: "drnoel@drnoelsark.com",
         templateId: "d-dc0588bc1518404a9942817a5f656ddf",
         dynamicTemplateData: {
             name: emailData["First name"] + " " + emailData["First name"],
