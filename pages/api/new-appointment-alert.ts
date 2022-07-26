@@ -46,6 +46,12 @@ export default function handler(
             message: emailData.Message,
         },
     };
-    sgMail.send(msg);
-    res.status(200).send({ message: "Success" });
+    sgMail
+        .send(msg)
+        .then(() => {
+            res.status(200).send({ message: "Success" });
+        })
+        .catch((err) => {
+            res.status(500).send({ message: err });
+        });
 }
