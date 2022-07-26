@@ -195,7 +195,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Box>
                 </Parallax>
             </Box>
-            <InView  triggerOnce={false}>
+            <InView triggerOnce={false}>
                 {({ inView, ref }) => {
                     return (
                         <>
@@ -213,7 +213,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 >
                                     <Box
                                         alignSelf={"center"}
-
                                         mt={20}
                                         // transform={{ base: "translateY(70px)" }}
                                     >
@@ -221,7 +220,6 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             fontSize={{ base: "40", lg: "70" }}
                                             color="white"
                                             ref={ref}
-
                                         >
                                             DR. NOEL'S ARK
                                         </Heading>
@@ -231,12 +229,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                                                 lg: "32.4",
                                             }}
                                             color="text.sub-heading"
-
                                         >
                                             NATURAL VETERINARY CARE
                                         </Text>
                                         <Text
-                                            mt={{base: "5", lg: "10"}}
+                                            mt={{ base: "5", lg: "10" }}
                                             color={"gray.300"}
                                             w={{ base: "100%", lg: "35em" }}
                                             fontSize={{
@@ -244,7 +241,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                                 lg: "18",
                                             }}
                                         >
-                                            Professional holisitic veterinary
+                                            Professional holistic veterinary
                                             services available as house calls
                                             for cats and dogs in Berkeley,
                                             Albany, Kensington, Montclair,
@@ -252,7 +249,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             Walnut Creek, and Danville.
                                         </Text>
                                         <Text
-                                            mt={{base: "5", lg: "10"}}
+                                            mt={{ base: "5", lg: "10" }}
                                             color={"gray.300"}
                                             w={{ base: "100%", lg: "35em" }}
                                             fontSize={{
@@ -272,11 +269,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                                 // zIndex={10}
                                                 as={"a"}
                                                 fontSize={16}
-                                                fontWeight={400}
+                                                // fontWeight={400}
                                                 variant={"solid"}
                                                 colorScheme={"brand"}
-                                                mt={{base: "5", lg: "10"}}
-
+                                                mt={{ base: "5", lg: "10" }}
                                                 size={"lg"}
                                                 onClick={() => {
                                                     analytics.then(
@@ -705,12 +701,15 @@ const Home: React.FC<HomeProps> = ({}) => {
                             >
                                 Homeopathy
                             </Text>
-                            <Text my="5" fontSize={16}>
+                            {/* <Text my="5" fontSize={16}>
                                 Homeopathy is a medical system based on the
                                 belief that the body can cure itself. Using tiny
                                 amounts of natural substances, like plants and
                                 minerals, homeopathic remedies are able to
                                 stimulate the healing process.
+                            </Text> */}
+                            <Text my="5" fontSize={16}>
+                                Homeopathy is a holistic medical healing modality that works with the body to relieve symptoms, restore vitality, and improve overall health. Using tiny amounts of natural substances like plants and minerals, homeopathic remedies aim to stimulate the healing process. 
                             </Text>
                             <NextLink href="/resources/homeopathy" passHref>
                                 <Button
@@ -748,7 +747,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     placeholder="blur"
                                     src={NutritionPhoto}
                                     objectFit="cover"
-                                    alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"
+                                    alt="Dalmatian dog eating watermelon surrounded by other fruits and vegetables"
                                 />
                             </Box>
                         ) : (
@@ -773,7 +772,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         placeholder="blur"
                                         src={NutritionPhoto}
                                         objectFit="cover"
-                                        alt="Dalmatian dog eating watermelon surrounded by other fruits and vegatables"
+                                        alt="Dalmatian dog eating watermelon surrounded by other fruits and vegetables"
                                     />
                                 </Box>
                             </Parallax>
@@ -911,7 +910,7 @@ const Home: React.FC<HomeProps> = ({}) => {
             >
                 <Flex
                     direction={{ base: "column", lg: "row" }}
-                    width={{ base: "80%", lg: "100%" }}
+                    width={{ base: "90%", lg: "100%" }}
                     height={"100%"}
                     alignItems="center"
                     justify="space-evenly"
@@ -919,15 +918,15 @@ const Home: React.FC<HomeProps> = ({}) => {
                     <Box>
                         <Text
                             color="gray.200"
-                            fontSize={{ base: 20, lg: 30 }}
+                            fontSize={{ base: 20, sm: 35, lg: 30 }}
                             mb="8"
                             fontWeight={"bold"}
                         >
                             Why choose Dr. Noel's Ark?
                         </Text>
                         <List
-                            spacing={{base: 8, sm: 3}}
-                            fontSize={{ base: 18, sm: 20 }}
+                            spacing={{ base: 8, sm: 3 }}
+                            fontSize={{ base: 16, sm: 18, lg: 20 }}
                             color="gray.200"
                         >
                             <ListItem>
@@ -935,7 +934,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
-                                Non-toxic approach
+                                Gentle, non-toxic approach
                             </ListItem>
                             <ListItem>
                                 <ListIcon
@@ -1101,13 +1100,14 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Initial Consultation
                             </Text>
                             <Text my="5" fontSize="16">
-                                This is an in-person consultation for me to get to know
-                                your pet and the health issues needing to be
-                                addressed. The fee includes a review of
-                                previous medical records, and case research
-                                after the consultation to decide on the
-                                appropriate homeopathic remedy selection, and to
-                                determine nutritional supplements as well as
+                                This is an in-person consultation for me to get
+                                to know your pet and the health issues needing
+                                to be addressed. The fee includes a review of
+                                previous medical records, a physical
+                                examination, and case analysis after the
+                                consultation to decide on the appropriate
+                                homeopathic remedy selection, and to determine
+                                beneficial nutritional supplements as well as
                                 dietary changes. My house call visit takes 1
                                 hour.
                             </Text>

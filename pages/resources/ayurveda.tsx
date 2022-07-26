@@ -135,7 +135,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                                 <Button
                                     as={"a"}
                                     fontSize={16}
-                                    fontWeight={400}
+                                    // fontWeight={400}
                                     variant={"solid"}
                                     colorScheme={"brand"}
                                     mt="10"
@@ -171,7 +171,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                 </Flex>
 
             </Box>
-            <Text
+            {/* <Text
                 fontSize={14}
                 color="gray.500"
                 mt={20}
@@ -182,7 +182,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                 Always read and follow label directions. Claims based on
                 traditional homeopathic practice, not accepted medical evidence.
                 Not FDA evaluated.
-            </Text>
+            </Text> */}
             <Footer variant="dark"></Footer>
         </>
     );

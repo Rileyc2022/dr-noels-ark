@@ -81,10 +81,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                             </Box>
                         </Box>
                         <Divider borderColor="gray.200" />
-                        <Box
-                            px={{ base: "50px", lg: "120" }}
-                            fontSize={16}
-                        >
+                        <Box px={{ base: "50px", lg: "120" }} fontSize={16}>
                             <Text
                                 fontSize={25}
                                 fontWeight="bold"
@@ -95,41 +92,49 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 Overview
                             </Text>
                             <Text>
-                                Homeopathy is a holistic approach to healing (in
-                                humans and animals) that is based on one simple
-                                principle: 'like cures like'.
-                            </Text>
-                            <Break />
-                            <Text>
-                                The objective of homeopathic medicine in
-                                veterinary care is to trigger the animal’s
-                                natural defenses, and support its innate ability
-                                to heal itself.
+                                Homeopathy is a system of natural medicine, used
+                                by millions of people worldwide for more than
+                                200 years to achieve wellness. In the United
+                                States, it is a federally recognized form of
+                                medicine regulated by the FDA. The objective of
+                                homeopathy in veterinary care is to trigger the
+                                animal's natural defenses, and support its
+                                innate ability to heal itself.
                             </Text>
                             <Break />
                             <Text>
                                 The conventional (allopathic) approach to
-                                medicine seeks to name a disease and then
-                                prescribe multiple types of drugs to control or
-                                suppress the symptoms. If you have an infection,
-                                you take an antibiotic. If you have pain or
-                                inflammation, you take an anti-inflammatory. By
-                                contrast, the homeopathic veterinarian sees the
-                                pet's entire symptom picture as their own
-                                individual expression of illness, and will
-                                prescribe a homeopathic medicine to work with
-                                the animal's body in the healing process.
+                                medicine is to diagnose a disease, attach a name
+                                to it, then prescribe multiple types of
+                                pharmaceuticals to control or suppress the
+                                symptoms. If you have an infection, you take an
+                                antibiotic. If you have pain or inflammation,
+                                you take an anti-inflammatory. Accordingly, a
+                                conventional veterinarian treats isolated
+                                symptoms in an ill animal but does not address
+                                the underlying susceptibility of the animal to
+                                develop disease.
                             </Text>
 
                             <Break />
                             <Text>
-                                The homeopathic veterinarian sees the symptoms
-                                as clues that guide him/her to the exact
-                                homeopathic prescription that, when given to a
-                                sick animal, will stimulate a healing response
-                                with a goal of optimum health and vitality.
+                                By contrast, the homeopathic veterinarian sees
+                                the pet's entire unique symptom picture as their
+                                own individual expression of an illness. In
+                                consultation with the pet owner, the homeopathic
+                                veterinarian will identify physical, mental and
+                                emotional symptoms, exercise habits,
+                                environmental influences (which can include
+                                toxins as well as stressful situations), and
+                                diet. All previous medical records are reviewed
+                                so that the veterinarian has a thorough history
+                                of the animal. Once this information is
+                                obtained, the symptoms and behaviors act as
+                                clues that guide him/her to prescribe a
+                                homeopathic medicine to work with the animal's
+                                body in the healing process, with a goal of
+                                optimum health and vitality.
                             </Text>
-
                             <Break />
                             <Text>
                                 To better understand how homeopathy works, Dr.
@@ -143,7 +148,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 fontStyle={"italic"}
                                 fontSize={16}
                                 mx={[4, 20]}
-                                my={10}
+                                mt={10}
                                 color="gray.600"
                             >
                                 <Text>
@@ -180,7 +185,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                             >
                                 Benefits
                             </Text>
-                            <Text
+                            {/* <Text
                                 fontSize={18}
                                 fontWeight="bold"
                                 mb="3"
@@ -207,26 +212,29 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 color={"brand.400"}
                             >
                                 Unique advantages of homeopathy:
-                            </Text>
+                            </Text> */}
                             <UnorderedList spacing={2}>
                                 <ListItem>
                                     Increases the overall health of the pet,
                                     especially when treating a chronic disease.
                                 </ListItem>
                                 <ListItem>
-                                    Produces long lasting results.
+                                    Achieves long lasting results.
                                 </ListItem>
                                 <ListItem>
                                     Has none of the toxic side effects normally
-                                    associated with pharmaceuticals.
+                                    associated with conventional medications.
                                 </ListItem>
                                 <ListItem>
-                                    Is less expensive and safer than
-                                    conventional medicine, and can reduce
-                                    healthcare costs over the life of your pet.
+                                    Is more affordable and safer than
+                                    conventional medicine, and can reduce health
+                                    care cost over the life of your pet.
+                                </ListItem>
+                                <ListItem>
+                                    Environmentally friendly, cruelty free, and
+                                    derived from natural sources.
                                 </ListItem>
                             </UnorderedList>
-
                             <Text mt="10">
                                 If you are ready for a holistic approach to your
                                 pet's health problems, please contact Dr. Noel
@@ -236,8 +244,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 <Button
                                     as={"a"}
                                     fontSize={16}
-
-                                    fontWeight={400}
+                                    // fontWeight={400}
                                     variant={"solid"}
                                     colorScheme={"brand"}
                                     mt="10"
@@ -272,7 +279,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                     </Box>
                 </Flex>
             </Box>
-            <Text
+            {/* <Text
                 fontSize={14}
                 color="gray.500"
                 mt={20}
@@ -283,7 +290,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                 Always read and follow label directions. Claims based on
                 traditional homeopathic practice, not accepted medical evidence.
                 Not FDA evaluated.
-            </Text>
+            </Text> */}
             <Footer variant="dark"></Footer>
         </>
     );

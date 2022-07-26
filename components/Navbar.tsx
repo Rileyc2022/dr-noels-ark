@@ -282,7 +282,7 @@ export default function WithSubnavigation({
                             <Button
                                 as={"a"}
                                 fontSize={"16"}
-                                fontWeight={400}
+                                // fontWeight={400}
                                 variant={"solid"}
                                 colorScheme={"brand"}
                                 size={"md"}

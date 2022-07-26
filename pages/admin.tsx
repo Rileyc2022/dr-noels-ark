@@ -9,6 +9,7 @@ import {
     Badge,
     Box,
     Button,
+    Divider,
     Flex,
     HStack,
     Spinner,
@@ -73,7 +74,7 @@ const Admin: React.FC<AdminProps> = ({}) => {
     useEffect(() => {
         setTimeout(() => {
             setStatusFetched(true);
-        }, 2000);
+        }, 3000);
         //     if (!currentUser) {
         //         setStatusFetched(true);
 
@@ -135,14 +136,15 @@ const Admin: React.FC<AdminProps> = ({}) => {
                             width={{ base: "100%", lg: "90%" }}
                             shadow="md"
                             zIndex="1"
-                                overflow={"hidden"}
-                                p={{ base: "0px", lg: "50" }}
+                            overflow={"hidden"}
+                            p={{ base: "0px", lg: "50" }}
                         >
-                            <Box p={{ base: "50px", lg: "0" }}>
+                            <Box p={{ base: "50px", lg: "0" }} mb={50}>
                                 <Text
-                                    fontSize={{ base: 25, lg: 40 }}
+                                    fontSize={{ base: 20, lg: 25 }}
+                                    mb={2}
                                     color={"brand.500"}
-                                    fontWeight={"bold"}
+                                    // fontWeight={"bold"}
                                     textAlign={"center"}
                                 >
                                     Admin Portal
@@ -150,12 +152,12 @@ const Admin: React.FC<AdminProps> = ({}) => {
                                 {/* <Divider my={10} /> */}
                                 <Text
                                     color="brand.600"
-                                    fontSize={20}
-                                    my={10}
+                                    fontSize={{ base: 24, lg: 35 }}
                                     textAlign={{
                                         base: "center",
-                                        lg: "initial",
+                                        // lg: "initial",
                                     }}
+                                    fontWeight={"bold"}
                                 >
                                     Appointment Requests
                                 </Text>
@@ -222,7 +224,8 @@ const Admin: React.FC<AdminProps> = ({}) => {
 const AppointmentTable = () => {
     const [appointmentRequests, setAppointmentRequests] = React.useState<
         AppointmentRequest[] | null
-    >(null);
+        >(null);
+    
 
     useEffect(() => {
         const unsub = onSnapshot(
@@ -245,7 +248,7 @@ const AppointmentTable = () => {
                 //     // alert(a.timestamp + b.timestamp)
                 //     return a.timestamp + b.timestamp;
                 // });
-                console.log(reqs);
+                console.log("ping")
                 setAppointmentRequests(reqs);
             }
         );
@@ -266,6 +269,18 @@ const AppointmentTable = () => {
     } = useDisclosure();
     const cancelRef = useRef<HTMLButtonElement | null>(null);
 
+    const handleRead = async (id: string) => {
+        // async () => {
+            const readDocRef = doc(
+                db,
+                "appointment_requests",
+                id
+            );
+            await updateDoc(readDocRef, {
+                read: true,
+            });
+        // }
+    }
     return (
         <>
             {/* <TableContainer w="100%" fontSize={16} py="10">
@@ -460,26 +475,17 @@ const AppointmentTable = () => {
                 ))} */}
             {/* // JSON.stringify(apReq) */}
 
-            {/* {appointmentRequests?.length == 0 && (
-                <Text textAlign={"center"} mb={10}>
-                    No request yet :(
+            {appointmentRequests?.length == 0 && (
+                <Text textAlign={"center"} mb={10} fontSize={16}>
+                    No appointment requests yet.
                 </Text>
-            )} */}
+            )}
             <Accordion defaultIndex={[0]} allowToggle>
                 {appointmentRequests?.map((apReq) => (
-                    <AccordionItem key={apReq["First name"]}>
+                    <AccordionItem key={apReq.id}>
                         <h2>
                             <AccordionButton
-                                onClick={async () => {
-                                    const readDocRef = doc(
-                                        db,
-                                        "appointment_requests",
-                                        apReq.id
-                                    );
-                                    await updateDoc(readDocRef, {
-                                        read: true,
-                                    });
-                                }}
+                                onClick={()=>{handleRead(apReq.id)}}
                             >
                                 <HStack
                                     spacing={{ base: 2, md: 5 }}
@@ -511,11 +517,11 @@ const AppointmentTable = () => {
                                         // moment(apReq.timestamp.toDate()),
                                         // "minutes"
                                         // ) <= 120
-                                        !apReq.read && (
-                                            <Badge colorScheme="green">
+                                        // !apReq.read && (
+                                            <Badge display={!apReq.read ? "initial" : "none"} colorScheme="green">
                                                 New
                                             </Badge>
-                                        )
+                                        // )
                                     }
                                 </HStack>
                                 <Text

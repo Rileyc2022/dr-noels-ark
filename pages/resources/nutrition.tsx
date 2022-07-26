@@ -92,43 +92,41 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 Overview
                             </Text>
                             <Text>
-                                Your pet's nutritional needs change during its
-                                life due to growth and development, the aging
-                                process, and management of various medical
-                                conditions. The breed, size, energy level, and
-                                environment of your pet are also factors in
-                                determining proper nutritional needs, such as
-                                calorie intake and frequency of feeding. It is
-                                also vital to make sure that your dog or cat
-                                gets the necessary basic nutrients. A good diet
-                                must contain the proper balance of proteins,
-                                fats, carbohydrates, vitamins and minerals for
-                                optimal health.
+                                The nutritional needs of your pet change during
+                                its life due to growth and development, the
+                                aging process, and the management of various
+                                health challenges. Your pet's breed, size, level
+                                of energy, and the environment in which it lives
+                                are also factors in determining proper
+                                nutritional needs, such calorie intake and
+                                frequency of feeding. It is also vital to make
+                                sure that your cat or dog gets the basic
+                                nutrients, and that the diet is well balanced
+                                for optimal health.
                             </Text>
-
                             <Break />
                             <Text>
                                 Unfortunately, most of the dry and canned pet
-                                foods available today are the by-products of the
+                                foods on the market today are by-products of the
                                 human food industry, and are so highly processed
-                                that they do not resemble real food at all. A
-                                poor diet can compromise your pet's health and
-                                result in a myriad of food related illnesses.
+                                that they hardly resemble food at all. A poor
+                                diet can compromise your pet's health and result
+                                in numerous food related illnesses.
                             </Text>
-
                             <Break />
                             <Text>
-                                For this reason, I provide nutritional
-                                consultations (as part of the homeopathic
-                                consultation or separately) emphasizing whole
-                                food diets, with individualized diet
-                                recommendations to fit your pet's unique needs,
-                                as well as your lifestyle. Good nutritional
-                                support works synergistically with homeopathic
-                                treatment to restore and maintain your pet in
-                                ultimate health and vitality.
+                                For this reason, I provide nutritional advice as
+                                part of the homeopathic consultation,
+                                emphasizing whole food diets with individualized
+                                diet recommendations to fit your pet's unique
+                                needs, as well as lifestyle. Sometimes
+                                nutritional supplements are an integral part of
+                                the treatment plan if your pet's diet needs
+                                additional support. With proper nutritional and
+                                dietary care your pet can respond much better to
+                                homeopathic medicines, helping to restore and
+                                maintain ultimate health and vitality.
                             </Text>
-
                             <Text
                                 fontSize={25}
                                 fontWeight="bold"
@@ -139,27 +137,23 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 Benefits
                             </Text>
                             <Text>
-                                Many health problems, such as digestive issues,
-                                chronic skin problems and ear infections
-                                dramatically improve or resolve simply by
-                                switching to a fresh food diet.
+                                Good nutrition forms the foundation for good
+                                health. Many pets' health problems, such as
+                                chronic skin problems, ear infections, and
+                                digestive issues improve dramatically improve or
+                                resolve by changing to a fresh whole food diet.
                             </Text>
-
                             <Break />
                             <Text>
-                                Proper nutrition through a lifetime of your cat
-                                or dog provides many benefits:
+                                A lifetime of proper nutrition has many benefits for your cat or dog:
                             </Text>
-
                             <Break />
                             <UnorderedList spacing={2}>
-                                <ListItem>A strong immune system</ListItem>
-                                <ListItem>
-                                    Weight and disease management
-                                </ListItem>
-                                <ListItem>Good muscle tone</ListItem>
-                                <ListItem>Ease of digestion</ListItem>
-                                <ListItem>A healthy skin and coat</ListItem>
+                                <ListItem>Fewer illnesses due to stronger immune system</ListItem>
+                                <ListItem>A noticeably healthier skin and coat</ListItem>
+                                <ListItem>Improved muscle tone resulting in fewer injuries</ListItem>
+                                <ListItem>Better digestion and absorption of dietary nutrients</ListItem>
+                                <ListItem>Weight management</ListItem>
                             </UnorderedList>
                             <Text mt="10">
                                 If you are ready for a holistic approach to your
@@ -170,7 +164,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 <Button
                                     as={"a"}
                                     fontSize={16}
-                                    fontWeight={400}
+                                    // fontWeight={400}
                                     variant={"solid"}
                                     colorScheme={"brand"}
                                     mt="10"
@@ -205,7 +199,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                     </Box>
                 </Flex>
             </Box>
-            <Text
+            {/* <Text
                 fontSize={14}
                 color="gray.500"
                 mt={20}
@@ -216,7 +210,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                 Always read and follow label directions. Claims based on
                 traditional homeopathic practice, not accepted medical evidence.
                 Not FDA evaluated.
-            </Text>
+            </Text> */}
             <Footer variant="dark"></Footer>
         </>
     );

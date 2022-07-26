@@ -89,127 +89,123 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
     ];
     const handleTest = async () => {
         // async () => {
-            const randomPick = (arr: any) => {
-                return arr[
-                    Math.floor(
-                        Math.random() *
-                        arr.length
-                    )
-                ];
-            };
-            // array of 20 random first names:
-            const firstNames = [
-                "John",
-                "Jane",
-                "Mary",
-                "Patricia",
-                "Linda",
-                "Barbara",
-                "Elizabeth",
-                "Jennifer",
-                "Maria",
-                "Susan",
-                "Margaret",
-                "Dorothy",
-                "Lisa",
-                "Nancy",
-                "Karen",
-                "Betty",
-                "Helen",
-                "Sandra",
-                "Donna",
-                "Carol",
-                "Ruth",
-                "Sharon",
-                "Michelle",
-                "Laura",
-                "Sarah",
-                "Kimberly",
-                "Deborah",
-                "Jessica",
-                "Shirley",
-                "Cynthia",
-                "Angela",
-                "Melissa",
-                "Brenda",
-                "Amy",
-                "Anna",
-                "Rebecca",
-                "Virginia",
-                "Kathleen",
-                "Pamela",
-                "Martha",
-                "Debra",
-                "Amanda",
-                "Stephanie",
-                "Carolyn",
-                "Christine",
-                "Marie",
-                "Janet",
-                "Catherine",
-                "Frances",
-                "Ann",
-                "Joyce",
-                "Diane",
-                "Alice",
-                "Julie",
-                "Heather",
-                "Teresa",
-                "Doris",
-                "Gloria",
-                "Evelyn",
-                "Jean",
-                "Cheryl",
-                "Mildred",
-                "Katherine",
-                "Joan",
-            ];
+        const randomPick = (arr: any) => {
+            return arr[Math.floor(Math.random() * arr.length)];
+        };
+        // array of 20 random first names:
+        const firstNames = [
+            "John",
+            "Jane",
+            "Mary",
+            "Patricia",
+            "Linda",
+            "Barbara",
+            "Elizabeth",
+            "Jennifer",
+            "Maria",
+            "Susan",
+            "Margaret",
+            "Dorothy",
+            "Lisa",
+            "Nancy",
+            "Karen",
+            "Betty",
+            "Helen",
+            "Sandra",
+            "Donna",
+            "Carol",
+            "Ruth",
+            "Sharon",
+            "Michelle",
+            "Laura",
+            "Sarah",
+            "Kimberly",
+            "Deborah",
+            "Jessica",
+            "Shirley",
+            "Cynthia",
+            "Angela",
+            "Melissa",
+            "Brenda",
+            "Amy",
+            "Anna",
+            "Rebecca",
+            "Virginia",
+            "Kathleen",
+            "Pamela",
+            "Martha",
+            "Debra",
+            "Amanda",
+            "Stephanie",
+            "Carolyn",
+            "Christine",
+            "Marie",
+            "Janet",
+            "Catherine",
+            "Frances",
+            "Ann",
+            "Joyce",
+            "Diane",
+            "Alice",
+            "Julie",
+            "Heather",
+            "Teresa",
+            "Doris",
+            "Gloria",
+            "Evelyn",
+            "Jean",
+            "Cheryl",
+            "Mildred",
+            "Katherine",
+            "Joan",
+        ];
 
-            const appointment = {
-                "First name":
-                    randomPick(firstNames),
-                "Last name":
-                    randomPick(firstNames),
-                "Email address":
-                    randomPick(firstNames) +
-                    "@gmail.com",
-                "Phone number":
-                    "123-456-7890",
-                City: "Berkeley",
-                Message:
-                    "I have a pet with a health challenge.",
-                "Preferred day of week":
-                    randomPick([
-                        "Monday",
-                        "Tuesday",
-                        "Wednesday",
-                        "Thursday",
-                        "Friday",
-                        "Saturday",
-                        "Sunday",
-                    ]),
-                "Preferred time of day":
-                    randomPick([
-                        "Morning",
-                        "Afternoon",
-                    ]),
-            };
-            await addDoc(
-                collection(
-                    db,
-                    "appointment_requests"
-                ),
-                {
-                    read:
-                    false,
-                    timestamp:
-                        serverTimestamp(),
-                    color: randomPick(["red", "orange", "yellow", "green", "teal", "blue", "cyan", "purple", "pink"]),
-                    ...appointment,
-                }
-            );
+        const appointment = {
+            "First name": randomPick(firstNames),
+            "Last name": randomPick(firstNames),
+            "Email address": randomPick(firstNames) + "@gmail.com",
+            "Phone number": "123-456-7890",
+            City: "Berkeley",
+            Message: "I have a pet with a health challenge.",
+            "Preferred day of week": randomPick([
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+            ]),
+            "Preferred time of day": randomPick(["Morning", "Afternoon"]),
+        };
+        fetch("/api/new-appointment-alert", {
+            method: "POST",
+            headers: {
+                "Content-Type":
+                    "application/json",
+            },
+            body: JSON.stringify(
+                appointment
+            ),
+        });
+        await addDoc(collection(db, "appointment_requests"), {
+            read: false,
+            timestamp: serverTimestamp(),
+            color: randomPick([
+                "red",
+                "orange",
+                "yellow",
+                "green",
+                "teal",
+                "blue",
+                "cyan",
+                "purple",
+                "pink",
+            ]),
+            ...appointment,
+        });
         // };
-    }
+    };
 
     return (
         <>
@@ -328,6 +324,16 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                         );
                                         actions.setSubmitting(false);
 
+                                        fetch("/api/new-appointment-alert", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type":
+                                                    "application/json",
+                                            },
+                                            body: JSON.stringify(
+                                                values
+                                            ),
+                                        });
                                         toast({
                                             title: "Appointment Request Sent",
                                             description:
@@ -514,10 +520,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                         >
                                             Submit
                                         </Button>
-                                        <Button
-                                            ml={2}
-                                            onClick={handleTest}
-                                        >
+                                        <Button ml={2} onClick={handleTest}>
                                             Test
                                         </Button>
                                     </Form>
