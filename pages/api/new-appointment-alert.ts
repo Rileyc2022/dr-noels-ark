@@ -35,7 +35,7 @@ export default function handler(
     const msg = {
         to: "rileyc2022@gmail.com",
         from: "drnoel@drnoels.ark",
-        templateId: "d-dc0588bc1518404a9942817a5f656ddf ",
+        templateId: "d-dc0588bc1518404a9942817a5f656ddf",
         dynamicTemplateData: {
             name: emailData["First name"] + " " + emailData["First name"],
             email_address: emailData["Email address"],
