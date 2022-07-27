@@ -39,20 +39,29 @@ export default function LargeWithLogoCentered({
                     spacing={8}
                     px={10}
                 >
-                    <Stack align={"flex-start"} fontSize={{base: "sm", md: "initial"}}>
+                    <Stack
+                        align={"flex-start"}
+                        fontSize={{ base: "sm", md: "initial" }}
+                    >
                         <ListHeader>Quick Links</ListHeader>
 
                         <Link href={"#about"}>About Me</Link>
                         <Link href={"#services"}>Services</Link>
                         <Link href={"#pricing"}>Pricing</Link>
                     </Stack>
-                    <Stack align={"flex-start"} fontSize={{base: "sm", md: "initial"}}>
+                    <Stack
+                        align={"flex-start"}
+                        fontSize={{ base: "sm", md: "initial" }}
+                    >
                         <ListHeader>Read More</ListHeader>
                         <Link href={"/resources/homeopathy"}>Homeopathy</Link>
                         <Link href={"/resources/nutrition"}>Nutrition</Link>
                         <Link href={"/resources/ayurveda"}>Ayurveda</Link>
                     </Stack>
-                    <Stack align={"flex-start"} fontSize={{base: "sm", md: "initial"}}>
+                    <Stack
+                        align={"flex-start"}
+                        fontSize={{ base: "sm", md: "initial" }}
+                    >
                         <ListHeader>Contact Me</ListHeader>
                         <Link
                             // fontSize={"sm"}
@@ -67,7 +76,7 @@ export default function LargeWithLogoCentered({
                                 });
                             }}
                         >
-                            Make appointment
+                            Make Appointment
                         </Link>
                         <Link
                             // fontSize={"sm"}
@@ -104,8 +113,11 @@ export default function LargeWithLogoCentered({
                         fontSize={{ base: "sm", md: "initial" }}
                     >
                         <ListHeader>Portals</ListHeader>
-                        <Stack direction={{base: "column-reverse", sm: "row"}} spacing={2}>
-                            <Text mb={{base: "2", sm: "0"}}>Pet Portal</Text>
+                        <Stack
+                            direction={{ base: "column-reverse", sm: "row" }}
+                            spacing={2}
+                        >
+                            <Text mb={{ base: "2", sm: "0" }}>Pet Portal</Text>
                             <Tag
                                 // size={"sm"}
                                 bg={isLight ? "blue.300" : "blue.500"}
@@ -115,7 +127,10 @@ export default function LargeWithLogoCentered({
                                 Coming Soon
                             </Tag>
                         </Stack>
-                        <Stack direction={{base: "column-reverse", sm: "row"}} spacing={2}>
+                        <Stack
+                            direction={{ base: "column-reverse", sm: "row" }}
+                            spacing={2}
+                        >
                             <Link
                                 href={"/admin"}
                                 onClick={() => {

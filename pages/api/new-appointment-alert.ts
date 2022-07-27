@@ -37,7 +37,7 @@ export default function handler(
         from: "drnoel@drnoelsark.com",
         templateId: "d-dc0588bc1518404a9942817a5f656ddf",
         dynamicTemplateData: {
-            name: emailData["First name"] + " " + emailData["First name"],
+            name: emailData["First name"] + " " + emailData["Last name"],
             email_address: emailData["Email address"],
             phone_number: emailData["Phone number"],
             city: emailData.City,

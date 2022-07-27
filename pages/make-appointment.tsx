@@ -474,6 +474,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                                 {appointmentField.special ==
                                                                     "phone-number" && (
                                                                     <Input
+                                                                        {...field}
                                                                         id={
                                                                             appointmentField.label
                                                                         }

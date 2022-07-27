@@ -1248,7 +1248,29 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Flex>
                 </Stack>
             </Box>
-
+            <Flex justify={"center"} alignItems={"center"} bgColor="gray.100">
+                <NextLink href="/make-appointment" passHref>
+                    <Button
+                        as="a"
+                        colorScheme={"brand"}
+                        size="md"
+                        p="10"
+                        fontSize={"16"}
+                        my={20}
+                        onClick={() => {
+                            analytics.then((analytics) => {
+                                analytics &&
+                                    logEvent(
+                                        analytics,
+                                        "clicked_make_appointment"
+                                    );
+                            });
+                        }}
+                    >
+                        Make Appointment
+                    </Button>
+                </NextLink>
+            </Flex>
             <Footer variant="light" />
         </>
     );
