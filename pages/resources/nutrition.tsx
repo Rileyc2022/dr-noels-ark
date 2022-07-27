@@ -220,7 +220,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                 textAlign="center"
             >
                 Disclaimer: The information on this website should not be used
-                as specific veterinary advise, and is not a substitute for
+                as specific veterinary advice, and is not a substitute for
                 professional veterinary diagnosis or treatment.
             </Text>
             <Footer variant="dark"></Footer>
