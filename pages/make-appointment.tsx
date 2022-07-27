@@ -181,12 +181,9 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
         fetch("/api/new-appointment-alert", {
             method: "POST",
             headers: {
-                "Content-Type":
-                    "application/json",
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(
-                appointment
-            ),
+            body: JSON.stringify(appointment),
         });
         await addDoc(collection(db, "appointment_requests"), {
             read: false,
@@ -330,9 +327,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                 "Content-Type":
                                                     "application/json",
                                             },
-                                            body: JSON.stringify(
-                                                values
-                                            ),
+                                            body: JSON.stringify(values),
                                         });
                                         toast({
                                             title: "Appointment Request Sent",
@@ -479,7 +474,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                                 {appointmentField.special ==
                                                                     "phone-number" && (
                                                                     <Input
-                                                                        {...field}
                                                                         id={
                                                                             appointmentField.label
                                                                         }
@@ -512,7 +506,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                             )}
                                         </Stack>
                                         <Button
-                                            colorScheme="teal"
+                                            colorScheme="brand"
                                             disabled={props.isSubmitting}
                                             isLoading={props.isSubmitting}
                                             type="submit"
@@ -520,9 +514,9 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                         >
                                             Submit
                                         </Button>
-                                        <Button ml={2} onClick={handleTest}>
+                                        {/* <Button ml={2} onClick={handleTest}>
                                             Test
-                                        </Button>
+                                        </Button> */}
                                     </Form>
                                 )}
                             </Formik>

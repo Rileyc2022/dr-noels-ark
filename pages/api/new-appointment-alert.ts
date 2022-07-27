@@ -33,7 +33,7 @@ export default function handler(
 
     // res.status(200).json({ name: "John Doe" });
     const msg = {
-        to: "rileyc2022@gmail.com",
+        to: "drnoelsarknvc@gmail.com",
         from: "drnoel@drnoelsark.com",
         templateId: "d-dc0588bc1518404a9942817a5f656ddf",
         dynamicTemplateData: {
