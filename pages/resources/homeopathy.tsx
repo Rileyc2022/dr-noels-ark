@@ -111,7 +111,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 antibiotic. If you have pain or inflammation,
                                 you take an anti-inflammatory. Accordingly, a
                                 conventional veterinarian treats isolated
-                                symptoms in an ill animal but does not address
+                                symptoms in an ill animal, but does not address
                                 the underlying susceptibility of the animal to
                                 develop disease.
                             </Text>
