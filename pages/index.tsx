@@ -261,34 +261,36 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             appointment with New Zealand
                                             veterinarian, Dr. Noel Crymble.
                                         </Text>
-                                        <NextLink
-                                            href={"/make-appointment"}
-                                            passHref
-                                        >
-                                            <Button
-                                                // zIndex={10}
-                                                as={"a"}
-                                                fontSize={16}
-                                                // fontWeight={400}
-                                                variant={"solid"}
-                                                colorScheme={"brand"}
-                                                mt={{ base: "5", lg: "10" }}
-                                                size={"lg"}
-                                                onClick={() => {
-                                                    analytics.then(
-                                                        (analytics) => {
-                                                            analytics &&
-                                                                logEvent(
-                                                                    analytics,
-                                                                    "clicked_make_appointment"
-                                                                );
-                                                        }
-                                                    );
-                                                }}
+                                        {/* <Box mx={{ base: "auto", lg: "0" }}> */}
+                                            <NextLink
+                                                href={"/make-appointment"}
+                                                passHref
                                             >
-                                                Make Appointment
-                                            </Button>
-                                        </NextLink>
+                                                <Button
+                                                    // zIndex={10}
+                                                    as={"a"}
+                                                    fontSize={16}
+                                                    // fontWeight={400}
+                                                    variant={"solid"}
+                                                    colorScheme={"brand"}
+                                                    mt={{ base: "5", lg: "10" }}
+                                                    size={"lg"}
+                                                    onClick={() => {
+                                                        analytics.then(
+                                                            (analytics) => {
+                                                                analytics &&
+                                                                    logEvent(
+                                                                        analytics,
+                                                                        "clicked_make_appointment"
+                                                                    );
+                                                            }
+                                                        );
+                                                    }}
+                                                >
+                                                    Make Appointment
+                                                </Button>
+                                            </NextLink>
+                                        {/* </Box> */}
                                     </Box>
                                     <Box
                                         width={{

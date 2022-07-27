@@ -263,7 +263,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                         >
                             <Box>
                                 <Text
-                                    fontSize={{ base: 35, lg: 40 }}
+                                    fontSize={{ base: 32, lg: 40 }}
                                     color={"brand.500"}
                                     fontWeight={"bold"}
                                     textAlign={"center"}
@@ -331,8 +331,10 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                         });
                                         toast({
                                             title: "Appointment Request Sent",
+                                            // duration: 9000,
+                                            duration: 10000,
                                             description:
-                                                "Dr. Noel will be alerted to your request, and get back to you soon.",
+                                                "Dr. Noel will be alerted to your request and get back to you soon.",
                                             status: "success",
                                         });
                                         analytics.then((analytics) => {
@@ -393,6 +395,52 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                                     appointmentField.label +
                                                                     " is required.";
                                                             }
+
+                                                            if (
+                                                                appointmentField.label ===
+                                                                "Email address"
+                                                            ) {
+                                                                // check if email is valid
+                                                                if (
+                                                                    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                                                                        value
+                                                                    )
+                                                                ) {
+                                                                    error =
+                                                                        "Email address is invalid.";
+                                                                }
+                                                            }
+
+                                                            // if (
+                                                            //     appointmentField.label ===
+                                                            //     "Phone number"
+                                                            // ) {
+                                                            //     // check if phone number is valid
+                                                            //     if (
+                                                            //         !/^\d{3}-\d{3}-\d{4}$/.test(
+                                                            //             value
+                                                            //         )
+                                                            //     ) {
+                                                            //         error =
+                                                            //             "Phone number is invalid.";
+                                                            //     }
+                                                            // }
+
+                                                            // validate phone numbers to have format (xxx) xxx-xxxx
+                                                            if (
+                                                                appointmentField.label ===
+                                                                "Phone number"
+                                                            ) {
+                                                                if (
+                                                                    !/^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d+)\)?)[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?)+)(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i.test(
+                                                                        value
+                                                                    )
+                                                                ) {
+                                                                    error =
+                                                                        "Phone number is invalid.";
+                                                                }
+                                                            }
+                                                            //     // validate phone numbers to have format (xxx) xxx-xxxx
 
                                                             return error;
                                                         }}
@@ -507,6 +555,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                             )}
                                         </Stack>
                                         <Button
+                                            w={{base: "100%", lg: "initial"}}
                                             colorScheme="brand"
                                             disabled={props.isSubmitting}
                                             isLoading={props.isSubmitting}

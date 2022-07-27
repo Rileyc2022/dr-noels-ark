@@ -240,28 +240,32 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 pet's health problems, please contact Dr. Noel
                                 to schedule a consultation.
                             </Text>
-                            <NextLink href={"/make-appointment"} passHref>
-                                <Button
-                                    as={"a"}
-                                    fontSize={16}
-                                    // fontWeight={400}
-                                    variant={"solid"}
-                                    colorScheme={"brand"}
-                                    mt="10"
-                                    size={"lg"}
-                                    onClick={() => {
-                                        analytics.then((analytics) => {
-                                            analytics &&
-                                                logEvent(
-                                                    analytics,
-                                                    "clicked_make_appointment"
-                                                );
-                                        });
-                                    }}
-                                >
-                                    Make Appointment
-                                </Button>
-                            </NextLink>
+                            <Flex
+                                justify={{base: "center", md: "flex-start"}}
+                            >
+                                <NextLink href={"/make-appointment"} passHref>
+                                    <Button
+                                        as={"a"}
+                                        fontSize={16}
+                                        // fontWeight={400}
+                                        variant={"solid"}
+                                        colorScheme={"brand"}
+                                        mt="10"
+                                        size={"lg"}
+                                        onClick={() => {
+                                            analytics.then((analytics) => {
+                                                analytics &&
+                                                    logEvent(
+                                                        analytics,
+                                                        "clicked_make_appointment"
+                                                    );
+                                            });
+                                        }}
+                                    >
+                                        Make Appointment
+                                    </Button>
+                                </NextLink>
+                            </Flex>
                         </Box>
                         <Box
                             backgroundImage={
