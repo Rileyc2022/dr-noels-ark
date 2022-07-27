@@ -151,42 +151,44 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <g mask="url(#mask0_227_218)">
                                 <path
                                     d="M479.69 722.964L479.982 723.053L480.274 722.964L743.189 642.582H939.271L479.982 782.956L20.6932 642.582H216.775L479.69 722.964Z"
-                                    stroke="#1E4A50"
+                                    stroke={isBase ? "#388386" : "#64BBBE"}
                                     strokeWidth="2"
                                 />
                                 <path
                                     d="M501.051 692.271V591.276L666.413 641.683L501.051 692.271Z"
-                                    stroke="#1E4A50"
+                                    stroke={isBase ? "#388386" : "#64BBBE"}
+                                    // stroke="#1E4A50"
+
                                     strokeWidth="2"
                                 />
                                 <path
                                     d="M293.535 641.683L458.898 591.276V692.271L293.535 641.683Z"
-                                    stroke="#1E4A50"
+                                    stroke={isBase ? "#388386" : "#64BBBE"}
                                     strokeWidth="2"
                                 />
                                 <path
                                     d="M501.051 556.397V378.648L811.172 473.345L704.08 618.526L501.051 556.397Z"
-                                    stroke="#1E4A50"
+                                    stroke={isBase ? "#388386" : "#64BBBE"}
                                     strokeWidth="2"
                                 />
                                 <path
                                     d="M255.811 618.526L148.72 473.345L458.841 378.648V556.397L255.811 618.526Z"
-                                    stroke="#1E4A50"
+                                    stroke={isBase ? "#388386" : "#64BBBE"}
                                     strokeWidth="2"
                                 />
                                 <path
                                     d="M825.72 443.034L501.051 343.763V192.637L864.833 303.844L825.72 443.034Z"
-                                    stroke="#1E4A50"
+                                    stroke={isBase ? "#388386" : "#64BBBE"}
                                     strokeWidth="2"
                                 />
                                 <path
                                     d="M458.853 343.763L134.184 443.034L95.0709 303.844L458.853 192.637V343.763Z"
-                                    stroke="#1E4A50"
+                                    stroke={isBase ? "#388386" : "#64BBBE"}
                                     strokeWidth="2"
                                 />
                                 <path
                                     d="M480.283 151.416L479.99 151.326L479.698 151.416L268.385 215.994V112.713L479.99 48.0457L691.596 112.713V215.994L480.283 151.416Z"
-                                    stroke="#1E4A50"
+                                    stroke={isBase ? "#388386" : "#64BBBE"}
                                     strokeWidth="2"
                                 />
                             </g>
@@ -217,7 +219,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         // transform={{ base: "translateY(70px)" }}
                                     >
                                         <Heading
-                                            fontSize={{ base: "40", lg: "70" }}
+                                            fontSize={{
+                                                base: "30",
+                                                md: 40,
+                                                lg: "70",
+                                            }}
                                             color="white"
                                             ref={ref}
                                         >
@@ -262,34 +268,34 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             veterinarian, Dr. Noel Crymble.
                                         </Text>
                                         {/* <Box mx={{ base: "auto", lg: "0" }}> */}
-                                            <NextLink
-                                                href={"/make-appointment"}
-                                                passHref
+                                        <NextLink
+                                            href={"/make-appointment"}
+                                            passHref
+                                        >
+                                            <Button
+                                                // zIndex={10}
+                                                as={"a"}
+                                                fontSize={16}
+                                                // fontWeight={400}
+                                                variant={"solid"}
+                                                colorScheme={"brand"}
+                                                mt={{ base: "5", lg: "10" }}
+                                                size={"lg"}
+                                                onClick={() => {
+                                                    analytics.then(
+                                                        (analytics) => {
+                                                            analytics &&
+                                                                logEvent(
+                                                                    analytics,
+                                                                    "clicked_make_appointment"
+                                                                );
+                                                        }
+                                                    );
+                                                }}
                                             >
-                                                <Button
-                                                    // zIndex={10}
-                                                    as={"a"}
-                                                    fontSize={16}
-                                                    // fontWeight={400}
-                                                    variant={"solid"}
-                                                    colorScheme={"brand"}
-                                                    mt={{ base: "5", lg: "10" }}
-                                                    size={"lg"}
-                                                    onClick={() => {
-                                                        analytics.then(
-                                                            (analytics) => {
-                                                                analytics &&
-                                                                    logEvent(
-                                                                        analytics,
-                                                                        "clicked_make_appointment"
-                                                                    );
-                                                            }
-                                                        );
-                                                    }}
-                                                >
-                                                    Make Appointment
-                                                </Button>
-                                            </NextLink>
+                                                Make Appointment
+                                            </Button>
+                                        </NextLink>
                                         {/* </Box> */}
                                     </Box>
                                     <Box
@@ -453,40 +459,84 @@ const Home: React.FC<HomeProps> = ({}) => {
                             Memberships
                         </Text>
                         <Divider m="10px 0 20px 0" />
-                        <List>
-                            <ListItem>
-                                <ListIcon as={RiGroupFill} color="brand.400" />
+                        <Stack>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
                                 American Veterinary Medical Association
-                            </ListItem>
-                            <ListItem>
-                                <ListIcon as={RiGroupFill} color="brand.400" />
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
                                 California Veterinary Medical Association
-                            </ListItem>
-                            <ListItem>
-                                <ListIcon as={RiGroupFill} color="brand.400" />
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
                                 American Holistic Veterinary Association
-                            </ListItem>
-                            <ListItem>
-                                <ListIcon as={RiGroupFill} color="brand.400" />
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
                                 American Association of Feline Practitioners
-                            </ListItem>
-                            <ListItem>
-                                <ListIcon as={RiGroupFill} color="brand.400" />
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
                                 Academy of Veterinary Homeopathy
-                            </ListItem>
-                            <ListItem>
-                                <ListIcon as={RiGroupFill} color="brand.400" />
+                            </Flex>
+                            {/* <List> */}
+
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
                                 International Academy of Veterinary Homeopathy
-                            </ListItem>
-                            <ListItem>
-                                <ListIcon as={RiGroupFill} color="brand.400" />
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
                                 Bay Area Homeopathic Association
-                            </ListItem>
-                            <ListItem>
-                                <ListIcon as={RiGroupFill} color="brand.400" />
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
                                 New Zealand Veterinary Association
-                            </ListItem>
-                        </List>
+                            </Flex>
+
+                            {/* </List> */}
+                        </Stack>
                     </Box>
                     <Box
                         w={{ base: "80%", lg: "auto" }}
@@ -500,8 +550,36 @@ const Home: React.FC<HomeProps> = ({}) => {
                             Certificates
                         </Text>
                         <Divider m="10px 0 20px 0" />
-                        <List>
-                            <ListItem>
+                        <Stack>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
+                                Professional Course in Veterinary Homeopathy
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
+                                Advanced Course in Veterinary Homeopathy
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    marginTop={2.6}
+                                    mr={3}
+                                    as={RiGroupFill}
+                                    color="brand.400"
+                                />
+                                Fear Free Professional
+                            </Flex>
+
+                            {/* <ListItem>
                                 <ListIcon as={BsAwardFill} color="brand.400" />
                                 Professional Course in Veterinary Homeopathy
                             </ListItem>
@@ -512,8 +590,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <ListItem>
                                 <ListIcon as={BsAwardFill} color="brand.400" />
                                 Fear Free Professional
-                            </ListItem>
-                        </List>
+                            </ListItem> */}
+                        </Stack>
                     </Box>
                 </Flex>
                 <Flex
@@ -917,7 +995,7 @@ const Home: React.FC<HomeProps> = ({}) => {
             >
                 <Flex
                     direction={{ base: "column", lg: "row" }}
-                    width={{ base: "90%", lg: "100%" }}
+                    width={{ base: "80%", lg: "100%" }}
                     height={"100%"}
                     alignItems="center"
                     justify="space-evenly"
@@ -931,19 +1009,69 @@ const Home: React.FC<HomeProps> = ({}) => {
                         >
                             Why choose Dr. Noel's Ark?
                         </Text>
-                        <List
+                        <Stack
                             spacing={{ base: 8, sm: 3 }}
                             fontSize={{ base: 16, sm: 18, lg: 20 }}
                             color="gray.200"
+                            // stylePosition={"outside"}
                         >
-                            <ListItem>
-                                <ListIcon
+                            <Flex>
+                                <Icon
+                                    mt={1}
+                                    mr={3}
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
                                 Gentle, non-toxic approach
-                            </ListItem>
-                            <ListItem>
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    mt={1}
+                                    mr={3}
+                                    as={MdCheckCircle}
+                                    color="green.300"
+                                />
+                                No expensive drugs
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    mt={1}
+                                    mr={3}
+                                    as={MdCheckCircle}
+                                    color="green.300"
+                                />
+                                Personalized care (no cookie-cutter treatments)
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    mt={1}
+                                    mr={3}
+                                    as={MdCheckCircle}
+                                    color="green.300"
+                                />
+                                Less animal stress – all check-ups done in your
+                                home
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    mt={1}
+                                    mr={3}
+                                    as={MdCheckCircle}
+                                    color="green.300"
+                                />
+                                Focus on addressing causes of illness, not
+                                masking symptoms
+                            </Flex>
+                            <Flex>
+                                <Icon
+                                    mt={1}
+                                    mr={3}
+                                    as={MdCheckCircle}
+                                    color="green.300"
+                                />
+                                Goal to restore and maintain optimal health
+                            </Flex>
+                            {/* <ListItem>
                                 <ListIcon
                                     as={MdCheckCircle}
                                     color="green.300"
@@ -979,8 +1107,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     color="green.300"
                                 />
                                 Goal to restore and maintain optimal health
-                            </ListItem>
-                        </List>
+                            </ListItem> */}
+                        </Stack>
                     </Box>
                     <NextLink href="/make-appointment" passHref>
                         <Button
@@ -1167,7 +1295,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             </Text>
                             <Text my="5" fontSize="16">
                                 Follow up sessions by phone are set for 30
-                                minutes. Any additional time will be billed
+                                minutes. Any additional time is billed
                                 incrementally at an hourly rate of $160. I will
                                 check the progress your pet is making, and may
                                 provide a change of recommendation either to
@@ -1223,7 +1351,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                             </Text>
                             <Text my="5" fontSize="16">
                                 This fee covers a 1/2 hour in-person follow up
-                                visit to your home. House calls allow me to
+                                visit at your home. House calls allow me to
                                 better reassess your pet so that I can make
                                 well-informed recommendations.
                             </Text>
