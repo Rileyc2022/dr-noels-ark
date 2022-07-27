@@ -123,8 +123,8 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 nutritional supplements are an integral part of
                                 the treatment plan if your pet's diet needs
                                 additional support. With proper nutritional and
-                                dietary care, your pet can respond much better to
-                                homeopathic medicines, helping to restore and
+                                dietary care, your pet can respond much better
+                                to homeopathic medicines, helping to restore and
                                 maintain ultimate health and vitality.
                             </Text>
                             <Text
@@ -145,14 +145,26 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                             </Text>
                             <Break />
                             <Text>
-                                A lifetime of proper nutrition has many benefits for your cat or dog:
+                                A lifetime of proper nutrition has many benefits
+                                for your cat or dog:
                             </Text>
                             <Break />
                             <UnorderedList spacing={2}>
-                                <ListItem>Fewer illnesses due to stronger immune system</ListItem>
-                                <ListItem>A noticeably healthier skin and coat</ListItem>
-                                <ListItem>Improved muscle tone resulting in fewer injuries</ListItem>
-                                <ListItem>Better digestion and absorption of dietary nutrients</ListItem>
+                                <ListItem>
+                                    Fewer illnesses due to stronger immune
+                                    system
+                                </ListItem>
+                                <ListItem>
+                                    A noticeably healthier skin and coat
+                                </ListItem>
+                                <ListItem>
+                                    Improved muscle tone resulting in fewer
+                                    injuries
+                                </ListItem>
+                                <ListItem>
+                                    Better digestion and absorption of dietary
+                                    nutrients
+                                </ListItem>
                                 <ListItem>Weight management</ListItem>
                             </UnorderedList>
                             <Text mt="10">
@@ -199,7 +211,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                     </Box>
                 </Flex>
             </Box>
-            {/* <Text
+            <Text
                 fontSize={14}
                 color="gray.500"
                 mt={20}
@@ -207,10 +219,10 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                 mx={10}
                 textAlign="center"
             >
-                Always read and follow label directions. Claims based on
-                traditional homeopathic practice, not accepted medical evidence.
-                Not FDA evaluated.
-            </Text> */}
+                Disclaimer: The information on this website should not be used
+                as specific veterinary advise, and is not a substitute for
+                professional veterinary diagnosis or treatment.
+            </Text>
             <Footer variant="dark"></Footer>
         </>
     );

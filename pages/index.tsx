@@ -406,7 +406,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 I come from New Zealand where I received a
                                 Bachelor of Science degree in Animal Science,
                                 and a Bachelor of Veterinary Science from Massey
-                                University’s school of veterinary medicine in
+                                University's school of veterinary medicine in
                                 2013.
                             </Text>
                             <Text>
@@ -423,7 +423,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 My specialty is veterinary homeopathy, and I
                                 have completed the year-long Professional Course
                                 in Veterinary Homeopathy (the Academy of
-                                Veterinary Homeopathy’s qualifying course in the
+                                Veterinary Homeopathy's qualifying course in the
                                 United States), and the Advanced Course in
                                 Veterinary Homeopathy, taught by Dr. Richard
                                 Pitcairn, DVM. I strongly believe that

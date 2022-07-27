@@ -166,7 +166,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                     </Box>
                 </Flex>
             </Box>
-            {/* <Text
+            <Text
                 fontSize={14}
                 color="gray.500"
                 mt={20}
@@ -174,10 +174,10 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                 mx={10}
                 textAlign="center"
             >
-                Always read and follow label directions. Claims based on
-                traditional homeopathic practice, not accepted medical evidence.
-                Not FDA evaluated.
-            </Text> */}
+                Disclaimer: The information on this website should not be used
+                as specific veterinary advise, and is not a substitute for
+                professional veterinary diagnosis or treatment.
+            </Text>
             <Footer variant="dark"></Footer>
         </>
     );
