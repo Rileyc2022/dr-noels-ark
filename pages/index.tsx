@@ -360,7 +360,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     display={"flex"}
                     alignItems="center"
                     justify={"space-evenly"}
-                    mb="120"
+                    mb={{ base: "40px", lg: "120px" }}
                     flexDirection={{ base: "column", lg: "row" }}
                 >
                     <Box w={{ base: "80%", lg: "30%" }}>
@@ -709,7 +709,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 stimulate the healing process.
                             </Text> */}
                             <Text my="5" fontSize={16}>
-                                Homeopathy is a holistic medical healing modality that works with the body to relieve symptoms, restore vitality, and improve overall health. Using tiny amounts of natural substances like plants and minerals, homeopathic remedies aim to stimulate the healing process. 
+                                Homeopathy is a holistic medical healing
+                                modality that works with the body to relieve
+                                symptoms, restore vitality, and improve overall
+                                health. Using tiny amounts of natural substances
+                                like plants and minerals, homeopathic remedies
+                                aim to stimulate the healing process.
                             </Text>
                             <NextLink href="/resources/homeopathy" passHref>
                                 <Button
@@ -878,12 +883,12 @@ const Home: React.FC<HomeProps> = ({}) => {
                             <Text my="5" fontSize={16}>
                                 Ayurveda is a medicine system with historical
                                 roots in the Indian subcontinent, where around
-                                80% of the population report using it. Ayurveda
-                                is based on the belief that health and wellness
-                                depend on a delicate balance between the mind,
-                                body, and spirit. The main goal of Ayurvedic
-                                supplements for pets is to promote good health,
-                                and treatments are geared toward specific health
+                                80% of the population use it. Ayurveda is based
+                                on the belief that health and wellness depend on
+                                a delicate balance between the mind, body, and
+                                spirit. The main goal of Ayurvedic supplements
+                                for pets is to promote good health, and
+                                treatments are geared toward specific health
                                 problems.
                             </Text>
                             <NextLink href="/resources/ayurveda" passHref>
@@ -1104,8 +1109,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 to know your pet and the health issues needing
                                 to be addressed. The fee includes a review of
                                 previous medical records, a physical
-                                examination, and case analysis after the
-                                consultation to decide on the appropriate
+                                examination, as well as a case analysis after
+                                the consultation to decide on the appropriate
                                 homeopathic remedy selection, and to determine
                                 beneficial nutritional supplements as well as
                                 dietary changes. My house call visit takes 1

@@ -85,16 +85,12 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                             </Text>
                             <Text>
                                 The ancient healing science, Ayurveda,
-                                originated in India around 6000BC,
-                                perhaps making it the oldest form of medicine.
-                                Ayurveda is a Sanskrit word and literally means
-                                the "Science of Life".
+                                originated in India around 6000BC. Ayurveda is a
+                                Sanskrit word literally meaning the "Science of
+                                Life".
                             </Text>
-
                             <Break />
                             <Text>
-                                This system determines the quality and power of
-                                herbs according to the laws of nature, thus
                                 Ayurvedic herbs can be used collectively or
                                 individually to match the patient's conditions,
                                 either to prevent disease or restore balance and
@@ -128,8 +124,8 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                             <Break />
                             <Text>
                                 If you are ready for a holistic approach to your
-                                pet's health problems, please contact Dr.
-                                Noel to schedule a consultation.
+                                pet's health problems, please contact Dr. Noel
+                                to schedule a consultation.
                             </Text>
                             <NextLink href={"/make-appointment"} passHref>
                                 <Button
@@ -169,7 +165,6 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                         />
                     </Box>
                 </Flex>
-
             </Box>
             {/* <Text
                 fontSize={14}
