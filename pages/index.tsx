@@ -273,7 +273,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                             passHref
                                         >
                                             <Button
-                                                // zIndex={10}
+                                                zIndex={10}
                                                 as={"a"}
                                                 fontSize={16}
                                                 // fontWeight={400}
@@ -309,6 +309,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                         justifySelf={"flex-end"}
                                         mt="auto"
                                         fontSize={0}
+                                        zIndex={-10}
                                     >
                                         {/* {isBase ? ( */}
                                         <Image
