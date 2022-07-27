@@ -184,7 +184,7 @@ export default function WithSubnavigation({
                                     ml="30px"
                                     width={"100%"}
                                     whiteSpace="nowrap"
-                                    fontSize={{base: "2xl", lg: "3xl"}}
+                                    fontSize={{ base: "2xl", lg: "3xl" }}
                                 >
                                     DR. NOEL'S ARK
                                 </Heading>
@@ -318,7 +318,7 @@ export default function WithSubnavigation({
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
-                <MobileNav />
+                <MobileNav closeWholeMenu={onToggle} />
             </Collapse>
         </Box>
     );
@@ -332,7 +332,7 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
     return (
         <Stack direction={"row"} spacing={4} align="center">
             {NAV_ITEMS.map((navItem) => (
-                <Box key={navItem.label} >
+                <Box key={navItem.label}>
                     {navItem.href ? (
                         <SimpleLink
                             p={2}
@@ -359,12 +359,12 @@ const DesktopNav = ({ variant }: WithSubnavigationProps) => {
                                     _hover={{
                                         textDecoration: "none",
                                         color: linkHoverColor,
-                                        backgroundColor: "whiteAlpha.100"
+                                        backgroundColor: "whiteAlpha.100",
                                     }}
-                                        variant="link"
-                                        bgColor="transparent"
+                                    variant="link"
+                                    bgColor="transparent"
                                     // display="inline"
-                                        
+
                                     cursor="pointer"
                                     rightIcon={<ChevronDownIcon />}
                                 >
@@ -439,21 +439,47 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
     );
 };
 
-const MobileNav = () => {
+interface MobileNavProps {
+    closeWholeMenu: () => void;
+}
+
+const MobileNav: React.FC<MobileNavProps> = ({ closeWholeMenu }) => {
     return (
         <Stack bg={"white"} p={4} display={{ lg: "none" }}>
             {NAV_ITEMS.map((navItem) => (
-                <MobileNavItem key={navItem.label} {...navItem} />
+                <MobileNavItem
+                    closeWholeMenu={closeWholeMenu}
+                    key={navItem.label}
+                    {...navItem}
+                />
             ))}
         </Stack>
     );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+type MobileNavItemProps = NavItem & {
+    closeWholeMenu: () => void;
+};
+
+const MobileNavItem: React.FC<MobileNavItemProps> = ({
+    closeWholeMenu,
+    label,
+    children,
+    href,
+}) => {
     const { isOpen, onToggle } = useDisclosure();
 
     return (
-        <Stack spacing={4} onClick={children && onToggle}>
+        <Stack
+            spacing={4}
+            onClick={() => {
+                if (children) {
+                    onToggle();
+                } else if (href?.startsWith("/#")) {
+                    closeWholeMenu();
+                }
+            }}
+        >
             <Flex
                 py={2}
                 as={href ? SimpleLink : Flex}

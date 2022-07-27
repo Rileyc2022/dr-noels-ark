@@ -123,7 +123,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 nutritional supplements are an integral part of
                                 the treatment plan if your pet's diet needs
                                 additional support. With proper nutritional and
-                                dietary care your pet can respond much better to
+                                dietary care, your pet can respond much better to
                                 homeopathic medicines, helping to restore and
                                 maintain ultimate health and vitality.
                             </Text>

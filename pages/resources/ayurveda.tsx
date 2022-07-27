@@ -85,7 +85,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                             </Text>
                             <Text>
                                 The ancient healing science, Ayurveda,
-                                originated in India somewhere around 6000BC,
+                                originated in India around 6000BC,
                                 perhaps making it the oldest form of medicine.
                                 Ayurveda is a Sanskrit word and literally means
                                 the "Science of Life".
