@@ -140,7 +140,7 @@ const Nutrition: React.FC<NutritionProps> = ({}) => {
                                 Good nutrition forms the foundation for good
                                 health. Many pets' health problems, such as
                                 chronic skin problems, ear infections, and
-                                digestive issues improve dramatically improve or
+                                digestive issues dramatically improve or
                                 resolve by changing to a fresh whole food diet.
                             </Text>
                             <Break />

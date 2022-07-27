@@ -1049,7 +1049,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
-                                Less animal stress – all check-ups done in your
+                                Less animal stress – consultations can be done in your
                                 home
                             </Flex>
                             <Flex>
