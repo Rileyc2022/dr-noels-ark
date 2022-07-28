@@ -149,7 +149,7 @@ export default function WithSubnavigation({
                     : "none"
             }
             backdropFilter={showCompanyName ? "blur(5px)" : "blur(0px)"}
-            zIndex={2}
+            zIndex={20}
             shadow={
                 withShadow ? (showCompanyName ? "dark-lg" : "none") : "none"
             }
