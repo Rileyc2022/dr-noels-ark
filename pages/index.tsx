@@ -6,19 +6,16 @@ import {
     Flex,
     Heading,
     Icon,
-    List,
-    ListIcon,
-    ListItem,
     Stack,
     Text,
     useBreakpointValue,
+    VStack,
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
-import { BsAwardFill } from "react-icons/bs";
 import { MdCheckCircle } from "react-icons/md";
 import { RiGroupFill } from "react-icons/ri";
 import { InView } from "react-intersection-observer";
@@ -263,44 +260,96 @@ const Home: React.FC<HomeProps> = ({}) => {
                                                 lg: "18",
                                             }}
                                         >
-                                            Click below to request an
-                                            appointment with New Zealand
-                                            veterinarian, Dr. Noel Crymble.
+                                            Click below to make an appointment
+                                            or request a free consultation with
+                                            New Zealand veterinarian, Dr. Noel
+                                            Crymble.
                                         </Text>
-                                        {/* <Box mx={{ base: "auto", lg: "0" }}> */}
-                                        <NextLink
-                                            href={"/make-appointment"}
-                                            passHref
+                                        <Flex
+                                            flexDir={{
+                                                base: "column",
+                                                md: "row",
+                                            }}
                                         >
-                                            <Button
-                                                zIndex={10}
-                                                as={"a"}
-                                                fontSize={16}
-                                                // fontWeight={400}
-                                                variant={"solid"}
-                                                colorScheme={"brand"}
-                                                mt={{ base: "5", lg: "10" }}
-                                                size={"lg"}
-                                                onClick={() => {
-                                                    analytics.then(
-                                                        (analytics) => {
-                                                            analytics &&
-                                                                logEvent(
-                                                                    analytics,
-                                                                    "clicked_make_appointment"
-                                                                );
-                                                        }
-                                                    );
-                                                }}
+                                            <NextLink
+                                                href={"/#pricing"}
+                                                passHref
                                             >
-                                                Make Appointment
-                                            </Button>
-                                        </NextLink>
-                                        {/* </Box> */}
+                                                <Button
+                                                    w={{
+                                                        base: "100%",
+                                                        md: "initial",
+                                                    }}
+                                                    zIndex={10}
+                                                    as={"a"}
+                                                    fontSize={16}
+                                                    // fontWeight={400}
+                                                    // variant={"outline"}
+                                                    // colorScheme={"brand"}
+                                                    color="white"
+                                                    backgroundColor="#b58961"
+                                                    _hover={{
+                                                        backgroundColor:
+                                                            "#856447",
+                                                    }}
+                                                    _active={{
+                                                        backgroundColor:
+                                                            "#5d4631",
+                                                    }}
+                                                    mt={{ base: "5", lg: "10" }}
+                                                    mr={2}
+                                                    size={"lg"}
+                                                    onClick={() => {
+                                                        analytics.then(
+                                                            (analytics) => {
+                                                                analytics &&
+                                                                    logEvent(
+                                                                        analytics,
+                                                                        "clicked_free_15_minute_consultation"
+                                                                    );
+                                                            }
+                                                        );
+                                                    }}
+                                                >
+                                                    Request Free Consultation
+                                                </Button>
+                                            </NextLink>
+                                            <NextLink
+                                                href={"/make-appointment"}
+                                                passHref
+                                            >
+                                                <Button
+                                                    w={{
+                                                        base: "100%",
+                                                        md: "initial",
+                                                    }}
+                                                    zIndex={10}
+                                                    as={"a"}
+                                                    fontSize={16}
+                                                    variant={"solid"}
+                                                    colorScheme={"brand"}
+                                                    mt={{ base: "5", lg: "10" }}
+                                                    size={"lg"}
+                                                    onClick={() => {
+                                                        analytics.then(
+                                                            (analytics) => {
+                                                                analytics &&
+                                                                    logEvent(
+                                                                        analytics,
+                                                                        "clicked_make_appointment"
+                                                                    );
+                                                            }
+                                                        );
+                                                    }}
+                                                >
+                                                    Make Appointment
+                                                </Button>
+                                            </NextLink>
+                                        </Flex>
                                     </Box>
                                     <Box
                                         width={{
-                                            base: "65%",
+                                            base: "60%",
                                             md: "40%",
                                             lg: "58%",
                                             xl: "38%",
@@ -988,16 +1037,11 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Flex>
                 </Stack>
             </Box>
-            <Flex
-                height="90vh"
-                my="50"
-                justify={{ base: "center" }}
-                bgColor="brand.800"
-            >
+            <Flex py="16" justify={{ base: "center" }} bgColor="brand.800">
                 <Flex
                     direction={{ base: "column", lg: "row" }}
                     width={{ base: "80%", lg: "100%" }}
-                    height={"100%"}
+                    minHeight="90vh"
                     alignItems="center"
                     justify="space-evenly"
                 >
@@ -1050,8 +1094,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     as={MdCheckCircle}
                                     color="green.300"
                                 />
-                                Less animal stress – consultations can be done in your
-                                home
+                                Less animal stress – consultations can be done
+                                in your home
                             </Flex>
                             <Flex>
                                 <Icon
@@ -1111,27 +1155,78 @@ const Home: React.FC<HomeProps> = ({}) => {
                             </ListItem> */}
                         </Stack>
                     </Box>
-                    <NextLink href="/make-appointment" passHref>
-                        <Button
-                            as="a"
-                            colorScheme={"brand"}
-                            size="lg"
-                            p="10"
-                            fontSize={"16"}
-                            mt={{ base: "10", lg: "0" }}
-                            onClick={() => {
-                                analytics.then((analytics) => {
-                                    analytics &&
-                                        logEvent(
-                                            analytics,
-                                            "clicked_make_appointment"
-                                        );
-                                });
-                            }}
+                    <VStack spacing={4} mt={{ base: "16", md: 0 }}>
+                        <NextLink href={"/#pricing"} passHref>
+                            <Button
+                                w="100%"
+                                zIndex={10}
+                                as={"a"}
+                                fontSize={16}
+                                // fontWeight={400}
+                                variant={"solid"}
+                                color="white"
+                                backgroundColor="#b58961"
+                                _hover={{
+                                    backgroundColor: "#856447",
+                                }}
+                                _active={{
+                                    backgroundColor: "#5d4631",
+                                }}
+                                size="lg"
+                                p="10"
+                                // mt={{ base: "10", lg: "0" }}
+                                onClick={() => {
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "clicked_free_15_minute_consultation"
+                                            );
+                                    });
+                                }}
+                            >
+                                Request Free Consultation
+                            </Button>
+                        </NextLink>
+                        <Flex
+                            color="gray.400"
+                            justify={"stretch"}
+                            align="center"
+                            width={"100%"}
                         >
-                            Make Appointment
-                        </Button>
-                    </NextLink>
+                            <Divider
+                                orientation="horizontal"
+                                borderColor={"gray.400"}
+                            />
+                            <Text mx="2">or</Text>
+                            <Divider
+                                orientation="horizontal"
+                                borderColor={"gray.400"}
+                            />
+                        </Flex>
+                        <NextLink href="/make-appointment" passHref>
+                            <Button
+                                w="100%"
+                                as="a"
+                                colorScheme={"brand"}
+                                size="lg"
+                                p="10"
+                                fontSize={"16"}
+                                mt={{ base: "10", lg: "0" }}
+                                onClick={() => {
+                                    analytics.then((analytics) => {
+                                        analytics &&
+                                            logEvent(
+                                                analytics,
+                                                "clicked_make_appointment"
+                                            );
+                                    });
+                                }}
+                            >
+                                Make Appointment
+                            </Button>
+                        </NextLink>
+                    </VStack>
                 </Flex>
             </Flex>
             <Box fontSize={0}>
@@ -1216,7 +1311,94 @@ const Home: React.FC<HomeProps> = ({}) => {
                     </Text>
                     <Box width="10" height="1" bg={"brand.600"}></Box>
                 </Box>
-                <Stack align={"center"} spacing="17">
+                <Stack align={"center"} spacing="20">
+                    <Flex
+                        w={{ base: "80%", lg: "80%" }}
+                        flexDirection={{ base: "column", lg: "row" }}
+                        align="center"
+                        justify={"space-evenly"}
+                    >
+                        <Box
+                            mr={{ base: "0px", lg: "40px" }}
+                            w={{ base: "auto", lg: "70%" }}
+                            mt={{ base: "30px", lg: "0px" }}
+                        >
+                            <Text
+                                fontSize={20}
+                                color="#b58961"
+                                fontWeight={"bold"}
+                            >
+                                Complimentary Introductory Consultation
+                            </Text>
+                            <Text mt="5" fontSize="16">
+                                I offer a free 15-minute consultation to help
+                                you better understand my approach to natural
+                                veterinary treatment, and to see if it is a fit
+                                for you and your pet. This is a chance for you
+                                to discuss some of the key health concerns and
+                                goals concerning your pet. No veterinary medical
+                                advice or recommendations will be given during
+                                this session.
+                            </Text>
+                            <Text my="5" fontSize="16">
+                                There is no obligation for you to book an
+                                appointment following the free consultation.
+                                However, for me to advise you on the appropriate
+                                homeopathic and nutritional treatment to address
+                                your pet's health issues, you will need to make
+                                an appointment with me for an initial
+                                consultation in your home.
+                            </Text>
+                            <NextLink
+                                href="/make-appointment?for=free-15-minute-consultation"
+                                passHref
+                            >
+                                <Button
+                                    my={6}
+                                    color="white"
+                                    backgroundColor="#b58961"
+                                    _hover={{
+                                        backgroundColor: "#856447",
+                                    }}
+                                    _active={{
+                                        backgroundColor: "#5d4631",
+                                    }}
+                                    // variant="outline"
+                                    rightIcon={<ArrowForwardIcon />}
+                                >
+                                    Request Free Consultation
+                                </Button>
+                            </NextLink>
+                        </Box>
+
+                        {!isBase && (
+                            <Divider
+                                orientation={"vertical"}
+                                borderColor={"#b58961"}
+                                borderWidth=""
+                                height="100"
+                            ></Divider>
+                        )}
+                        {!isBase && (
+                            <Text
+                                fontSize={20}
+                                fontWeight="bold"
+                                color="#b58961"
+                                ml={{ base: "0", lg: "40px" }}
+                                w={{ base: "auto", lg: "15%" }}
+                                my={{ base: "30px", lg: "0px" }}
+                            >
+                                Free
+                            </Text>
+                        )}
+                    </Flex>
+                    {isBase && (
+                        <Divider
+                            orientation={"horizontal"}
+                            borderColor={"#b58961"}
+                            borderWidth=""
+                        ></Divider>
+                    )}
                     <Flex
                         w={{ base: "80%", lg: "80%" }}
                         flexDirection={{ base: "column", lg: "row" }}
@@ -1233,7 +1415,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 color="brand.500"
                                 fontWeight={"bold"}
                             >
-                                Initial Consultation
+                                {"Initial Consultation" +
+                                    (isBase ? " — $320" : "")}
                             </Text>
                             <Text my="5" fontSize="16">
                                 This is an in-person consultation for me to get
@@ -1247,6 +1430,28 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 dietary changes. My house call visit takes 1
                                 hour.
                             </Text>
+                            <NextLink
+                                href="/make-appointment?for=initial-consultation"
+                                passHref
+                            >
+                                <Button
+                                    my={6}
+                                    colorScheme={"brand"}
+                                    // variant="outline"
+                                    rightIcon={<ArrowForwardIcon />}
+                                    onClick={() => {
+                                        analytics.then((analytics) => {
+                                            analytics &&
+                                                logEvent(
+                                                    analytics,
+                                                    "clicked_make_initial_consultation_appointment"
+                                                );
+                                        });
+                                    }}
+                                >
+                                    Make Appointment
+                                </Button>
+                            </NextLink>
                         </Box>
 
                         {!isBase && (
@@ -1257,17 +1462,18 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 height="100"
                             ></Divider>
                         )}
-
-                        <Text
-                            fontSize="30px"
-                            fontWeight="extrabold"
-                            color="brand.500"
-                            ml={{ base: "0", lg: "40px" }}
-                            w={{ base: "auto", lg: "15%" }}
-                            my={{ base: "30px", lg: "0px" }}
-                        >
-                            $320
-                        </Text>
+                        {!isBase && (
+                            <Text
+                                fontSize={20}
+                                fontWeight="bold"
+                                color="brand.500"
+                                ml={{ base: "0", lg: "40px" }}
+                                w={{ base: "auto", lg: "15%" }}
+                                my={{ base: "30px", lg: "0px" }}
+                            >
+                                $320
+                            </Text>
+                        )}
                     </Flex>
                     {isBase && (
                         <Divider
@@ -1292,17 +1498,39 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 color="brand.500"
                                 fontWeight={"bold"}
                             >
-                                Phone Follow up
+                                {"Phone Follow-Up" + (isBase ? " — $80" : "")}
                             </Text>
                             <Text my="5" fontSize="16">
-                                Follow up sessions by phone are set for 30
+                                Follow-up sessions by phone are set for 30
                                 minutes. Any additional time is billed
                                 incrementally at an hourly rate of $160. I will
                                 check the progress your pet is making, and may
                                 provide a change of recommendation either to
-                                remedy, supplements, or diet. Phone follow ups
+                                remedy, supplements, or diet. Phone follow-ups
                                 are recommended every 4 to 6 weeks.
                             </Text>
+                            <NextLink
+                                href="/make-appointment?for=phone-follow-up"
+                                passHref
+                            >
+                                <Button
+                                    my={6}
+                                    colorScheme={"brand"}
+                                    // variant="outline"
+                                    rightIcon={<ArrowForwardIcon />}
+                                    onClick={() => {
+                                        analytics.then((analytics) => {
+                                            analytics &&
+                                                logEvent(
+                                                    analytics,
+                                                    "clicked_make_phone_follow_up_appointment"
+                                                );
+                                        });
+                                    }}
+                                >
+                                    Make Appointment
+                                </Button>
+                            </NextLink>
                         </Box>
 
                         {!isBase && (
@@ -1313,17 +1541,18 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 height="100"
                             ></Divider>
                         )}
-
-                        <Text
-                            fontSize="30px"
-                            fontWeight="extrabold"
-                            color="brand.500"
-                            ml={{ base: "0", lg: "40px" }}
-                            w={{ base: "auto", lg: "15%" }}
-                            my={{ base: "30px", lg: "0px" }}
-                        >
-                            $80
-                        </Text>
+                        {!isBase && (
+                            <Text
+                                fontSize={20}
+                                fontWeight="bold"
+                                color="brand.500"
+                                ml={{ base: "0", lg: "40px" }}
+                                w={{ base: "auto", lg: "15%" }}
+                                my={{ base: "30px", lg: "0px" }}
+                            >
+                                $80
+                            </Text>
+                        )}
                     </Flex>
                     {isBase && (
                         <Divider
@@ -1348,7 +1577,8 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 color="brand.500"
                                 fontWeight={"bold"}
                             >
-                                House Call Follow Up
+                                {"House Call Follow Up" +
+                                    (isBase ? " — $160" : "")}
                             </Text>
                             <Text my="5" fontSize="16">
                                 This fee covers a 1/2 hour in-person follow up
@@ -1356,6 +1586,28 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 better reassess your pet so that I can make
                                 well-informed recommendations.
                             </Text>
+                            <NextLink
+                                href="/make-appointment?for=house-call-follow-up"
+                                passHref
+                            >
+                                <Button
+                                    my={6}
+                                    colorScheme={"brand"}
+                                    // variant="outline"
+                                    rightIcon={<ArrowForwardIcon />}
+                                    onClick={() => {
+                                        analytics.then((analytics) => {
+                                            analytics &&
+                                                logEvent(
+                                                    analytics,
+                                                    "clicked_make_house_call_follow_up_appointment"
+                                                );
+                                        });
+                                    }}
+                                >
+                                    Make Appointment
+                                </Button>
+                            </NextLink>
                         </Box>
                         {!isBase && (
                             <Divider
@@ -1365,21 +1617,22 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 height="100"
                             ></Divider>
                         )}
-
-                        <Text
-                            fontSize="30px"
-                            fontWeight="extrabold"
-                            color="brand.500"
-                            ml={{ base: "0", lg: "40px" }}
-                            w={{ base: "auto", lg: "15%" }}
-                            my={{ base: "30px", lg: "0px" }}
-                        >
-                            $160
-                        </Text>
+                        {!isBase && (
+                            <Text
+                                fontSize={20}
+                                fontWeight="bold"
+                                color="brand.500"
+                                ml={{ base: "0", lg: "40px" }}
+                                w={{ base: "auto", lg: "15%" }}
+                                my={{ base: "30px", lg: "0px" }}
+                            >
+                                $160
+                            </Text>
+                        )}
                     </Flex>
                 </Stack>
             </Box>
-            <Flex justify={"center"} alignItems={"center"} bgColor="gray.100">
+            {/* <Flex justify={"center"} alignItems={"center"} bgColor="gray.100">
                 <NextLink href="/make-appointment" passHref>
                     <Button
                         as="a"
@@ -1401,7 +1654,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         Make Appointment
                     </Button>
                 </NextLink>
-            </Flex>
+            </Flex> */}
             <Footer variant="light" />
         </>
     );

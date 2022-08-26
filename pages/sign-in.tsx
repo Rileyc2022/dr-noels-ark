@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
 import {
     Box,
     Button,
@@ -10,7 +8,6 @@ import {
     Input,
     InputGroup,
     InputRightElement,
-    Link,
     Stack,
     Text,
     useToast,
@@ -18,10 +15,12 @@ import {
 import { logEvent } from "firebase/analytics";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { analytics } from "../constants/firebase";
+import { useAuth } from "../contexts/AuthContext";
 import { checkIsAdmin } from "../functions/checkIsAdmin";
-import HeadTemplate from "../components/HeadTemplate";
 
 export default function SignIn() {
     const emailRef = useRef<HTMLInputElement>(null);

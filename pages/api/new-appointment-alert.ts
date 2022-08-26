@@ -7,6 +7,11 @@ sgMail.setApiKey(
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 type AppointmentRequestFieldValues = {
+    "Appointment Type":
+        | "Free 15-Minute Consultation"
+        | "Initial Consultation"
+        | "Phone Follow-Up"
+        | "House Call Follow-Up";
     "First name": string;
     "Last name": string;
     "Email address": string;
@@ -37,12 +42,23 @@ export default function handler(
         from: "drnoel@drnoelsark.com",
         templateId: "d-dc0588bc1518404a9942817a5f656ddf",
         dynamicTemplateData: {
+            appointment_type: emailData["Appointment Type"],
             name: emailData["First name"] + " " + emailData["Last name"],
             email_address: emailData["Email address"],
             phone_number: emailData["Phone number"],
             city: emailData.City,
-            preferred_day_of_week: emailData["Preferred day of week"],
-            preferred_time_of_day: emailData["Preferred time of day"],
+            time_and_day_preferences: `${
+                (emailData["Preferred day of week"] ||
+                    emailData["Preferred time of day"]) &&
+                `Prefers ${
+                    emailData["Preferred day of week"] &&
+                    emailData["Preferred day of week"] +
+                        (emailData["Preferred time of day"] ? " " : "s")
+                }${
+                    emailData["Preferred time of day"] &&
+                    emailData["Preferred time of day"] + "s"
+                }`
+            }`,
             message: emailData.Message,
         },
     };

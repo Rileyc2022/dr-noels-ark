@@ -9,39 +9,31 @@ import {
     Badge,
     Box,
     Button,
-    Divider,
     Flex,
     HStack,
     Spinner,
     Stack,
     Tag,
     Text,
-    useDisclosure,
-    useToast,
 } from "@chakra-ui/react";
 import {
     collection,
     doc,
-    DocumentData,
     onSnapshot,
     orderBy,
     query,
-    QueryDocumentSnapshot,
     updateDoc,
 } from "firebase/firestore";
 import moment from "moment";
 import NextLink from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
 import { db } from "../constants/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { checkIsAdmin } from "../functions/checkIsAdmin";
-import {
-    AppointmentRequest,
-    AppointmentRequestFieldValues,
-} from "../types/request";
+import { AppointmentRequest } from "../types/request";
 
 interface AdminProps {}
 
@@ -49,6 +41,7 @@ const Admin: React.FC<AdminProps> = ({}) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [statusFetched, setStatusFetched] = useState(false);
     const { currentUser } = useAuth();
+
     // useEffect(() => {
     //     if (currentUser) {
     //         checkIsAdmin(currentUser).then((isAdmin) => {
@@ -224,8 +217,7 @@ const Admin: React.FC<AdminProps> = ({}) => {
 const AppointmentTable = () => {
     const [appointmentRequests, setAppointmentRequests] = React.useState<
         AppointmentRequest[] | null
-        >(null);
-    
+    >(null);
 
     useEffect(() => {
         const unsub = onSnapshot(
@@ -248,39 +240,35 @@ const AppointmentTable = () => {
                 //     // alert(a.timestamp + b.timestamp)
                 //     return a.timestamp + b.timestamp;
                 // });
-                console.log("ping")
+                console.log("ping");
                 setAppointmentRequests(reqs);
             }
         );
         return unsub;
     }, []);
 
-    const {
-        isOpen: isMessageOpen,
-        onOpen: onMessageOpen,
-        onClose: onMessageClose,
-    } = useDisclosure();
-    const [message, setMessage] = useState("");
-    const toast = useToast();
-    const {
-        isOpen: isDeleteOpen,
-        onOpen: onDeleteOpen,
-        onClose: onDeleteClose,
-    } = useDisclosure();
-    const cancelRef = useRef<HTMLButtonElement | null>(null);
+    // const {
+    //     isOpen: isMessageOpen,
+    //     onOpen: onMessageOpen,
+    //     onClose: onMessageClose,
+    // } = useDisclosure();
+    // const [message, setMessage] = useState("");
+    // const toast = useToast();
+    // const {
+    //     isOpen: isDeleteOpen,
+    //     onOpen: onDeleteOpen,
+    //     onClose: onDeleteClose,
+    // } = useDisclosure();
+    // const cancelRef = useRef<HTMLButtonElement | null>(null);
 
     const handleRead = async (id: string) => {
         // async () => {
-            const readDocRef = doc(
-                db,
-                "appointment_requests",
-                id
-            );
-            await updateDoc(readDocRef, {
-                read: true,
-            });
+        const readDocRef = doc(db, "appointment_requests", id);
+        await updateDoc(readDocRef, {
+            read: true,
+        });
         // }
-    }
+    };
     return (
         <>
             {/* <TableContainer w="100%" fontSize={16} py="10">
@@ -485,7 +473,9 @@ const AppointmentTable = () => {
                     <AccordionItem key={apReq.id}>
                         <h2>
                             <AccordionButton
-                                onClick={()=>{handleRead(apReq.id)}}
+                                onClick={() => {
+                                    handleRead(apReq.id);
+                                }}
                             >
                                 <HStack
                                     spacing={{ base: 2, md: 5 }}
@@ -500,7 +490,7 @@ const AppointmentTable = () => {
                                             " " +
                                             apReq["Last name"]
                                         }
-                                        bgColor={apReq.color + ".500"}
+                                        // bgColor={apReq.color + ".500"}
                                         color="white"
                                         fontWeight={"bold"}
                                     ></Avatar>
@@ -518,9 +508,14 @@ const AppointmentTable = () => {
                                         // "minutes"
                                         // ) <= 120
                                         // !apReq.read && (
-                                            <Badge display={!apReq.read ? "initial" : "none"} colorScheme="green">
-                                                New
-                                            </Badge>
+                                        <Badge
+                                            display={
+                                                !apReq.read ? "initial" : "none"
+                                            }
+                                            colorScheme="green"
+                                        >
+                                            New
+                                        </Badge>
                                         // )
                                     }
                                 </HStack>
@@ -536,18 +531,91 @@ const AppointmentTable = () => {
                         <AccordionPanel pb={4}>
                             <Stack spacing={4}>
                                 <HStack spacing={4}>
+                                    {/* {apReq["Appointment Type"] ==
+                                        "Free 15-Minute Consultation" && (
+                                        <Tag
+                                            variant="solid"
+                                            colorScheme="green"
+                                        >
+                                            Free 15-Minute Consultation
+                                        </Tag>
+                                    )} */}
+                                    {apReq["Appointment Type"] && (
+                                        <Tag
+                                            // variant="solid"
+                                            backgroundColor={
+                                                apReq["Appointment Type"] ==
+                                                "Free 15-Minute Consultation"
+                                                    ? "#b58961"
+                                                    : "gray.100"
+                                            }
+                                            color={
+                                                apReq["Appointment Type"] ==
+                                                "Free 15-Minute Consultation"
+                                                    ? "white"
+                                                    : "initial"
+                                            }
+                                            // colorScheme={
+                                            //     apReq["Appointment Type"] ==
+                                            //     "Initial Consultation"
+                                            //         ? "blue"
+                                            //         : apReq[
+                                            //               "Appointment Type"
+                                            //           ] == "Phone Follow-Up"
+                                            //         ? "orange"
+                                            //         : apReq[
+                                            //               "Appointment Type"
+                                            //           ] ==
+                                            //           "House Call Follow-Up"
+                                            //         ? "teal"
+                                            //         : "gray"
+                                            // }
+                                        >
+                                            {apReq["Appointment Type"]}
+                                        </Tag>
+                                    )}
                                     <Tag
                                     // variant="solid"
                                     // colorScheme="gray"
                                     >
                                         {apReq["City"]}
                                     </Tag>
-                                    <Tag
-                                    // variant="solid"
-                                    // colorScheme="gray"
-                                    >
-                                        {`Prefers ${apReq["Preferred day of week"]} ${apReq["Preferred time of day"]}s`}
-                                    </Tag>
+                                    {(apReq["Preferred time of day"] ||
+                                        apReq["Preferred day of week"]) && (
+                                        <Tag
+                                        // variant="solid"
+                                        // colorScheme="gray"
+                                        >
+                                            {`${
+                                                (apReq[
+                                                    "Preferred day of week"
+                                                ] ||
+                                                    apReq[
+                                                        "Preferred time of day"
+                                                    ]) &&
+                                                `Prefers ${
+                                                    apReq[
+                                                        "Preferred day of week"
+                                                    ] &&
+                                                    apReq[
+                                                        "Preferred day of week"
+                                                    ] +
+                                                        (apReq[
+                                                            "Preferred time of day"
+                                                        ]
+                                                            ? " "
+                                                            : "s")
+                                                }${
+                                                    apReq[
+                                                        "Preferred time of day"
+                                                    ] &&
+                                                    apReq[
+                                                        "Preferred time of day"
+                                                    ] + "s"
+                                                }`
+                                            }`}
+                                        </Tag>
+                                    )}
                                 </HStack>
                                 <Text fontSize={16}>{apReq["Message"]}</Text>
                                 <Box>

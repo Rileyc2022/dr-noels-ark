@@ -65,18 +65,15 @@ export default function LargeWithLogoCentered({
                         <ListHeader>Contact Me</ListHeader>
                         <Link
                             // fontSize={"sm"}
-                            href={"/make-appointment"}
+                            href="mailto:drnoel@drnoelsark.com"
                             onClick={() => {
                                 analytics.then((analytics) => {
                                     analytics &&
-                                        logEvent(
-                                            analytics,
-                                            "clicked_make_appointment"
-                                        );
+                                        logEvent(analytics, "clicked_email");
                                 });
                             }}
                         >
-                            Make Appointment
+                            drnoel@drnoelsark.com
                         </Link>
                         <Link
                             // fontSize={"sm"}

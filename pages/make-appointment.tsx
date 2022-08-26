@@ -1,7 +1,6 @@
 import {
     Box,
     Button,
-    Divider,
     Flex,
     FormControl,
     FormErrorMessage,
@@ -17,20 +16,33 @@ import {
 import { logEvent } from "firebase/analytics";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { Field, FieldProps, Form, Formik } from "formik";
-import moment from "moment";
-import Head from "next/head";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import HeadTemplate from "../components/HeadTemplate";
 import Navbar from "../components/Navbar";
+import SimpleLink from "../components/SimpleLink";
 import { analytics, db } from "../constants/firebase";
 
 interface MakeAppointmentProps {}
 
 const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
     const toast = useToast();
-
+    const { query } = useRouter();
+    const [appointmentType, setAppointmentType] = useState(query.for);
     const appointmentFields = [
+        {
+            label: "Appointment Type",
+            required: true,
+            special: "dropdown",
+            helperText: "See pricing for details.",
+            options: [
+                "Free 15-Minute Consultation",
+                "Initial Consultation",
+                "Phone Follow-Up",
+                "House Call Follow-Up",
+            ],
+        },
         {
             label: "First name",
             required: true,
@@ -68,17 +80,19 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
         },
         {
             label: "Preferred day of week",
-            required: true,
+            required: false,
             special: "dropdown",
+            helperText: "Optional",
 
             options: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         },
         {
             label: "Preferred time of day",
-            required: true,
+            required: false,
             special: "dropdown",
+            helperText: "Optional",
 
-            options: ["Morning", "Afternoon", "No preference"],
+            options: ["Morning", "Afternoon"],
         },
         {
             label: "Message",
@@ -188,17 +202,17 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
         await addDoc(collection(db, "appointment_requests"), {
             read: false,
             timestamp: serverTimestamp(),
-            color: randomPick([
-                "red",
-                "orange",
-                "yellow",
-                "green",
-                "teal",
-                "blue",
-                "cyan",
-                "purple",
-                "pink",
-            ]),
+            // color: randomPick([
+            //     "red",
+            //     "orange",
+            //     "yellow",
+            //     "green",
+            //     "teal",
+            //     "blue",
+            //     "cyan",
+            //     "purple",
+            //     "pink",
+            // ]),
             ...appointment,
         });
         // };
@@ -268,7 +282,13 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                     fontWeight={"bold"}
                                     textAlign={"center"}
                                 >
-                                    Make Appointment
+                                    {appointmentType ==
+                                        "free-15-minute-consultation" ||
+                                    appointmentType ==
+                                        "Free 15-Minute Consultation"
+                                        ? "Request Free 15-Minute Consultation"
+                                        : "Make Appointment"}
+                                    {/* {appointmentType} */}
                                 </Text>
                                 <Text
                                     fontSize={{ base: 20, lg: 25 }}
@@ -284,14 +304,27 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                         <Box p={{ base: "50px", lg: "120" }} fontSize={16}>
                             <Formik
                                 initialValues={{
+                                    "Appointment Type":
+                                        query.for ==
+                                        "free-15-minute-consultation"
+                                            ? "Free 15-Minute Consultation"
+                                            : query.for ==
+                                              "initial-consultation"
+                                            ? "Initial Consultation"
+                                            : query.for == "phone-follow-up"
+                                            ? "Phone Follow-Up"
+                                            : query.for ==
+                                              "house-call-follow-up"
+                                            ? "House Call Follow-Up"
+                                            : "",
                                     "First name": "",
                                     "Last name": "",
                                     "Email address": "",
                                     "Phone number": "",
                                     City: "",
-                                    Message: "",
                                     "Preferred day of week": "",
                                     "Preferred time of day": "",
+                                    Message: "",
                                 }}
                                 onSubmit={async (values, actions) => {
                                     console.log(values);
@@ -386,10 +419,20 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                             let error;
 
                                                             if (
-                                                                !value ||
-                                                                (value &&
-                                                                    value.length ==
-                                                                        0)
+                                                                appointmentField.label ==
+                                                                "Appointment Type"
+                                                            ) {
+                                                                setAppointmentType(
+                                                                    value
+                                                                );
+                                                            }
+
+                                                            if (
+                                                                appointmentField.required &&
+                                                                (!value ||
+                                                                    (value &&
+                                                                        value.length ==
+                                                                            0))
                                                             ) {
                                                                 error =
                                                                     appointmentField.label +
@@ -471,7 +514,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                                         appointmentField.label
                                                                     }
                                                                 </FormLabel>
-
                                                                 {!appointmentField.special && (
                                                                     <Input
                                                                         {...field}
@@ -518,7 +560,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                                         }
                                                                     ></Textarea>
                                                                 )}
-
                                                                 {appointmentField.special ==
                                                                     "phone-number" && (
                                                                     <Input
@@ -531,7 +572,6 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                                         }
                                                                     ></Input>
                                                                 )}
-
                                                                 <FormErrorMessage>
                                                                     {
                                                                         form
@@ -541,11 +581,29 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                                                         ]
                                                                     }
                                                                 </FormErrorMessage>
-                                                                {appointmentField.helperText && (
+                                                                {appointmentField.helperText !==
+                                                                    "See pricing for details." && (
                                                                     <FormHelperText>
                                                                         {
                                                                             appointmentField.helperText
                                                                         }
+                                                                    </FormHelperText>
+                                                                )}
+                                                                {appointmentField.helperText ==
+                                                                    "See pricing for details." && (
+                                                                    <FormHelperText>
+                                                                        See{" "}
+                                                                        <SimpleLink
+                                                                            color="brand.500"
+                                                                            textDecoration={
+                                                                                "underline"
+                                                                            }
+                                                                            href="/#pricing"
+                                                                        >
+                                                                            pricing
+                                                                        </SimpleLink>{" "}
+                                                                        for
+                                                                        details.
                                                                     </FormHelperText>
                                                                 )}
                                                             </FormControl>
@@ -555,7 +613,7 @@ const MakeAppointment: React.FC<MakeAppointmentProps> = ({}) => {
                                             )}
                                         </Stack>
                                         <Button
-                                            w={{base: "100%", lg: "initial"}}
+                                            w={{ base: "100%", lg: "initial" }}
                                             colorScheme="brand"
                                             disabled={props.isSubmitting}
                                             isLoading={props.isSubmitting}

@@ -241,7 +241,7 @@ const Homeopathy: React.FC<HomeopathyProps> = ({}) => {
                                 to schedule a consultation.
                             </Text>
                             <Flex
-                                justify={{base: "center", md: "flex-start"}}
+                                justify={{ base: "center", md: "flex-start" }}
                             >
                                 <NextLink href={"/make-appointment"} passHref>
                                     <Button

@@ -128,7 +128,7 @@ const Ayurveda: React.FC<AyurvedaProps> = ({}) => {
                                 to schedule a consultation.
                             </Text>
                             <Flex
-                                justify={{base: "center", md: "flex-start"}}
+                                justify={{ base: "center", md: "flex-start" }}
                             >
                                 <NextLink href={"/make-appointment"} passHref>
                                     <Button
