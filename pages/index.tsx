@@ -1328,10 +1328,10 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 color="#b58961"
                                 fontWeight={"bold"}
                             >
-                                Complimentary Introductory Consultation
+                                Complimentary Introductory Phone Consultation
                             </Text>
                             <Text mt="5" fontSize="16">
-                                I offer a free 15-minute consultation to help
+                                I offer a free 15-minute phone consultation to help
                                 you better understand my approach to natural
                                 veterinary treatment, and to see if it is a fit
                                 for you and your pet. This is a chance for you
