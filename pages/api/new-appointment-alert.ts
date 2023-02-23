@@ -1,7 +1,7 @@
 import sgMail from "@sendgrid/mail";
 import type { NextApiRequest, NextApiResponse } from "next";
 sgMail.setApiKey(
-    "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"
+    process.env.SENDGRID_KEY as string
 );
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
