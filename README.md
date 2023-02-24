@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Overview
 
-## Getting Started
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [create-next-app](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and written in [Typescript](https://www.typescriptlang.org/).
 
-First, run the development server:
+My goal with this project was to help my father's veterinary company attract new clients.
+To achieve this, I developed a distinct, functional, and eye-catching website that allows visitors to learn about his experience and the range of services he offers before easily registering for appointments. When visitors sign up, they trigger an email notification, and their information is displayed in a private admin portal. This portal shows their contact information, location, and their pet's problems, making it easy to follow up with them and grow the business.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Technical Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The website includes a range of features such as user authorization, sign up forms, an admin portal, page routing, scroll animations, and a fully responsive UI. Additionally, the site is built with accessibility, SEO, and performance in mind, achieving a perfect 100 in all Chrome Lighthouse sections.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![Chrome Lighthouse Screenshot](README_Assets/chrome_lighthouse_screenshot.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## View website
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can view the live website at [drnoelsark.com](https://www.drnoelsark.com)!
