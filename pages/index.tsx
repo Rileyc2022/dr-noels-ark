@@ -9,13 +9,14 @@ import {
     Stack,
     Text,
     useBreakpointValue,
-    VStack,
+    VStack
 } from "@chakra-ui/react";
 import { logEvent } from "firebase/analytics";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
+import { BsAwardFill } from "react-icons/bs";
 import { MdCheckCircle } from "react-icons/md";
 import { RiGroupFill } from "react-icons/ri";
 import { InView } from "react-intersection-observer";
@@ -74,7 +75,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                 url="https://www.drnoelsark.com"
             />
 
-            <Box zIndex={-10} position="absolute" height={"100vh"} w="100%">
+            <Box zIndex={-100} position="absolute" height={"100vh"} w="100%">
                 <Parallax
                     style={{
                         // position: "relative",
@@ -429,7 +430,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 fontSize={0}
                             >
                                 <Image
-                                    placeholder="blur"
+                                    // placeholder="blur"
                                     src={LookingAtCatPhoto}
                                     alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                 ></Image>
@@ -446,7 +447,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     fontSize={0}
                                 >
                                     <Image
-                                        placeholder="blur"
+                                        // placeholder="blur"
                                         src={LookingAtCatPhoto}
                                         alt="Dr. Noel Crymble sitting down, smiling, holding fluffy gray cat"
                                     ></Image>
@@ -605,7 +606,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 <Icon
                                     marginTop={2.6}
                                     mr={3}
-                                    as={RiGroupFill}
+                                    as={BsAwardFill}
                                     color="brand.400"
                                 />
                                 Professional Course in Veterinary Homeopathy
@@ -614,7 +615,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 <Icon
                                     marginTop={2.6}
                                     mr={3}
-                                    as={RiGroupFill}
+                                    as={BsAwardFill}
                                     color="brand.400"
                                 />
                                 Advanced Course in Veterinary Homeopathy
@@ -623,7 +624,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 <Icon
                                     marginTop={2.6}
                                     mr={3}
-                                    as={RiGroupFill}
+                                    as={BsAwardFill}
                                     color="brand.400"
                                 />
                                 Fear Free Professional
@@ -664,7 +665,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // bgRepeat="no-repeat"
                     >
                         <Image
-                            placeholder="blur"
+                            // placeholder="blur"
                             src={FearFreeCertifiedPhoto}
                             alt="Fear Free Certification"
                         />
@@ -679,7 +680,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                         // bgRepeat="no-repeat"
                     >
                         <Image
-                            placeholder="blur"
+                            // placeholder="blur"
                             src={FearFreeLogoPhoto}
                             alt="Fear Free Certification Logo"
                         />
@@ -698,7 +699,7 @@ const Home: React.FC<HomeProps> = ({}) => {
 
                     <Box
                         position={"relative"}
-                        h="80vh"
+                        h="400px"
                         w="100%"
                         clipPath={"inset(0)"}
                         zIndex="-20"
@@ -715,7 +716,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 layout="fill"
                                 // height="100vh"
                                 objectFit="cover"
-                                placeholder="blur"
+                                // placeholder="blur"
                                 src={ForestMountainsPhoto}
                                 alt="Forest and mountains background"
                                 sizes="800px"
@@ -732,15 +733,17 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     className="aspect-[2/1]"
                     //     style={{ height: "100vh" }}
                     // />
-                    <Box zIndex={-100} position="relative">
+                    <Box zIndex={-50} position="relative" maxHeight={"400px"}>
                         <Parallax speed={-35}>
-                            <Image
-                                placeholder="blur"
+                                <Image
+                                // placeholder="blur"
                                 src={ForestMountainsPhoto}
                                 alt="Forest and mountains background"
                                 // sizes="5760px"
                                 // width={5760}
                                 // height={3840}
+                                    // height={"50%"}
+                                    // height={"50vh"}
                             />
                         </Parallax>
                     </Box>
@@ -787,7 +790,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
-                                    placeholder="blur"
+                                    // placeholder="blur"
                                     src={HomeopathyPhoto}
                                     objectFit="cover"
                                     alt="Bottle of homeopathy spilling out onto table with flowers"
@@ -811,7 +814,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                     <Image
-                                        placeholder="blur"
+                                        // placeholder="blur"
                                         src={HomeopathyPhoto}
                                         objectFit="cover"
                                         alt="Bottle of homeopathy spilling out onto table with flowers"
@@ -879,7 +882,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
-                                    placeholder="blur"
+                                    // placeholder="blur"
                                     src={NutritionPhoto}
                                     objectFit="cover"
                                     alt="Dalmatian dog eating watermelon surrounded by other fruits and vegetables"
@@ -904,7 +907,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                     <Image
-                                        placeholder="blur"
+                                        // placeholder="blur"
                                         src={NutritionPhoto}
                                         objectFit="cover"
                                         alt="Dalmatian dog eating watermelon surrounded by other fruits and vegetables"
@@ -965,7 +968,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 // bgImage="/images/homeopathy.jpeg"
                             >
                                 <Image
-                                    placeholder="blur"
+                                    // placeholder="blur"
                                     src={AyurvedaPhoto}
                                     objectFit="cover"
                                     alt="Small bowl filled with orange, powered herb, surrounded by plants"
@@ -990,7 +993,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                     // bgImage="/images/homeopathy.jpeg"
                                 >
                                     <Image
-                                        placeholder="blur"
+                                        // placeholder="blur"
                                         src={AyurvedaPhoto}
                                         objectFit="cover"
                                         alt="Small bowl filled with orange, powered herb, surrounded by plants"
@@ -1241,7 +1244,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                     // <Box>
                     <Box
                         position={"relative"}
-                        h="80vh"
+                        h="400px"
                         w="100%"
                         clipPath={"inset(0)"}
                         zIndex="-20"
@@ -1258,7 +1261,7 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 layout="fill"
                                 // height="100vh"
                                 objectFit="cover"
-                                placeholder="blur"
+                                // placeholder="blur"
                                 src={RiverPhoto}
                                 alt="Shallow river at sunset with foliage and mountains in the background"
                                 sizes="800px"
@@ -1273,14 +1276,17 @@ const Home: React.FC<HomeProps> = ({}) => {
                     //     className="aspect-[2/1]"
                     //     style={{ height: "100vh" }}
                     //     />
-                    <Box zIndex={-100} position="relative">
+                    <Box zIndex={-50} position="relative"  maxHeight={"400px"}>
                         <Parallax speed={-35}>
-                            <Image
-                                placeholder="blur"
+                                <Image
+                                // placeholder="blur"
                                 src={RiverPhoto}
                                 alt="Shallow river at sunset with foliage and mountains in the background"
                                 // width={"100%"}
-
+                                style={{
+                                    position: 'absolute',
+                                    bottom: '50%', // Adjust this value to shift the image down to the desired amount
+                                }}
                                 // sizes="5760px"
                                 // width={5760}
                                 // height={3840}
@@ -1331,14 +1337,14 @@ const Home: React.FC<HomeProps> = ({}) => {
                                 Complimentary Introductory Phone Consultation
                             </Text>
                             <Text mt="5" fontSize="16">
-                                I offer a free 15-minute phone consultation to help
-                                you better understand my approach to natural
-                                veterinary treatment, and to see if it is a fit
-                                for you and your pet. This is a chance for you
-                                to discuss some of the key health concerns and
-                                goals concerning your pet. No veterinary medical
-                                advice or recommendations will be given during
-                                this session.
+                                I offer a free 15-minute phone consultation to
+                                help you better understand my approach to
+                                natural veterinary treatment, and to see if it
+                                is a fit for you and your pet. This is a chance
+                                for you to discuss some of the key health
+                                concerns and goals concerning your pet. No
+                                veterinary medical advice or recommendations
+                                will be given during this session.
                             </Text>
                             <Text my="5" fontSize="16">
                                 There is no obligation for you to book an

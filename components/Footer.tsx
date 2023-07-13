@@ -45,9 +45,9 @@ export default function LargeWithLogoCentered({
                     >
                         <ListHeader>Quick Links</ListHeader>
 
-                        <Link href={"#about"}>About Me</Link>
-                        <Link href={"#services"}>Services</Link>
-                        <Link href={"#pricing"}>Pricing</Link>
+                        <Link href={"/#about"}>About Me</Link>
+                        <Link href={"/#services"}>Services</Link>
+                        <Link href={"/#pricing"}>Pricing</Link>
                     </Stack>
                     <Stack
                         align={"flex-start"}
